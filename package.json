@@ -1,0 +1,36 @@
+{
+  "name": "core-hub-plex",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "start": "node ./dist/server/entry.mjs",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/node": "^10.0.4",
+    "@astrojs/react": "^5.0.3",
+    "@tailwindcss/vite": "^4.1.11",
+    "astro": "^6.1.5",
+    "gsap": "^3.13.0",
+    "leaflet": "^1.9.4",
+    "notyf": "^3.10.0",
+    "photoswipe": "^5.4.4",
+    "sharp": "^0.34.5",
+    "swiper": "^12.1.3",
+    "tailwindcss": "^4.1.11",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.21"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.0.0",
+    "lightningcss-linux-x64-gnu": "^1.0.0"
+  }
+}

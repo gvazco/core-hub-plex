@@ -1,0 +1,139 @@
+---
+import CoreLayout from '@/layouts/CoreLayout.astro';
+import { Picture } from 'astro:assets';
+import { PostSchema } from '@/types';
+import PostMeta from '@/components/blog/PostMeta.astro';
+import PostCategories from '@/components/blog/PostCategories.astro';
+import GalleryBanner from '@/components/blog/GalleryBanner.astro';
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+const res = await fetch(`${import.meta.env.API_URL}/posts?slug=${slug}`);
+const json = await res.json();
+const post = PostSchema.safeParse(json[0]);
+if (!post.success) return Astro.redirect('/404');
+const { title, featured_images, date, content, category_details, acf } =
+  post.data;
+// console.log(post.data);
+---
+
+<CoreLayout title={title.rendered} bgImage={featured_images?.full?.url || ''}>
+  {
+    acf.video_url && acf.options.video_enabled ? (
+      <div class="aspect-video">
+        <iframe
+          src={acf?.video_url}
+          title={title.rendered}
+          allowfullscreen
+          class="w-full h-full"
+        />
+      </div>
+    ) : (
+      featured_images?.full?.url && (
+        <Picture
+          src={featured_images.full.url}
+          alt={title.rendered}
+          width={featured_images?.full?.width || 600}
+          height={400}
+          formats={['avif', 'webp']}
+          class="w-full"
+        />
+      )
+    )
+  }
+  <article
+    class="relative top-[-130px] bg-dark-transparent space-y-5 p-5 max-w-4xl mx-auto"
+  >
+    <h1
+      class="text-xl md:text-3xl lg:text-4xl font-black text-black dark:text-white uppercase tracking-tight"
+    >
+      {title.rendered}
+    </h1>
+    <PostMeta date={date} />
+    {
+      category_details.map((cat) => (
+        <PostCategories name={cat.name} slug={cat.slug} />
+      ))
+    }
+
+    <div set:html={content.rendered} class="text-lg space-y-3 mt-5" />
+
+    {
+      acf.gallery_banner && acf.options.gallery_enabled ? (
+        <div class="aspect-gallery-banner">
+          <div class="mx-auto max-w-7x">
+            <div class="relative isolate overflow-clip bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+              <div
+                aria-hidden="true"
+                class="absolute right-0 top-0 -z-10 aspect-square w-full max-w-3xl translate-x-3/4 rounded-full bg-pink-500/60 blur-[10rem] lg:-top-[40rem] lg:left-1/2 lg:-translate-x-1/2"
+              />
+              <div class="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-24 lg:text-start">
+                <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+                  Want to partner with design experts in SaaS?
+                </h2>
+                <p class="mt-6 text-base text-gray-300">
+                  We're excited to talk to you about your project requirements
+                  and business goals.
+                </p>
+                <div class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
+                  <a
+                    href="#"
+                    class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                  >
+                    Schedule a call
+                  </a>
+                  <a
+                    href="#"
+                    class="text-sm font-semibold leading-6 text-white"
+                  >
+                    Send an email
+                  </a>
+                </div>
+              </div>
+              <div class="relative mt-16 h-80 lg:mt-8 lg:h-auto">
+                <img
+                  width="1920"
+                  height="1139"
+                  class="absolute left-0 top-0 w-[58rem] max-w-none rounded-2xl bg-white/5 ring-1 ring-white/10 lg:top-14"
+                  src="https://htmlwind.com/assets/images/dark-dashboard-screenshot.webp"
+                  alt="dashboard screenshot"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        ''
+      )
+    }
+
+    {
+      acf.gallery_banner && acf.options.gallery_enabled ? (
+        <GalleryBanner acf={acf} />
+      ) : (
+        ''
+      )
+    }
+  </article>
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const banner = document.querySelector('[data-gallery-banner]');
+      const closeButton = document.querySelector('[data-gallery-close]');
+      if (!banner || !closeButton) return;
+
+      const hideBanner = () => {
+        banner.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => banner.remove(), 200);
+      };
+
+      closeButton.addEventListener('click', hideBanner);
+      closeButton.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          hideBanner();
+        }
+      });
+    });
+  </script>
+</CoreLayout>

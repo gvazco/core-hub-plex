@@ -1,0 +1,15 @@
+---
+import CoreLayout from '@/layouts/CoreLayout.astro';
+import bg from '@/assets/bg_404.jpg';
+---
+
+<CoreLayout
+  title="404 - Página no encontrada"
+  subtitle="¡Ups!"
+  bgImage={bg.src}
+>
+  <p class="text-center text-lg">
+    Tal vez quieras volver al {''}
+    <a href="/" class="text-yellow-700 font-bold">Inicio</a>
+  </p>
+</CoreLayout>

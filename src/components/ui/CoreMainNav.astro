@@ -1,0 +1,26 @@
+---
+const navigation = [
+  { name: 'Última Hora', href: '/blog/' },
+  { name: 'Tecnología', href: '/blog/categoria/tecnologia' },
+  { name: 'Cultura', href: '/blog/categoria/ciencia' },
+];
+
+const currentPath = Astro.url.pathname;
+const isActive = (href: string) => {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+};
+---
+
+<nav class="hidden md:flex gap-8 font-mono font-bold text-lg">
+  {
+    navigation.map((item) => (
+      <a
+        href={item.href}
+        class={`${isActive(item.href) ? 'text-neon-yellow' : 'text-white hover:text-neon-yellow'} uppercase text-lg font-bold`}
+      >
+        {item.name}
+      </a>
+    ))
+  }
+</nav>

@@ -1,0 +1,22 @@
+---
+import { CategoriesSchema } from '@/types';
+const catUrl = `${import.meta.env.API_URL}/hashtags?per_page=20`;
+const catResponse = await fetch(catUrl);
+const catJson = await catResponse.json();
+const catData = CategoriesSchema.parse(catJson);
+
+// console.log(catData);
+---
+
+<div class="my-3 flex flex-wrap gap-2 justify-center">
+  {
+    catData.map((cat) => (
+      <a
+        href={`/blog/categoria/${cat.slug}`}
+        class="py-1 px-5 bg-yellow-700 hover:bg-yellow-600 text-sm text-white text-semibold mr-2 rounded mt-1"
+      >
+        {cat.name}
+      </a>
+    ))
+  }
+</div>

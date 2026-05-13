@@ -1,0 +1,53 @@
+---
+// import Logo from '@/assets/logo.svg';
+import CoreMainNav from './CoreMainNav.astro';
+import CoreMobileMenu from './CoreMobileMenu.astro';
+
+// interface Props {
+//   bgImage: string;
+//   title: string;
+// }
+
+// const { bgImage, title } = Astro.props;
+---
+
+<header class="border-b-4 border-neon-cyan p-6 bg-dark sticky top-0 z-50">
+  <nav
+    class="max-w-7xl mt-5 md:mt-0 mx-auto flex justify-between items-center gap-2"
+  >
+    <a
+      href="#"
+      class="text-xl md:text-4xl font-extrabold tracking-tighter text-neon-cyan uppercase flex items-center gap-2"
+    >
+      <span class="bg-neon-cyan text-dark px-2 py-1 relative">
+        <span
+          class="absolute inset-0 neo-border-cyan mt-1 ml-1 mix-blend-screen opacity-50"
+        ></span>
+        COREHUB
+      </span>
+      PLEX
+    </a>
+
+    <CoreMainNav />
+
+    <button
+      class="hidden md:block bg-neon-pink text-white px-6 py-3 font-bold font-mono text-xl neo-border-pink neo-shadow-yellow neo-hover-yellow transition-neo"
+    >
+      SUSCRIBIRSE
+    </button>
+
+    <div
+      class="md:hidden bg-neon-pink text-dark font-bold font-mono text-xl neo-border-pink neo-shadow-yellow-btn neo-hover-yellow transition-neo"
+    >
+      <button
+        id="mobile-menu-btn"
+        class="p-2 border-4 border-black dark:border-white bg-primary text-black"
+      >
+        <i data-lucide="menu" class="w-3 h-3 text-white"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <CoreMobileMenu />
+  </nav>
+</header>
