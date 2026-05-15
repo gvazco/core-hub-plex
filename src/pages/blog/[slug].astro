@@ -20,7 +20,7 @@ const { title, featured_images, date, content, category_details, acf } =
 
 <CoreLayout title={title.rendered} bgImage={featured_images?.full?.url || ''}>
   {
-    acf.video_url && acf.options.video_enabled ? (
+    acf.video_url && acf?.options?.video_enabled ? (
       <div class="aspect-video">
         <iframe
           src={acf?.video_url}
@@ -60,7 +60,7 @@ const { title, featured_images, date, content, category_details, acf } =
     <div set:html={content.rendered} class="text-lg space-y-3 mt-5" />
 
     {
-      acf.gallery_banner && acf.options.gallery_enabled ? (
+      acf.gallery_banner && acf?.options?.gallery_enabled ? (
         <div class="aspect-gallery-banner">
           <div class="mx-auto max-w-7x">
             <div class="relative isolate overflow-clip bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
@@ -109,7 +109,7 @@ const { title, featured_images, date, content, category_details, acf } =
     }
 
     {
-      acf.gallery_banner && acf.options.gallery_enabled ? (
+      acf.gallery_banner && acf?.options?.gallery_enabled ? (
         <GalleryBanner acf={acf} />
       ) : (
         ''

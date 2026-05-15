@@ -16,8 +16,8 @@ import CoreMobileMenu from './CoreMobileMenu.astro';
     class="max-w-7xl mt-5 md:mt-0 mx-auto flex justify-between items-center gap-2"
   >
     <a
-      href="#"
-      class="text-xl md:text-4xl font-extrabold tracking-tighter text-neon-cyan uppercase flex items-center gap-2"
+      href="/"
+      class="text-xl lg:text-4xl font-extrabold tracking-tighter text-neon-cyan uppercase flex items-center gap-2"
     >
       <span class="bg-neon-cyan text-dark px-2 py-1 relative">
         <span
@@ -31,7 +31,7 @@ import CoreMobileMenu from './CoreMobileMenu.astro';
     <CoreMainNav />
 
     <button
-      class="hidden md:block bg-neon-pink text-white px-6 py-3 font-bold font-mono text-xl neo-border-pink neo-shadow-yellow neo-hover-yellow transition-neo"
+      class="hidden lg:block bg-neon-pink text-white px-6 py-3 font-bold font-mono text-xl neo-border-pink neo-shadow-yellow neo-hover-yellow transition-neo"
     >
       SUSCRIBIRSE
     </button>
@@ -41,10 +41,9 @@ import CoreMobileMenu from './CoreMobileMenu.astro';
     >
       <button
         id="mobile-menu-btn"
-        class="p-2 border-4 border-black dark:border-white bg-primary text-black"
-      >
-        <i data-lucide="menu" class="w-3 h-3 text-white"></i>
-      </button>
+        type="button"
+        class="p-4 border-4 border-black dark:border-white bg-primary text-black menu-icon"
+        aria-label="Abrir menú"></button>
     </div>
 
     <!-- Mobile Menu Overlay -->

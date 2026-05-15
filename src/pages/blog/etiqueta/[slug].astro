@@ -1,6 +1,7 @@
 ---
 import { CategoriesSlugSchema, CategorySchema, PostsSchema } from '@/types';
 import CoreLayout from '@/layouts/CoreLayout.astro';
+import PostTags from '@/components/ui/PostTags.astro';
 import PostCard from '@/components/blog/PostCard.astro';
 export async function getStaticPaths() {
   const res = await fetch(
@@ -12,14 +13,11 @@ export async function getStaticPaths() {
     params: { slug: tag.slug },
   }));
 }
-
 const { slug } = Astro.params;
-const tagUrl = `${import.meta.env.API_URL}/tags?slug=${slug}`;
+const tagUrl = `${import.meta.env.API_URL}/tags?slug=${slug}&per_page=50`;
 const tagRes = await fetch(tagUrl);
 const tagJson = await tagRes.json();
 const tag = CategorySchema.parse(tagJson[0]);
-console.log(tag);
-
 const postsUrl = `${import.meta.env.API_URL}/posts?tags=${tag.id}&per_page=50`;
 const postsRes = await fetch(postsUrl);
 const postsJson = await postsRes.json();
@@ -31,5 +29,8 @@ const posts = PostsSchema.parse(postsJson);
   subtitle={`Posts en la etiqueta: ${tag.name}`}
   bgImage={posts[0]?.featured_images?.full?.url || ''}
 >
-  {posts.map((post) => <PostCard post={post} />)}
+  <PostTags />
+  <div class="columns-1 md:columns-2 lg:columns-3 gap-5 my-8 space-y-5">
+    {posts.map((post) => <PostCard post={post} />)}
+  </div>
 </CoreLayout>

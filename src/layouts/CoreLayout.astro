@@ -33,7 +33,7 @@ import CoreFooter from '@/components/ui/CoreFooter.astro';
   <body class="antialiased selection:bg-neon-pink selection:text-white">
     <CoreHeader transition:animate={fade({ duration: '.5s' })} />
 
-    <main class="bg-dark max-w-7xl mx-auto lg:-mt-22 relative">
+    <main class="bg-dark max-w-7xl mx-auto lg:-mt-20 relative">
       <div transition:animate={slide({ duration: '1s' })}>
         <slot />
       </div>
@@ -45,37 +45,23 @@ import CoreFooter from '@/components/ui/CoreFooter.astro';
   </body>
 </html>
 
-<!-- Lucide Icons -->
-<script src="https://unpkg.com/lucide@latest"></script>
-
 <script>
-  // Initialize Lucide Icons
-  const lucide = (window as any).lucide;
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
 
-  if (lucide) {
-    lucide.createIcons();
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      mobileMenuBtn.classList.toggle('menu-icon');
+      mobileMenuBtn.classList.toggle('close-icon');
+    });
 
-    // Mobile Menu Logic
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    if (mobileMenuBtn && mobileMenu) {
-      mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        const icon = mobileMenu.classList.contains('hidden') ? 'menu' : 'x';
-        // Re-render icon (simplified for this context)
-        mobileMenuBtn.innerHTML = `<i data-lucide="${icon}" class="w-3 h-3 text-white"></i>`;
-        lucide.createIcons();
+    document.querySelectorAll('#mobile-menu a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenuBtn.classList.remove('close-icon');
+        mobileMenuBtn.classList.add('menu-icon');
       });
-
-      // Close mobile menu on link click
-      document.querySelectorAll('#mobile-menu a').forEach((link) => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.add('hidden');
-          mobileMenuBtn.innerHTML = `<i data-lucide="menu" class="w-3 h-3 text-white"></i>`;
-          lucide.createIcons();
-        });
-      });
-    }
+    });
   }
 </script>

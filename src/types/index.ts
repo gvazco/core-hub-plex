@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { sl } from "zod/v4/locales";
 
 const imageSchema = z.object({
   url: z.string().nullable().optional(),
@@ -45,15 +46,8 @@ const gallerySchema = z.object({
   full: imageSchema,
 });
 
-
 export const GalleryPageSchema = BaseWPSchema.extend({
   gallery: z.array(gallerySchema),
-});
-
-const processSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  image: z.string(),
 });
 
 export const GallerySchema = BaseWPSchema.omit({
@@ -82,21 +76,21 @@ export const CategoriesSchema = z.array(CategorySchema);
 export const PostSchema = BaseWPSchema.extend({
   acf: z.object({
     subtitle: z.string().optional(),
-    video_url: z.string().optional(),
+    video_url: z.string().nullable().optional(),
     gallery_banner: z.object({
-      gallery_url: z.string(),
-      banner_description: z.string(),
-      gallery_cover: z.string(),
-    }).optional(),
+      gallery_url: z.string().nullable().optional(),
+      banner_description: z.string().nullable().optional(),
+      gallery_cover: z.union([z.string(), z.boolean()]).optional(),
+    }).nullable().optional(),
     
     options: z.object({
       video_enabled: z.boolean(),
       gallery_enabled: z.boolean(),
-    }),
+    }).optional(),
   }),
   date: z.string(),
   category_details: CategoriesSchema,
-  tag_details: CategoriesSchema,
+  tag_details: CategoriesSchema.optional(),
 });
 
 export const PostsSchema = z.array(PostSchema);
@@ -111,6 +105,43 @@ export const GaleriaSchema = BaseWPSchema.extend({
 });
 
 export const GaleriasSchema = z.array(GaleriaSchema);
+
+export const InicioSchema = BaseWPSchema.omit({
+  content: true,
+}).extend({
+  acf: z.object({
+    subtitle: z.string().optional(),
+    titular: z.object({
+      epigrafe: z.string(),
+      titulo: z.string(),
+      subtitulo: z.string().optional(),
+      resumen: z.string().optional(),
+      categoria: z.string(),
+      etiqueta: z.string(),
+      slug: z.string(),
+    }),
+    columna: z.object({
+      impacto: z.object({
+        titulo: z.string(),
+        resumen: z.string().optional(),
+        categoria: z.string(),
+        etiqueta: z.string(),
+        slug: z.string(),
+      }),
+      fondo: z.object({
+        titulo: z.string(),
+        categoria: z.string(),
+        etiqueta: z.string(),
+        autor: z.string(),
+        fecha: z.string(),
+        slug: z.string(),
+      }),
+    }),
+  }),
+  date: z.string(),
+});
+
+export const IniciosSchema = z.array(InicioSchema);
 
 const MenuItemSchema = BaseWPSchema.pick({
   title: true,
