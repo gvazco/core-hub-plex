@@ -68,9 +68,21 @@ function coffee_shop_api_init()
     );
 
     register_rest_field(
+        array('post'),
+        'author_details',
+        array('get_callback' => 'get_post_authors')
+    );
+
+    register_rest_field(
         array('gallery'),
         'category_details',
         array('get_callback' => 'get_gallery_categories')
+    );
+
+    register_rest_field(
+        array('gallery'),
+        'tecnica_details',
+        array('get_callback' => 'get_gallery_tecnicas')
     );
 
     register_rest_field(
@@ -148,9 +160,43 @@ function get_post_tags($post) {
     );
 }
 
+function get_post_authors($post)
+{
+    $terms = wp_get_post_terms($post['id'], 'post_author');
+
+    if (is_wp_error($terms) || empty($terms)) {
+        return [];
+    }
+
+    return array_map(function ($term) {
+        return [
+            'id' => $term->term_id,
+            'name' => $term->name,
+            'slug' => $term->slug,
+        ];
+    }, $terms);
+}
+
 function get_gallery_categories($post)
 {
     $terms = wp_get_post_terms($post['id'], 'gallery_hashtag');
+
+    if (is_wp_error($terms) || empty($terms)) {
+        return [];
+    }
+
+    return array_map(function ($term) {
+        return [
+            'id' => $term->term_id,
+            'name' => $term->name,
+            'slug' => $term->slug,
+        ];
+    }, $terms);
+}
+
+function get_gallery_tecnicas($post)
+{
+    $terms = wp_get_post_terms($post['id'], 'tecnica');
 
     if (is_wp_error($terms) || empty($terms)) {
         return [];

@@ -1,0 +1,52 @@
+---
+import { AutoresSlugSchema, AutorSchema, PostsSchema } from '@/types';
+import Layout from '@/layouts/CoreLayout.astro';
+import PostCard from '@/components/blog/PostCard.astro';
+import PostAuthors from '@/components/ui/Taxonomies/PostAuthors.astro';
+import AuthorSummary from '@/components/ui/Taxonomies/AuthorSummary.astro';
+export async function getStaticPaths() {
+  const res = await fetch(
+    `${import.meta.env.API_URL}/autores?_fields=slug,name&per_page=20`
+  );
+  const json = await res.json();
+  const autores = AutoresSlugSchema.parse(json);
+  return autores.map((autor) => ({
+    params: { slug: autor.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const autorUrl = `${import.meta.env.API_URL}/autores?slug=${slug}`;
+const autorRes = await fetch(autorUrl);
+const autorJson = await autorRes.json();
+const autor = AutorSchema.parse(autorJson[0]);
+
+// console.log('Autor encontrado:', autor);
+
+const postsUrl = `${import.meta.env.API_URL}/posts?autores=${autor.id}&per_page=50`;
+const postsRes = await fetch(postsUrl);
+const postsJson = await postsRes.json();
+const posts = PostsSchema.parse(postsJson);
+// console.log('Posts del autor:', posts);
+---
+
+<Layout
+  title={`Posts por el autor: ${autor.name}`}
+  subtitle={`Posts por el autor: ${autor.name}`}
+  bgImage={posts[0]?.featured_images?.full?.url || ''}
+>
+  <AuthorSummary autor={autor} />
+  <h2
+    class="mx-10 md:mx-auto my-10 text-3xl md:text-5xl font-black uppercase text-white flex items-center gap-4"
+  >
+    <span class="w-8 h-8 bg-neon-pink inline-block neo-shadow-cyan"></span>
+    Posts del autor:
+    <span
+      class="flex-grow h-2 bg-gradient-to-r from-neon-pink via-neon-cyan to-neon-green"
+    ></span>
+  </h2>
+  <div class="columns-1 md:columns-2 lg:columns-3 gap-5 space-y-5">
+    {posts.map((post) => <PostCard post={post} />)}
+  </div>
+  <PostAuthors />
+</Layout>

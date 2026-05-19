@@ -1,11 +1,13 @@
 import { z } from "zod";
-import { sl } from "zod/v4/locales";
 
 const imageSchema = z.object({
   url: z.string().nullable().optional(),
   width: z.number().nullable().optional(),
   height: z.number().nullable().optional(),
 });
+
+// Accept a string URL, or `false`/undefined when image is not available yet
+const maybeImageString = z.union([z.string(), z.literal(false)]).nullable().optional();
 
 const featureImagesSchema = z.object({
   medium: imageSchema,
@@ -73,6 +75,26 @@ export const CategoriesSlugSchema = z.array(
 
 export const CategoriesSchema = z.array(CategorySchema);
 
+export const AutorSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  slug: z.string(),
+  description: z.string().optional(),
+  acf: z.object({
+    formacion: z.string(),
+    biografia: z.string(),
+    imagen: maybeImageString,
+  }).optional(),
+});
+
+export const AutoresSlugSchema = z.array(
+  AutorSchema.pick({
+    slug: true,
+  }),
+);
+
+export const AutoresSchema = z.array(AutorSchema);
+
 export const PostSchema = BaseWPSchema.extend({
   acf: z.object({
     subtitle: z.string().optional(),
@@ -91,6 +113,7 @@ export const PostSchema = BaseWPSchema.extend({
   date: z.string(),
   category_details: CategoriesSchema,
   tag_details: CategoriesSchema.optional(),
+  author_details: AutoresSchema.optional(),
 });
 
 export const PostsSchema = z.array(PostSchema);
@@ -102,6 +125,7 @@ export const GaleriaSchema = BaseWPSchema.extend({
   gallery: z.array(gallerySchema).optional(),
   date: z.string(),
   category_details: CategoriesSchema,
+  tecnica_details: CategoriesSchema.optional(),
 });
 
 export const GaleriasSchema = z.array(GaleriaSchema);
@@ -134,6 +158,29 @@ export const InicioSchema = BaseWPSchema.omit({
         etiqueta: z.string(),
         autor: z.string(),
         fecha: z.string(),
+        slug: z.string(),
+      }),
+    }),
+    secundarias: z.object({
+      izquierda: z.object({
+        titulo: z.string(),
+        categoria: z.string(),
+        etiqueta: z.string(),
+        imagen: maybeImageString,
+        slug: z.string(),
+      }),
+      centro: z.object({
+        titulo: z.string(),
+        categoria: z.string(),
+        etiqueta: z.string(),
+        imagen: maybeImageString,
+        slug: z.string(),
+      }),
+      derecha: z.object({
+        titulo: z.string(),
+        categoria: z.string(),
+        etiqueta: z.string(),
+        imagen: maybeImageString,
         slug: z.string(),
       }),
     }),

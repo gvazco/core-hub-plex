@@ -1,5 +1,5 @@
 ---
-import { formatDate } from "@/helpers";
+import { formatDate } from '@/helpers';
 
 interface Props {
   date: string;
@@ -9,5 +9,5 @@ const { date } = Astro.props;
 ---
 
 <p class="text-sm">
-  Escrito el: <span class="text-coffee-600">{formatDate(date)}</span>
+  Publicado el: <span class="text-neon-cyan">{formatDate(date)}</span>
 </p>

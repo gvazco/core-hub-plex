@@ -3,12 +3,14 @@ const navigation = [
   { name: 'Tecnología', href: '/blog/categoria/tecnologia' },
   { name: 'Cultura', href: '/blog/categoria/cultura' },
   { name: 'Galerías', href: '/galerias' },
+  { name: 'Más', href: '/blog' },
 ];
 
 const currentPath = Astro.url.pathname;
 const isActive = (href: string) => {
   if (href === '/') return currentPath === '/';
-  return currentPath.startsWith(href);
+  if (href === '/blog') return currentPath === '/blog';
+  return currentPath === href || currentPath.startsWith(`${href}/`);
 };
 ---
 

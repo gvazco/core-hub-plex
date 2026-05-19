@@ -8,12 +8,12 @@ const catData = CategoriesSchema.parse(catJson);
 // console.log(catData);
 ---
 
-<div class="my-3 flex flex-wrap gap-2 justify-center">
+<div class="mt-5 md:mt-30 my-3 flex flex-wrap gap-2 justify-center">
   {
     catData.map((cat) => (
       <a
-        href={`/blog/categoria/${cat.slug}`}
-        class="py-1 px-5 bg-yellow-700 hover:bg-yellow-600 text-sm text-white text-semibold mr-2 rounded mt-1"
+        href={`/galerias/categoria/${cat.slug}`}
+        class="inline-block py-1 px-5 text-sm text-gray-50 m-1 bg-dark neo-border-cyan neo-shadow-cyan neo-hover-cyan transition-neo"
       >
         {cat.name}
       </a>

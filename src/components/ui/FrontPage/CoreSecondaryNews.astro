@@ -1,9 +1,19 @@
 ---
+import AdvertisingSpace from '@/components/ui/FrontPage/AdvertisingSpace.astro';
+import { Picture } from 'astro:assets';
+import { formatDate } from '@/helpers';
+import { InicioSchema } from '@/types';
+const url = `${import.meta.env.API_URL}/pages?slug=inicio`;
+const response = await fetch(url);
+const json = await response.json();
+const data = InicioSchema.parse(json[0]);
+const secundarias = data.acf.secundarias;
 
+// console.log(secundarias);
 ---
 
 <!-- Grid de Noticias Secundarias -->
-<section class="max-w-7xl px-5 mx-auto mt-10 mb-20">
+<section class="max-w-7xl px-2 mx-auto mt-10 mb-20">
   <h2
     class="text-3xl md:text-5xl font-black uppercase text-white mb-12 flex items-center gap-4"
   >
@@ -19,25 +29,34 @@
     <article
       class="bg-dark neo-border-yellow p-5 neo-shadow-yellow neo-hover-yellow transition-neo flex flex-col group"
     >
-      <img
-        src="https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=600&auto=format&fit=crop"
-        alt="Espacio"
-        class="h-48 w-full object-cover border-b-4 border-neon-yellow mb-4 grayscale group-hover:grayscale-0 transition-all"
-      />
-      <span class="text-neon-yellow font-mono text-sm mb-2 font-bold"
-        >CIENCIA</span
-      >
-      <h3
-        class="text-2xl font-bold uppercase mb-4 flex-grow group-hover:text-neon-yellow transition-colors"
-      >
-        Encuentran un planeta de cristal líquido
-      </h3>
-      <a
-        href="#"
-        class="text-white hover:text-neon-yellow font-mono font-bold flex justify-between items-center mt-auto border-t-2 border-gray-800 pt-4"
-      >
-        <span>LEER MÁS</span>
-        <span class="text-xl">→</span>
+      <a href={secundarias.izquierda.slug}>
+        {
+          secundarias.izquierda.imagen && (
+            <Picture
+              src={secundarias.izquierda.imagen}
+              alt={secundarias.izquierda.titulo || 'Imagen Destacada'}
+              width={600}
+              height={600}
+              formats={['avif', 'webp']}
+              class="h-48 w-full object-cover border-b-4 border-neon-yellow mb-4 grayscale group-hover:grayscale-0 transition-all"
+            />
+          )
+        }
+        <span class="text-neon-yellow font-mono text-sm mb-2 font-bold"
+          >{secundarias.izquierda.categoria}</span
+        >
+        <h3
+          class="text-2xl font-bold uppercase mb-4 flex-grow group-hover:text-neon-yellow transition-colors"
+        >
+          {secundarias.izquierda.titulo}
+        </h3>
+        <a
+          href={secundarias.izquierda.slug}
+          class="text-white hover:text-neon-yellow font-mono font-bold flex justify-between items-center mt-auto border-t-2 border-gray-800 pt-4"
+        >
+          <span>LEER MÁS</span>
+          <span class="text-xl">→</span>
+        </a>
       </a>
     </article>
 
@@ -45,23 +64,34 @@
     <article
       class="bg-dark neo-border-cyan p-5 neo-shadow-cyan neo-hover-cyan transition-neo flex flex-col group"
     >
-      <img
-        src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=600&auto=format&fit=crop"
-        alt="Código"
-        class="h-48 w-full object-cover border-b-4 border-neon-cyan mb-4 grayscale group-hover:grayscale-0 transition-all"
-      />
-      <span class="text-neon-cyan font-mono text-sm mb-2 font-bold">DEV</span>
-      <h3
-        class="text-2xl font-bold uppercase mb-4 flex-grow group-hover:text-neon-cyan transition-colors"
-      >
-        ¿Vue o React? El debate llega a los tribunales virtuales
-      </h3>
-      <a
-        href="#"
-        class="text-white hover:text-neon-cyan font-mono font-bold flex justify-between items-center mt-auto border-t-2 border-gray-800 pt-4"
-      >
-        <span>LEER MÁS</span>
-        <span class="text-xl">→</span>
+      <a href={secundarias.centro.slug}>
+        {
+          secundarias.centro.imagen && (
+            <Picture
+              src={secundarias.centro.imagen}
+              alt={secundarias.centro.titulo || 'Imagen Destacada'}
+              width={600}
+              height={600}
+              formats={['avif', 'webp']}
+              class="h-48 w-full object-cover border-b-4 border-neon-cyan mb-4 grayscale group-hover:grayscale-0 transition-all"
+            />
+          )
+        }
+        <span class="text-neon-cyan font-mono text-sm mb-2 font-bold"
+          >{secundarias.centro.categoria}</span
+        >
+        <h3
+          class="text-2xl font-bold uppercase mb-4 flex-grow group-hover:text-neon-cyan transition-colors"
+        >
+          {secundarias.centro.titulo}
+        </h3>
+        <a
+          href={secundarias.centro.slug}
+          class="text-white hover:text-neon-cyan font-mono font-bold flex justify-between items-center mt-auto border-t-2 border-gray-800 pt-4"
+        >
+          <span>LEER MÁS</span>
+          <span class="text-xl">→</span>
+        </a>
       </a>
     </article>
 
@@ -69,28 +99,34 @@
     <article
       class="bg-dark neo-border-pink p-5 neo-shadow-pink neo-hover-pink transition-neo flex flex-col group"
     >
-      <div
-        class="h-48 w-full bg-gradient-to-br from-neon-pink to-neon-cyan border-b-4 border-neon-pink mb-4 flex items-center justify-center"
-      >
-        <span
-          class="text-6xl drop-shadow-[4px_4px_0_rgba(0,0,0,1)] group-hover:scale-110 transition-transform"
-          >🎙️</span
+      <a href={secundarias.derecha.slug}>
+        {
+          secundarias.derecha.imagen && (
+            <Picture
+              src={secundarias.derecha.imagen}
+              alt={secundarias.derecha.titulo || 'Imagen Destacada'}
+              width={600}
+              height={600}
+              formats={['avif', 'webp']}
+              class="h-48 w-full object-cover border-b-4 border-neon-cyan mb-4 grayscale group-hover:grayscale-0 transition-all"
+            />
+          )
+        }
+        <span class="text-neon-pink font-mono text-sm mb-2 font-bold"
+          >{secundarias.derecha.categoria}</span
         >
-      </div>
-      <span class="text-neon-pink font-mono text-sm mb-2 font-bold"
-        >PODCAST</span
-      >
-      <h3
-        class="text-2xl font-bold uppercase mb-4 flex-grow group-hover:text-neon-pink transition-colors"
-      >
-        Ep. 42: La singularidad técnica, ¿Mito o Realidad?
-      </h3>
-      <a
-        href="#"
-        class="text-white hover:text-neon-pink font-mono font-bold flex justify-between items-center mt-auto border-t-2 border-gray-800 pt-4"
-      >
-        <span>ESCUCHAR AHORA</span>
-        <span class="text-xl">▶</span>
+        <h3
+          class="text-2xl font-bold uppercase mb-4 flex-grow group-hover:text-neon-pink transition-colors"
+        >
+          {secundarias.derecha.titulo}
+        </h3>
+        <a
+          href={secundarias.derecha.slug}
+          class="text-white hover:text-neon-pink font-mono font-bold flex justify-between items-center mt-auto border-t-2 border-gray-800 pt-4"
+        >
+          <span>ESCUCHAR AHORA</span>
+          <span class="text-xl">▶</span>
+        </a>
       </a>
     </article>
   </div>

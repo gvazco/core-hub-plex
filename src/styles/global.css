@@ -35,6 +35,15 @@
   --color-dark: #0a0a0a;
   --color-dark-transparent: rgba(10, 10, 10, 0.8);
 
+  --color-gray-50: #f9f9f9;
+  --color-gray-100: #e0e0e0;
+  --color-gray-200: #c0c0c0;
+  --color-gray-300: #a0a0a0;
+  --color-gray-400: #808080;
+  --color-gray-500: #606060;
+  --color-gray-600: #404040;
+  --color-gray-700: #202020;    
+
 
   --color-coffee-50: #fcf8ee;
   --color-coffee-100: #ebe7de;
@@ -183,25 +192,8 @@ audio {
   @apply border-coffee-900 border-2 p-2;
 }
 
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #444;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.swiper-slide{
+  scale: 0.8;
 }
 
 .swiper-pagination-bullet {
@@ -211,8 +203,6 @@ audio {
 .swiper-pagination-bullet-active {
   background: white !important;
 }
-
-
 
 /* Utilidades de borde Neobrutalista */
 .neo-border-pink {
@@ -343,6 +333,25 @@ audio {
     justify-items: center;
     margin-top: 1rem;
   }
+}
+
+.swiper-button-next, .swiper-button-prev {
+  --swiper-navigation-color: var(--color-dark-blue);
+  height: 2rem  !important;
+  width: 2rem  !important;
+  svg {
+    position: absolute ;
+    z-index: 999;
+    padding: 0.3rem;
+  }
+}
+
+.swiper-pagination-bullet {
+  background-color: var(--color-dark-cyan) !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--color-neon-cyan) !important;
 }
 
 @media screen and (min-width: 576px) {

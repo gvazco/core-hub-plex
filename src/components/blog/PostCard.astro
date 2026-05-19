@@ -8,7 +8,7 @@ interface Props {
   post: Post;
 }
 const { post } = Astro.props;
-// console.log(post);
+console.log(post);
 ---
 
 <article
@@ -36,7 +36,10 @@ const { post } = Astro.props;
       </a>
     </h3>
 
-    <PostMeta date={post.date} />
+    <PostMeta
+      date={post.date}
+      author={post.author_details ? post.author_details[0]?.name : ''}
+    />
 
     {
       post.category_details.map((cat) => (
