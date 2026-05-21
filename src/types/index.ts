@@ -4,6 +4,7 @@ const imageSchema = z.object({
   url: z.string().nullable().optional(),
   width: z.number().nullable().optional(),
   height: z.number().nullable().optional(),
+  caption: z.string().nullable().optional(),
 });
 
 // Accept a string URL, or `false`/undefined when image is not available yet
@@ -46,6 +47,7 @@ export const NewsInformeArraySchema = z.array(NewsInformeSchema);
 const gallerySchema = z.object({
   large: imageSchema,
   full: imageSchema,
+  caption: z.string().optional(),
 });
 
 export const GalleryPageSchema = BaseWPSchema.extend({
@@ -56,6 +58,9 @@ export const GallerySchema = BaseWPSchema.omit({
   content: true,
 }).extend({
   date: z.string(),
+  acf: z.object({
+    historia: z.string().optional(),
+  }),
   gallery: z.array(gallerySchema).optional(),
 });
 
@@ -126,6 +131,7 @@ export const GaleriaSchema = BaseWPSchema.extend({
   date: z.string(),
   category_details: CategoriesSchema,
   tecnica_details: CategoriesSchema.optional(),
+  author_details: AutoresSchema.optional(),
 });
 
 export const GaleriasSchema = z.array(GaleriaSchema);

@@ -1,9 +1,8 @@
 ---
 import CoreLayout from '@/layouts/CoreLayout.astro';
-import GalleryPosts from '@/components/galleries/GalleryPosts.astro';
 import GalleryCategories from '@/components/ui/Taxonomies/GalleryCategories.astro';
 import { BaseWPSchema } from '@/types';
-import SwiperGallery from '@/components/gallery/SwiperGallery.astro';
+import SwiperGalleryWrapper from '@/components/galleries/SwiperGalleryWrapper.astro';
 const url = `${import.meta.env.API_URL}/pages?slug=galerias`;
 const response = await fetch(url);
 const json = await response.json();
@@ -17,6 +16,6 @@ const data = BaseWPSchema.parse(json[0]);
   bgImage={data?.featured_images?.full?.url || ''}
 >
   <GalleryCategories />
-  <SwiperGallery />
+  <SwiperGalleryWrapper />
   <!-- <GalleryPosts /> -->
 </CoreLayout>

@@ -3,11 +3,22 @@ import { formatDate } from '@/helpers';
 
 interface Props {
   date: string;
+  author: string;
+  slug: string;
 }
-
-const { date } = Astro.props;
+const { date, author, slug } = Astro.props;
 ---
 
-<p class="text-sm">
-  Publicado el: <span class="text-neon-cyan">{formatDate(date)}</span>
-</p>
+<div class="text-sm">
+  <p>Publicado el: <span class="text-neon-cyan">{formatDate(date)}</span></p>
+  {
+    author && (
+      <p>
+        Autor:{' '}
+        <span class="text-neon-cyan">
+          <a href={`/blog/autor/${slug}`}>{author}</a>
+        </span>
+      </p>
+    )
+  }
+</div>

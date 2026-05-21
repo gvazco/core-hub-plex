@@ -1,9 +1,7 @@
 ---
-import PostLayout from '@/layouts/CoreLayout.astro';
-import { Picture } from 'astro:assets';
+import CoreLayout from '@/layouts/CoreLayout.astro';
 import { GaleriaSchema } from '@/types';
-import PostMeta from '@/components/galleries/PostMeta.astro';
-import PostCategories from '@/components/galleries/PostCategories.astro';
+import { Picture } from 'astro:assets';
 import GalleryGrid from '@/components/gallery/GalleryGrid.astro';
 
 export const prerender = false;
@@ -11,20 +9,45 @@ export const prerender = false;
 const { slug } = Astro.params;
 const res = await fetch(`${import.meta.env.API_URL}/gallery?slug=${slug}`);
 const json = await res.json();
+
 const post = GaleriaSchema.safeParse(json[0]);
 if (!post.success) return Astro.redirect('/404');
-const { title, featured_images, date, category_details, acf, gallery } =
-  post.data;
+const {
+  title,
+  featured_images,
+  date,
+  category_details,
+  author_details,
+  acf,
+  gallery,
+} = post.data;
+
+const historia = acf?.historia || '';
 ---
 
-<PostLayout title={title.rendered} bgImage={featured_images?.full?.url || ''}>
-  <article class="space-y-5 max-w-4xl mx-auto">
-    <PostMeta date={date} />
-    {
-      category_details.map((cat) => (
-        <PostCategories name={cat.name} slug={cat.slug} />
-      ))
-    }
-    <GalleryGrid gallery={gallery || []} />
+<CoreLayout title={title.rendered} bgImage={featured_images?.full?.url || ''}>
+  {
+    featured_images?.full?.url && (
+      <Picture
+        src={featured_images.full.url}
+        alt={title.rendered}
+        width={featured_images?.full?.width || 600}
+        height={400}
+        formats={['avif', 'webp']}
+        class="w-full"
+      />
+    )
+  }
+  <article
+    class="relative top-[-130px] bg-dark-transparent space-y-5 p-5 max-w-5xl mx-auto"
+  >
+    <GalleryGrid
+      gallery={gallery || []}
+      historia={historia}
+      category_details={category_details}
+      author_details={author_details}
+      title={title}
+      date={date}
+    />
   </article>
-</PostLayout>
+</CoreLayout>

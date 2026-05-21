@@ -27,6 +27,7 @@ import CoreFooter from '@/components/ui/CoreFooter.astro';
       href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <ClientRouter />
   </head>
 
@@ -42,26 +43,38 @@ import CoreFooter from '@/components/ui/CoreFooter.astro';
     <slot name="after-main-content" />
 
     <CoreFooter transition:animate={fade({ duration: '.5s' })} />
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      import AOS from 'aos';
+      document.addEventListener('DOMContentLoaded', () => {
+        if (typeof AOS !== 'undefined') {
+          AOS.init({
+            easing: 'ease',
+            duration: 1800,
+            once: true,
+          });
+        }
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuBtn && mobileMenu) {
+          mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuBtn.classList.toggle('menu-icon');
+            mobileMenuBtn.classList.toggle('close-icon');
+          });
+
+          document.querySelectorAll('#mobile-menu a').forEach((link) => {
+            link.addEventListener('click', () => {
+              mobileMenu.classList.add('hidden');
+              mobileMenuBtn.classList.remove('close-icon');
+              mobileMenuBtn.classList.add('menu-icon');
+            });
+          });
+        }
+      });
+    </script>
   </body>
 </html>
-
-<script>
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-      mobileMenuBtn.classList.toggle('menu-icon');
-      mobileMenuBtn.classList.toggle('close-icon');
-    });
-
-    document.querySelectorAll('#mobile-menu a').forEach((link) => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        mobileMenuBtn.classList.remove('close-icon');
-        mobileMenuBtn.classList.add('menu-icon');
-      });
-    });
-  }
-</script>

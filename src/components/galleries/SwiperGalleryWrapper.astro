@@ -1,0 +1,16 @@
+---
+import SwiperGalleryReact from './SwiperGallery';
+import { GaleriasSchema } from '@/types';
+
+const url = `${import.meta.env.API_URL}/gallery?per_page=50`;
+const res = await fetch(url);
+const json = await res.json();
+const data = GaleriasSchema.parse(json);
+// console.log(data);
+---
+
+<section class="swiper-gallery pb-15">
+  <div data-aos="zoom-out-down" class="mx-auto max-w-7xl">
+    <SwiperGalleryReact client:load slides={data} />
+  </div>
+</section>
