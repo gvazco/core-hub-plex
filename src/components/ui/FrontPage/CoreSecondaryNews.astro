@@ -1,15 +1,12 @@
 ---
-import AdvertisingSpace from '@/components/ui/FrontPage/AdvertisingSpace.astro';
 import { Picture } from 'astro:assets';
-import { formatDate } from '@/helpers';
-import { InicioSchema } from '@/types';
-const url = `${import.meta.env.API_URL}/pages?slug=inicio`;
-const response = await fetch(url);
-const json = await response.json();
-const data = InicioSchema.parse(json[0]);
-const secundarias = data.acf.secundarias;
-
-// console.log(secundarias);
+import { DirectusPageIndexResponseSchema } from '@/types';
+const newUrl = `${import.meta.env.API_ITEMS}/page_index?fields=*.*.*`;
+const newResponse = await fetch(newUrl);
+const newJson = await newResponse.json();
+const newData = DirectusPageIndexResponseSchema.parse(newJson);
+const { data: pageIndex } = newData;
+const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
 ---
 
 <!-- Grid de Noticias Secundarias -->
@@ -30,13 +27,13 @@ const secundarias = data.acf.secundarias;
       data-aos="zoom-out-down"
       class="bg-dark neo-border-yellow p-5 neo-shadow-yellow neo-hover-yellow transition-neo flex flex-col group"
     >
-      <a href={secundarias.izquierda.slug}>
+      <a href={pageIndex.izq_slug}>
         {
-          secundarias.izquierda.imagen && (
+          pageIndex.izq_image && (
             <Picture
-              src={secundarias.izquierda.imagen}
-              alt={secundarias.izquierda.titulo || 'Imagen Destacada'}
-              width={600}
+              src={`${publicAssetsUrl}/${pageIndex?.izq_image?.id}`}
+              alt={pageIndex.izq_title || 'Imagen Destacada'}
+              width={800}
               height={600}
               formats={['avif', 'webp']}
               class="h-48 w-full object-cover border-b-4 border-neon-yellow mb-4 grayscale group-hover:grayscale-0 transition-all"
@@ -44,15 +41,15 @@ const secundarias = data.acf.secundarias;
           )
         }
         <span class="text-neon-yellow font-mono text-sm mb-2 font-bold"
-          >{secundarias.izquierda.categoria}</span
+          >{pageIndex.izq_category?.name}</span
         >
         <h3
           class="text-2xl font-bold uppercase mb-4 flex-grow group-hover:text-neon-yellow transition-colors"
         >
-          {secundarias.izquierda.titulo}
+          {pageIndex.izq_title}
         </h3>
         <a
-          href={secundarias.izquierda.slug}
+          href={pageIndex.izq_slug}
           class="text-white hover:text-neon-yellow font-mono font-bold flex justify-between items-center mt-auto border-t-2 border-gray-800 pt-4"
         >
           <span>LEER MÁS</span>
@@ -66,13 +63,13 @@ const secundarias = data.acf.secundarias;
       data-aos="zoom-out-down"
       class="bg-dark neo-border-cyan p-5 neo-shadow-cyan neo-hover-cyan transition-neo flex flex-col group"
     >
-      <a href={secundarias.centro.slug}>
+      <a href={pageIndex.cen_slug}>
         {
-          secundarias.centro.imagen && (
+          pageIndex.cen_image && (
             <Picture
-              src={secundarias.centro.imagen}
-              alt={secundarias.centro.titulo || 'Imagen Destacada'}
-              width={600}
+              src={`${publicAssetsUrl}/${pageIndex?.cen_image?.id}`}
+              alt={pageIndex.cen_title || 'Imagen Destacada'}
+              width={800}
               height={600}
               formats={['avif', 'webp']}
               class="h-48 w-full object-cover border-b-4 border-neon-cyan mb-4 grayscale group-hover:grayscale-0 transition-all"
@@ -80,15 +77,15 @@ const secundarias = data.acf.secundarias;
           )
         }
         <span class="text-neon-cyan font-mono text-sm mb-2 font-bold"
-          >{secundarias.centro.categoria}</span
+          >{pageIndex.cen_category?.name}</span
         >
         <h3
           class="text-2xl font-bold uppercase mb-4 flex-grow group-hover:text-neon-cyan transition-colors"
         >
-          {secundarias.centro.titulo}
+          {pageIndex.cen_title}
         </h3>
         <a
-          href={secundarias.centro.slug}
+          href={pageIndex.cen_slug}
           class="text-white hover:text-neon-cyan font-mono font-bold flex justify-between items-center mt-auto border-t-2 border-gray-800 pt-4"
         >
           <span>LEER MÁS</span>
@@ -102,13 +99,13 @@ const secundarias = data.acf.secundarias;
       data-aos="zoom-out-down"
       class="bg-dark neo-border-pink p-5 neo-shadow-pink neo-hover-pink transition-neo flex flex-col group"
     >
-      <a href={secundarias.derecha.slug}>
+      <a href={pageIndex.der_slug}>
         {
-          secundarias.derecha.imagen && (
+          pageIndex.der_image && (
             <Picture
-              src={secundarias.derecha.imagen}
-              alt={secundarias.derecha.titulo || 'Imagen Destacada'}
-              width={600}
+              src={`${publicAssetsUrl}/${pageIndex?.der_image?.id}`}
+              alt={pageIndex.der_title || 'Imagen Destacada'}
+              width={800}
               height={600}
               formats={['avif', 'webp']}
               class="h-48 w-full object-cover border-b-4 border-neon-cyan mb-4 grayscale group-hover:grayscale-0 transition-all"
@@ -116,15 +113,15 @@ const secundarias = data.acf.secundarias;
           )
         }
         <span class="text-neon-pink font-mono text-sm mb-2 font-bold"
-          >{secundarias.derecha.categoria}</span
+          >{pageIndex.der_category?.name}</span
         >
         <h3
           class="text-2xl font-bold uppercase mb-4 flex-grow group-hover:text-neon-pink transition-colors"
         >
-          {secundarias.derecha.titulo}
+          {pageIndex.der_title}
         </h3>
         <a
-          href={secundarias.derecha.slug}
+          href={pageIndex.der_slug}
           class="text-white hover:text-neon-pink font-mono font-bold flex justify-between items-center mt-auto border-t-2 border-gray-800 pt-4"
         >
           <span>ESCUCHAR AHORA</span>

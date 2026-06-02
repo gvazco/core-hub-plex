@@ -4,9 +4,10 @@ import { formatDate } from '@/helpers';
 interface Props {
   date: string;
   author: string;
+  slug: string;
 }
 
-const { date, author } = Astro.props;
+const { date, author, slug } = Astro.props;
 ---
 
 <div class="text-sm">
@@ -16,7 +17,7 @@ const { date, author } = Astro.props;
       <p>
         Autor:{' '}
         <span class="text-neon-cyan">
-          <a href="/blog/autor/">{author}</a>
+          <a href={`/blog/autor/${slug}`}>{author}</a>
         </span>
       </p>
     )

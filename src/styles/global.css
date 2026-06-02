@@ -124,6 +124,95 @@ body {
     overflow-x: hidden;
 }
 
+.top-nav{
+	width: 100%;
+	height: 100vh;
+	position: fixed;
+	top:120vh;
+	z-index: 50;
+	background-color: #16162d;
+	border-bottom-right-radius: 100%;
+	border-bottom-left-radius: 100%;
+	transition: all 650ms cubic-bezier(1.0, 0.1);
+}
+
+.nav-list{
+	list-style: none;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+li{
+	margin: 0.2rem;
+}
+a.nav-link{
+	color:#eee;
+}
+.nav-link{
+	font-family: 'Rancho', cursive;
+	font-size: 5rem;
+	padding: 1rem;
+}
+
+.nav-link:hover,
+.nav-link:focus{
+	background: linear-gradient(to top, #ffe838, #fd57bf);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+}
+
+.top-nav.open{
+	top: 0;
+	border-radius: initial;
+}
+
+.menu-toggler{
+	position: absolute;
+	top: 2.2rem;
+	right: 1rem;
+	width: 3rem;
+	height: 3rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	cursor: pointer;
+	z-index: 1500;
+	transition: transform 650ms ease-out;
+}
+
+.bar{
+	background: linear-gradient(to right, var(--color-neon-cyan), var(--color-neon-pink));
+	width: 100%;
+	height: 4px;
+}
+
+.bar-half{
+	width: 50%;
+}
+
+.bar-half.start{
+	transform-origin: right;
+	transition: transform 650ms cubic-bezier(0.54, -0.81, 0.57, 0.57);
+}
+
+.open .bar-half.start{
+	transform: rotate(-450deg) translateX(.8rem);
+}
+
+.bar-half.end{
+	align-self: flex-end;
+	transform-origin: left;
+	transition: transform 650ms cubic-bezier(0.54, -0.81, 0.57, 0.57);
+}
+
+.open .bar-half.end{
+	transform: rotate(-450deg) translateX(-.8rem);
+}
+
 /* Estilizado del elemento audio y sus controles */
 .wp-audio-shortcode {
   width: 100% !important;
@@ -131,6 +220,10 @@ body {
   border-radius: 0 !important;
   /* padding: 1.5rem !important; */
   margin: 1rem 0 !important;
+}
+
+iframe {
+  width: 100% !important;
 }
 
 /* Controles de audio personalizados */
@@ -320,7 +413,8 @@ audio {
     height: 100%;
   }
 
-.banner_product {
+
+.wp-block-columns {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -375,8 +469,9 @@ audio {
   display: none;
 }
 
+
 @media screen and (min-width: 576px) {
-  .banner_product {
+  .column_green {
     flex-direction: row;
     padding: 2rem 3rem;
     text-align: left;

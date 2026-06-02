@@ -1,13 +1,17 @@
 ---
-import { PostsSchema } from '@/types';
+import { DirectusArticlesCollectionResponseSchema } from '@/types';
 import PostCard from './PostCard.astro';
-const url = `${import.meta.env.API_URL}/posts?per_page=50`;
-const res = await fetch(url);
-const json = await res.json();
-const data = PostsSchema.parse(json);
-// console.log(data);
+const newUrl = `${import.meta.env.API_ITEMS}/articles?fields=*,article_category.*,article_tags.*,author.*`;
+const newRes = await fetch(newUrl);
+const newJson = await newRes.json();
+const newData = DirectusArticlesCollectionResponseSchema.parse(newJson);
+const { data: articles } = newData;
 ---
 
 <div class="columns-1 md:columns-2 lg:columns-3 gap-5 my-8 space-y-5">
-  {data.map((post) => <PostCard post={post} />)}
+  {
+    articles.map(
+      (post) => post.status === 'published' && <PostCard post={post} />
+    )
+  }
 </div>

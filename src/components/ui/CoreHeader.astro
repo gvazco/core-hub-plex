@@ -30,23 +30,44 @@ import CoreMobileMenu from './CoreMobileMenu.astro';
 
     <CoreMainNav />
 
-    <button
+    <!-- <button
       class="hidden lg:block bg-neon-pink text-white px-6 py-3 font-bold font-mono text-xl neo-border-pink neo-shadow-yellow neo-hover-yellow transition-neo"
     >
       SUSCRIBIRSE
-    </button>
+    </button> -->
 
-    <div
-      class="md:hidden bg-neon-pink text-dark font-bold font-mono text-xl neo-border-pink neo-shadow-yellow-btn neo-hover-yellow transition-neo"
-    >
+    <!-- Hamburger Button -->
+    <div class="md:hidden">
       <button
-        id="mobile-menu-btn"
+        id="menu-toggler"
         type="button"
-        class="p-4 border-4 border-black dark:border-white bg-primary text-black menu-icon"
-        aria-label="Abrir menú"></button>
+        class="menu-toggler flex flex-col gap-1.5 p-2 cursor-pointer"
+        aria-label="Abrir menú"
+      >
+        <span
+          class="bar block w-8 h-1 bg-dark transition-all duration-300 origin-center"
+        ></span>
+        <span class="bar block w-8 h-1 bg-dark transition-all duration-300"
+        ></span>
+        <span
+          class="bar block w-8 h-1 bg-dark transition-all duration-300 origin-center"
+        ></span>
+      </button>
     </div>
 
     <!-- Mobile Menu Overlay -->
     <CoreMobileMenu />
+
+    <style is:global>
+      .menu-toggler.open .bar:nth-child(1) {
+        transform: translateY(10px) rotate(45deg);
+      }
+      .menu-toggler.open .bar:nth-child(2) {
+        opacity: 0;
+      }
+      .menu-toggler.open .bar:nth-child(3) {
+        transform: translateY(-18px) rotate(-45deg);
+      }
+    </style>
   </nav>
 </header>

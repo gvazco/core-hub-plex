@@ -52,6 +52,45 @@ export default function SwiperGalleryReact({ slides }) {
         modifier: 1,
         slideShadows: false,
       },
+      breakpoints: {
+        320: {
+          slidesPerView: 1.2,
+          spaceBetween: 12,
+          centeredSlides: true,
+          coverflowEffect: {
+            stretch: 0,
+            rotate: 5,
+            depth: 100,
+          },
+        },
+        640: {
+          slidesPerView: slideCount >= 3 ? 1.5 : 1,
+          spaceBetween: 16,
+          coverflowEffect: {
+            stretch: 40,
+            rotate: 10,
+            depth: 150,
+          },
+        },
+        768: {
+          slidesPerView: slideCount >= 3 ? 'auto' : 1,
+          spaceBetween: 24,
+          coverflowEffect: {
+            stretch: 80,
+            rotate: 10,
+            depth: 200,
+          },
+        },
+        1024: {
+          slidesPerView: slideCount >= 3 ? 'auto' : 1,
+          spaceBetween: 24,
+          coverflowEffect: {
+            stretch: 120,
+            rotate: 10,
+            depth: 200,
+          },
+        },
+      },
     });
 
     return () => {
@@ -64,28 +103,28 @@ export default function SwiperGalleryReact({ slides }) {
   return (
     <div ref={swiperRef} className="swiper">
       <div className="swiper-wrapper">
-        {slides.map((slide) => (
+        {slides.data?.map((slide) => (
           <a
             key={slide.slug}
             href={`/galerias/${slide.slug}`}
             className="swiper-slide relative w-full max-w-[420px] shrink-0 overflow-hidden transition-shadow bg-dark text-white p-6 neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer"
           >
-            {slide.featured_images?.medium_large?.url && (
+            {slide.cover_image && (
               <img
-                src={slide.featured_images.medium_large.url}
-                alt={slide.title?.rendered || slide.slug}
-                className="h-[28rem] w-full object-cover"
+                src={`${import.meta.env.PUBLIC_ASSETS}${slide.cover_image}`}
+                alt={slide.title || slide.slug}
+                className="h-[18rem] sm:h-[22rem] lg:h-[28rem] w-full object-cover"
               />
             )}
             <div className="absolute align-center text-center inset-x-0 bottom-0 bg-black/60 p-6 text-white backdrop-blur-sm">
               <h2 className="mb-4 text-3xl font-semibold">
-                {slide.title?.rendered || slide.slug}
+                {slide.title || slide.slug}
               </h2>
-              {slide.category_details?.map((cat) => (
-                <h3 key={cat.id} className="max-w-xs inline-block py-1 px-3 text-md font-bold text-white mb-2 ml-2 mr-2 transition-neo">
-                  #{cat.name}
+              
+                <h3 key={slide.gallery_category?.id} className="max-w-xs inline-block py-1 px-3 text-md font-bold text-white mb-2 ml-2 mr-2 transition-neo">
+                  #{slide.gallery_category?.name}
                 </h3>
-              ))}
+              
             </div>
           </a>
         ))}

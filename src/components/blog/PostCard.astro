@@ -8,50 +8,57 @@ interface Props {
   post: Post;
 }
 const { post } = Astro.props;
-console.log(post);
+
+const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
 ---
 
 <article
   class="break-inside-avoid-column overflow-hidden transition-shadow bg-dark text-white p-6 neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer"
 >
-  {
-    post?.featured_images?.medium_large?.url && (
-      <Picture
-        src={post.featured_images.medium_large.url}
-        alt={post?.title.rendered}
-        width={post?.featured_images?.medium_large?.width || 600}
-        height={post?.featured_images?.medium_large?.height || 600}
-        formats={['avif', 'webp']}
-        class="w-full h-48 object-cover"
-      />
-    )
-  }
+  <a href={`/blog/${post.slug}`}>
+    {
+      post?.cover_image && (
+        <Picture
+          src={`${publicAssetsUrl}/${post.cover_image}`}
+          alt={post?.title}
+          width={800}
+          height={600}
+          formats={['avif', 'webp']}
+          class="w-full h-48 object-cover"
+        />
+      )
+    }
 
-  <div class="p-5 space-y-3">
-    <h3
-      class="text-2xl font-bold uppercase mb-4 flex-grow group-hover:text-neon-cyan transition-colors"
-    >
-      <a href={`/blog/${post.slug}`}>
-        {post.title.rendered}
-      </a>
-    </h3>
+    <div class="p-5 space-y-3">
+      <h3
+        class="text-2xl font-bold uppercase mb-4 flex-grow group-hover:text-neon-cyan transition-colors"
+      >
+        {post.title}
+      </h3>
+    </div>
 
     <PostMeta
-      date={post.date}
-      author={post.author_details ? post.author_details[0]?.name : ''}
+      date={post.date_created}
+      author={post.author ? post.author?.name : ''}
+      slug={post.author?.slug !== null ? post.author?.slug : ''}
     />
 
     {
-      post.category_details.map((cat) => (
-        <PostCategories name={cat.name} slug={cat.slug} />
-      ))
+      post.article_category?.name && (
+        <PostCategories
+          name={post.article_category.name}
+          slug={post.article_category.slug}
+        />
+      )
     }
 
     {
-      post?.tag_details &&
-        post.tag_details.map((tag) => (
-          <PostTags name={tag.name} slug={tag.slug} />
-        ))
+      post?.article_tags && (
+        <PostTags
+          name={post.article_tags?.name}
+          slug={post.article_tags?.slug}
+        />
+      )
     }
-  </div>
+  </a>
 </article>

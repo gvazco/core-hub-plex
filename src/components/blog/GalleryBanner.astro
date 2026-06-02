@@ -1,11 +1,10 @@
 ---
-import { Picture } from 'astro:assets';
 import type { Post } from '@/types';
 interface Props {
-  acf: Post['acf'];
+  gallerySlug: Post['gallery_slug'];
 }
-const { acf } = Astro.props;
-// console.log(acf);
+const { gallerySlug } = Astro.props;
+console.log(gallerySlug);
 ---
 
 <div
@@ -36,7 +35,7 @@ const { acf } = Astro.props;
       </div>
     </div>
     <a
-      href={acf?.gallery_banner?.gallery_url}
+      href={gallerySlug}
       target="_blank"
       class="bg-black ml-3 dark:bg-white text-sm md:text-lg text-[#ffde59] dark:text-black font-black px-2 py-2 md:px-6 md:py-3 border-2 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.3)] transition-all uppercase tracking-wide inline-block"
     >

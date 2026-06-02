@@ -1,21 +1,20 @@
 ---
 import CoreLayout from '@/layouts/CoreLayout.astro';
 import GalleryCategories from '@/components/ui/Taxonomies/GalleryCategories.astro';
-import { BaseWPSchema } from '@/types';
+import { DirectusGalleriesPageResponseSchema } from '@/types';
 import SwiperGalleryWrapper from '@/components/galleries/SwiperGalleryWrapper.astro';
-const url = `${import.meta.env.API_URL}/pages?slug=galerias`;
-const response = await fetch(url);
-const json = await response.json();
-const data = BaseWPSchema.parse(json[0]);
-// console.log(data);
+const newUrl = `${import.meta.env.API_ITEMS}/pages?filter[slug][_eq]=galerias`;
+const newResponse = await fetch(newUrl);
+const newJson = await newResponse.json();
+const newData = DirectusGalleriesPageResponseSchema.parse(newJson);
+const { data: galleriesPage } = newData;
 ---
 
 <CoreLayout
-  title="Galería"
-  subtitle={data?.acf?.subtitle || 'Nuestra galería de imágenes'}
-  bgImage={data?.featured_images?.full?.url || ''}
+  title={galleriesPage[0]?.title || 'Galerías'}
+  subtitle={galleriesPage[0]?.subtitle}
+  bgImage={`${import.meta.env.PUBLIC_ASSETS}/${galleriesPage[0]?.cover_image}`}
 >
   <GalleryCategories />
   <SwiperGalleryWrapper />
-  <!-- <GalleryPosts /> -->
 </CoreLayout>

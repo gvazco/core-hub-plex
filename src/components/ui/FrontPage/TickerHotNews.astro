@@ -1,10 +1,10 @@
 ---
-import { NewsInformeArraySchema } from '@/types';
-const url = `${import.meta.env.API_URL}/news`;
-const response = await fetch(url);
-const json = await response.json();
-const data = NewsInformeArraySchema.parse(json);
-// console.log(data);
+import { DirectusHotNewsResponseSchema } from '@/types';
+const newURL = `${import.meta.env.API_ITEMS}/hot_news`;
+const newResponse = await fetch(newURL);
+const newJson = await newResponse.json();
+const newData = DirectusHotNewsResponseSchema.parse(newJson);
+const { data: dataItems } = newData;
 ---
 
 <!-- Ticker de Noticias Rápidas -->
@@ -13,18 +13,22 @@ const data = NewsInformeArraySchema.parse(json);
 >
   <div class="animate-scroll">
     {
-      data.map((item) => (
-        <a
-          href={item.acf.url}
-          target="_blank"
-          class="inline-flex items-center mx-4"
-        >
-          <span class="mx-4 uppercase">
-            {item.title.rendered}
-            {item.acf.informe}
-          </span>
-        </a>
-      ))
+      dataItems.map(
+        (item) =>
+          item.status === 'published' && (
+            <a
+              href={item.article_url}
+              target="_blank"
+              class="inline-flex items-center mx-2"
+            >
+              <p class="mx-4 flex items-center space-x-2">
+                <span class="material-symbols-outlined">{item.icon}</span>
+                {item.title}
+                <span>{item.subtitle}</span>
+              </p>
+            </a>
+          )
+      )
     }
   </div>
 </div>

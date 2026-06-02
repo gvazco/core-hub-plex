@@ -1,25 +1,24 @@
 ---
 import CoreLayout from '@/layouts/CoreLayout.astro';
-import { ContactPageSchema } from '@/types';
+import { DirectusContactPageResponseSchema } from '@/types';
 import LocationMap from '@/components/contact/LocationMap.astro';
 import ContactForm from '@/components/contact/ContactForm.astro';
-const url = `${import.meta.env.API_URL}/pages?slug=contacto`;
+const url = `${import.meta.env.API_ITEMS}/pages?filter[slug][_eq]=contacto`;
 const response = await fetch(url);
 const json = await response.json();
-const data = ContactPageSchema.parse(json[0]);
+const pageData = DirectusContactPageResponseSchema.parse(json);
+const { data } = pageData;
+console.log(data[0]);
 ---
 
 <CoreLayout
   title="Contacto"
-  subtitle={data.acf.subtitle}
-  bgImage={data?.featured_images?.full?.url || ''}
+  subtitle={data[0]?.subtitle || ''}
+  bgImage={data[0]?.cover_image || ''}
 >
-  <div
-    class="text-xl space-y-3 mt-10 lg:mt-0"
-    set:html={data?.content?.rendered}
-  />
+  <div class="text-xl space-y-3 mt-10 lg:mt-0" set:html={data[0]?.content} />
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
     <ContactForm />
-    <LocationMap location={data.acf.location} />
+    <LocationMap location={data[0]?.location?.location} />
   </div>
 </CoreLayout>

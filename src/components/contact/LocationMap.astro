@@ -1,17 +1,18 @@
 ---
-import type { Location } from "@/types";
+import type { Location } from '@/types';
 interface Props {
   location: Location;
 }
 
 const { location } = Astro.props;
+console.log('LOCATION', location);
 ---
 
 <div>
-  <h3 class="text-coffee-900 font-black text-center text-2xl uppercase mb-5">
+  <h3 class="text-neon-cyan font-black text-center text-2xl uppercase mb-5">
     Ubicación
   </h3>
-  <div id="map" class="h-[700px]"></div>
+  <div id="map" class="h-[300px] md:h-[500px] lg:h-[700px]"></div>
   <location-data
     data-lat={location.lat}
     data-lng={location.lng}
@@ -22,8 +23,8 @@ const { location } = Astro.props;
 </div>
 
 <script>
-  import L from "leaflet";
-  import "leaflet/dist/leaflet.css";
+  import L from 'leaflet';
+  import 'leaflet/dist/leaflet.css';
 
   class LocationData extends HTMLElement {
     connectedCallback() {
@@ -35,8 +36,8 @@ const { location } = Astro.props;
       const markerLng = this.dataset.markerlng;
 
       if (lat && lng && zoom && label && markerLat && markerLng) {
-        const map = L.map("map").setView([+lat, +lng], +zoom);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
+        const map = L.map('map').setView([+lat, +lng], +zoom);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(
           map
         );
         L.marker([+markerLat, +markerLng])
@@ -46,5 +47,5 @@ const { location } = Astro.props;
       }
     }
   }
-  customElements.define("location-data", LocationData);
+  customElements.define('location-data', LocationData);
 </script>

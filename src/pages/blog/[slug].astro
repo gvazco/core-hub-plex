@@ -1,48 +1,61 @@
 ---
 import CoreLayout from '@/layouts/CoreLayout.astro';
 import { Picture } from 'astro:assets';
-import { PostSchema } from '@/types';
+import { PostSchema, DirectusArticlesCollectionSchema } from '@/types';
 import PostMeta from '@/components/blog/PostMeta.astro';
 import PostCategories from '@/components/blog/PostCategories.astro';
+import PostTags from '@/components/blog/PostTags.astro';
 import GalleryBanner from '@/components/blog/GalleryBanner.astro';
 
 export const prerender = false;
-
 const { slug } = Astro.params;
-const res = await fetch(`${import.meta.env.API_URL}/posts?slug=${slug}`);
-const json = await res.json();
-const post = PostSchema.safeParse(json[0]);
-if (!post.success) return Astro.redirect('/404');
+const newsRes = await fetch(
+  `${import.meta.env.API_ITEMS}/articles?filter[slug][_eq]=${slug}&fields=*,article_category.*,article_tags.*,author.*`
+);
+const newJson = await newsRes.json();
+const newPost = DirectusArticlesCollectionSchema.safeParse(newJson.data[0]);
+
+if (!newPost.success) return Astro.redirect('/404');
 const {
   title,
-  featured_images,
-  date,
-  content,
-  category_details,
-  author_details,
-  acf,
-} = post.data;
-// console.log(post.data);
+  subtitle,
+  seo_title,
+  seo_description,
+  status,
+  excerpt,
+  cover_image,
+  date_created,
+  markdown_disabled,
+  article_category,
+  article_tags,
+  gallery_slug,
+  gallery_enabled,
+  author,
+  video_enabled,
+  video_cover,
+} = newPost.data;
+const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
+// console.log(newPost.data);
 ---
 
-<CoreLayout title={title.rendered} bgImage={featured_images?.full?.url || ''}>
+<CoreLayout title={title} bgImage={`${publicAssetsUrl}/${cover_image}`}>
   {
-    acf.video_url && acf?.options?.video_enabled ? (
+    video_cover && video_enabled ? (
       <div class="aspect-video">
         <iframe
-          src={acf?.video_url}
-          title={title.rendered}
+          src={video_cover}
+          title={title}
           allowfullscreen
           class="w-full h-full"
         />
       </div>
     ) : (
-      featured_images?.full?.url && (
+      cover_image && (
         <Picture
-          src={featured_images.full.url}
-          alt={title.rendered}
-          width={featured_images?.full?.width || 600}
-          height={400}
+          src={`${publicAssetsUrl}/${cover_image}`}
+          alt={title}
+          width={800}
+          height={600}
           formats={['avif', 'webp']}
           class="w-full"
         />
@@ -50,27 +63,25 @@ const {
     )
   }
   <article
-    class="relative top-[-130px] bg-dark-transparent space-y-5 p-5 max-w-5xl mx-auto"
+    class="relative top-[-60px] md:top-[-100px] lg:top-[-130px] bg-dark-transparent space-y-5 p-5 max-w-5xl mx-auto"
   >
     <h1
       class="text-xl md:text-3xl lg:text-4xl font-black text-black dark:text-white uppercase tracking-tight"
     >
-      {title.rendered}
+      {title}
     </h1>
     <PostMeta
-      date={date}
-      author={author_details ? author_details[0]?.name : ''}
+      date={date_created}
+      author={author ? author?.name : ''}
+      slug={author ? author?.slug : ''}
     />
-    {
-      category_details.map((cat) => (
-        <PostCategories name={cat.name} slug={cat.slug} />
-      ))
-    }
+    <PostCategories name={article_category.name} slug={article_category.slug} />
+    <PostTags name={article_tags?.name} slug={article_tags?.slug} />
 
-    <div set:html={content.rendered} class="text-lg space-y-3 mt-5" />
+    <div set:html={markdown_disabled} class="text-lg space-y-3 mt-5" />
 
     {
-      acf.gallery_banner && acf?.options?.gallery_enabled ? (
+      gallery_slug && gallery_enabled ? (
         <div class="aspect-gallery-banner">
           <div class="mx-auto max-w-7x">
             <div class="relative isolate overflow-clip bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
@@ -119,8 +130,8 @@ const {
     }
 
     {
-      acf.gallery_banner && acf?.options?.gallery_enabled ? (
-        <GalleryBanner acf={acf} />
+      gallery_slug && gallery_enabled ? (
+        <GalleryBanner gallerySlug={gallery_slug} />
       ) : (
         ''
       )

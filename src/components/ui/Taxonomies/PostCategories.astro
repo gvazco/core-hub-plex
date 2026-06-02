@@ -1,22 +1,25 @@
 ---
-import { CategoriesSchema } from '@/types';
-const catUrl = `${import.meta.env.API_URL}/categories?per_page=20`;
-const catResponse = await fetch(catUrl);
-const catJson = await catResponse.json();
-const catData = CategoriesSchema.parse(catJson);
+import { DirectusArticlesCategoryResponseSchema } from '@/types';
 
-// console.log(catData);
+const newCatUrl = `${import.meta.env.API_ITEMS}/articles_categories`;
+const newCatResponse = await fetch(newCatUrl);
+const newCatJson = await newCatResponse.json();
+const newCatData = DirectusArticlesCategoryResponseSchema.parse(newCatJson);
+const { data: catData } = newCatData;
 ---
 
 <div class="mt-5 md:mt-30 my-3 flex flex-wrap gap-2 justify-center">
   {
-    catData.map((cat) => (
-      <a
-        href={`/blog/categoria/${cat.slug}`}
-        class="inline-block py-1 px-5 text-sm text-white m-1 bg-dark neo-border-pink p-5 neo-shadow-pink neo-hover-pink transition-neo"
-      >
-        {cat.name}
-      </a>
-    ))
+    catData.map(
+      (cat) =>
+        cat.status === 'published' && (
+          <a
+            href={`/blog/categoria/${cat.slug}`}
+            class="inline-block py-1 px-5 text-sm text-white m-1 bg-dark neo-border-pink p-5 neo-shadow-pink neo-hover-pink transition-neo"
+          >
+            {cat.name}
+          </a>
+        )
+    )
   }
 </div>

@@ -1,9 +1,9 @@
 ---
-import { CategoriesSchema } from '@/types';
-const catUrl = `${import.meta.env.API_URL}/autores?per_page=20`;
+import { DirectusAuthorsSchema } from '@/types';
+const catUrl = `${import.meta.env.API_ITEMS}/authors`;
 const catResponse = await fetch(catUrl);
 const catJson = await catResponse.json();
-const catData = CategoriesSchema.parse(catJson);
+const catData = DirectusAuthorsSchema.parse(catJson.data);
 
 // console.log(catData);
 ---
