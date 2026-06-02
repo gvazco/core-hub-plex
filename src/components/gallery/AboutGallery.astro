@@ -1,12 +1,13 @@
 ---
 import GalleryGrid from '@/components/gallery/GalleryGrid.astro';
-import { GalleryPageSchema } from '@/types';
-const url = `${import.meta.env.API_URL}/pages?slug=galeria`;
+import { DirectusGalleriesCollectionSchema } from '@/types';
+
+const url = `${import.meta.env.API_ITEMS}/galleries?filter[slug][_eq]=galeria&fields=*,gallery_category.*,gallery_tag.*,author.*,gallery.directus_files_id.id,gallery.directus_files_id.filename_disk,gallery.directus_files_id.filename_download,gallery.directus_files_id.title,gallery.directus_files_id.type,gallery.directus_files_id.width,gallery.directus_files_id.height,gallery.directus_files_id.filesize`;
 const response = await fetch(url);
 const json = await response.json();
-const data = GalleryPageSchema.parse(json[0]);
+const data = DirectusGalleriesCollectionSchema.parse(json.data[0]);
 ---
 
 <div>
-  <GalleryGrid gallery={data.gallery} />
+  <GalleryGrid gallery={data.gallery || []} title={data.title} date={data.date_created} category_details={data.gallery_category ? [{ name: data.gallery_category.name, slug: data.gallery_category.slug }] : []} author_details={data.author ? [{ name: data.author.name, slug: data.author.slug }] : []} historia={data.excerpt ?? ''} />
 </div>

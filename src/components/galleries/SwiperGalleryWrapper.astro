@@ -2,7 +2,7 @@
 import SwiperGalleryReact from './SwiperGallery';
 import { DirectusGalleriesCollectionResponseSchema } from '@/types';
 
-const url = `${import.meta.env.API_ITEMS}/galleries?fields=*,gallery_category.*,gallery_tag.*,author.*`;
+const url = `${import.meta.env.API_ITEMS}/galleries?fields=*,gallery_category.*,gallery_tag.*,author.*,gallery.directus_files_id.id,gallery.directus_files_id.filename_disk,gallery.directus_files_id.filename_download,gallery.directus_files_id.title,gallery.directus_files_id.type,gallery.directus_files_id.width,gallery.directus_files_id.height,gallery.directus_files_id.filesize`;
 const res = await fetch(url);
 const json = await res.json();
 const data = DirectusGalleriesCollectionResponseSchema.parse(json);

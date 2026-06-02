@@ -1,6 +1,6 @@
 ---
 import { DirectusArticlesCategoryResponseSchema } from '@/types';
-const catUrl = `${import.meta.env.API_ITEMS}/articles_tags`;
+const catUrl = `${import.meta.env.API_ITEMS}/galleries_tags`;
 const catResponse = await fetch(catUrl);
 const catJson = await catResponse.json();
 const catData = DirectusArticlesCategoryResponseSchema.parse(catJson);

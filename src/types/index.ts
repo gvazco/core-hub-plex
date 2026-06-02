@@ -1,128 +1,7 @@
 import { z } from "zod";
 
-const imageSchema = z.object({
-  url: z.string().nullable().optional(),
-  width: z.number().nullable().optional(),
-  height: z.number().nullable().optional(),
-  caption: z.string().nullable().optional(),
-});
 
-// Accept a string URL, or `false`/undefined when image is not available yet
-const maybeImageString = z.union([z.string(), z.literal(false)]).nullable().optional();
 
-const featureImagesSchema = z.object({
-  medium: imageSchema,
-  medium_large: imageSchema,
-  large: imageSchema,
-  full: imageSchema,
-});
-
-export const BaseWPSchema = z.object({
-  id: z.number(),
-  slug: z.string(),
-  title: z.object({
-    rendered: z.string(),
-  }),
-  content: z.object({
-    rendered: z.string(),
-  }),
-  featured_images: featureImagesSchema.optional(),
-  acf: z.object({
-    subtitle: z.string().optional(),
-  }),
-});
-
-const gallerySchema = z.object({
-  large: imageSchema,
-  full: imageSchema,
-  caption: z.string().optional(),
-});
-
-export const GalleryPageSchema = BaseWPSchema.extend({
-  gallery: z.array(gallerySchema),
-});
-
-export const GallerySchema = BaseWPSchema.omit({
-  content: true,
-}).extend({
-  date: z.string(),
-  acf: z.object({
-    historia: z.string().optional(),
-  }),
-  gallery: z.array(gallerySchema).optional(),
-});
-
-export const GalleriesSchema = z.array(GallerySchema);
-
-export const CategorySchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  slug: z.string(),
-});
-
-export const CategoriesSlugSchema = z.array(
-  CategorySchema.pick({
-    slug: true,
-  }),
-);
-
-export const CategoriesSchema = z.array(CategorySchema);
-
-export const AutorSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  slug: z.string(),
-  description: z.string().optional(),
-  acf: z.object({
-    formacion: z.string(),
-    biografia: z.string(),
-    imagen: maybeImageString,
-  }).optional(),
-});
-
-export const AutoresSlugSchema = z.array(
-  AutorSchema.pick({
-    slug: true,
-  }),
-);
-
-export const AutoresSchema = z.array(AutorSchema);
-
-export const PostSchema = BaseWPSchema.extend({
-  acf: z.object({
-    subtitle: z.string().optional(),
-    video_url: z.string().nullable().optional(),
-    gallery_banner: z.object({
-      gallery_url: z.string().nullable().optional(),
-      banner_description: z.string().nullable().optional(),
-      gallery_cover: z.union([z.string(), z.boolean()]).optional(),
-    }).nullable().optional(),
-    
-    options: z.object({
-      video_enabled: z.boolean(),
-      gallery_enabled: z.boolean(),
-    }).optional(),
-  }),
-  date: z.string(),
-  category_details: CategoriesSchema,
-  tag_details: CategoriesSchema.optional(),
-  author_details: AutoresSchema.optional(),
-});
-
-export const PostsSchema = z.array(PostSchema);
-
-export const GaleriaSchema = BaseWPSchema.extend({
-  acf: z.object({
-    historia: z.string().optional(),
-  }),
-  gallery: z.array(gallerySchema).optional(),
-  date: z.string(),
-  category_details: CategoriesSchema,
-  tecnica_details: CategoriesSchema.optional(),
-  author_details: AutoresSchema.optional(),
-});
-
-export const GaleriasSchema = z.array(GaleriaSchema);
 
 
 /* -------------------------------------------------------------------------- */
@@ -172,6 +51,18 @@ export const DirectusGalleriesSchema = DirectusBaseSchema.extend({
   gallery_category: z.number(),
   gallery_tag: z.number(),
   gallery: z.array(DirectusGalleryJunctionSchema).optional(),
+});
+
+const GallerySchema = z.object({
+  directus_files_id: z.object({
+    id: z.string(),
+    filename_disk: z.string(),
+    filename_download: z.string(),
+    title: z.string(),
+    width: z.number().nullable(),
+    height: z.number().nullable(),
+    description: z.string().nullable(),
+  }),
 });
 
 export const DirectusGalleriesArraySchema = z.array(DirectusGalleriesSchema);
@@ -227,6 +118,21 @@ const DirectusFileSchema = z.object({
 });
 /* -------------------------------------------------------------------------- */
 
+/* ---------------------- GALLERY JUNCTION WITH FILE ----------------------- */
+const DirectusGalleryJunctionWithFileSchema = z.object({
+  directus_files_id: z.object({
+    id: z.string(),
+    filename_disk: z.string(),
+    filename_download: z.string(),
+    title: z.string().nullable().optional(),
+    type: z.string(),
+    filesize: z.string(),
+    width: z.number().nullable().optional(),
+    height: z.number().nullable().optional(),
+  }).passthrough(),
+});
+/* -------------------------------------------------------------------------- */
+
 /* ----------------------------- AUTHORS SCHEMA ----------------------------- */
 export const DirectusAuthorSchema = z.object({
   id: z.number(),
@@ -258,7 +164,7 @@ export const DirectusGalleriesCollectionSchema = DirectusBaseSchema.extend({
   date_updated: z.string().datetime().nullable().optional(),
   user_updated: z.string().nullable().optional(),
   excerpt: z.string().optional(),
-  gallery: z.array(z.number()).optional(),
+  gallery: z.array(DirectusGalleryJunctionWithFileSchema).optional(),
   gallery_category: DirectusCategorySchema,
   gallery_tag: DirectusCategorySchema,
   author: DirectusAuthorSchema,
@@ -407,7 +313,6 @@ export const DirectusHotNewsResponseSchema = z.object({
 /* -------------------------------------------------------------------------- */
 
 export type Post = z.infer<typeof DirectusArticlesCollectionSchema>;
-export type Galeria = z.infer<typeof GaleriaSchema>;
-export type Gallery = z.infer<typeof gallerySchema>;
-export type FeatureImages = z.infer<typeof featureImagesSchema>;
+export type Galeria = z.infer<typeof DirectusGalleriesCollectionSchema>;
+export type Gallery = z.infer<typeof GallerySchema>;
 export type Location = z.infer<typeof DirectusLocationSchema>;

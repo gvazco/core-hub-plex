@@ -21,6 +21,6 @@ export default defineConfig({
   },
 
   image: {
-    domains: ["api-core-hub-plex.local", "api-panel.core-hub-plex.cloud"],
+    domains: ["api-core-hub-plex.local", "localhost:8055", "core-cms.core-hub-plex.cloud"],
   },
 });

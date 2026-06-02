@@ -7,7 +7,7 @@ interface Props {
   post: Galeria;
 }
 const { post } = Astro.props;
-// console.log(post);
+const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
 ---
 
 <article
@@ -15,12 +15,12 @@ const { post } = Astro.props;
 >
   <a href={`/galerias/${post.slug}`}>
     {
-      post?.featured_images?.medium_large?.url && (
+      post?.cover_image && (
         <Picture
-          src={post.featured_images.medium_large.url}
-          alt={post?.title.rendered}
-          width={post?.featured_images?.medium_large?.width || 600}
-          height={post?.featured_images?.medium_large?.height || 600}
+          src={`${publicAssetsUrl}/${post?.cover_image}`}
+          alt={post?.title}
+          width={800}
+          height={600}
           formats={['avif', 'webp']}
           class="w-full h-48 object-cover"
         />
@@ -32,16 +32,23 @@ const { post } = Astro.props;
         class="text-2xl font-bold uppercase mb-4 flex-grow group-hover:text-neon-cyan transition-colors"
       >
         <a href={`/galerias/${post.slug}`}>
-          {post.title.rendered}
+          {post.title}
         </a>
       </h3>
 
-      <PostMeta date={post.date} />
+      <PostMeta
+        date={post.date_created}
+        author={post?.author?.name}
+        slug={post?.slug}
+      />
 
       {
-        post.category_details.map((cat) => (
-          <PostCategories name={cat.name} slug={cat.slug} />
-        ))
+        (
+          <PostCategories
+            name={post?.gallery_category?.name}
+            slug={post?.gallery_category?.slug}
+          />
+        )
       }
     </div>
   </a>

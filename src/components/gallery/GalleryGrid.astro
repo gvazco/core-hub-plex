@@ -1,49 +1,68 @@
 ---
 import { Picture } from 'astro:assets';
-import { type Gallery } from '@/types';
 import PostMeta from '@/components/galleries/PostMeta.astro';
 import PostCategories from '@/components/galleries/PostCategories.astro';
+import PostTags from '@/components/galleries/PostTags.astro';
+
+const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
+
 interface Props {
-  gallery: Gallery[];
-  historia?: string;
-  category_details: {
+  gallery: {
+    directus_files_id: {
+      id: string;
+      filename_disk: string;
+      filename_download: string;
+      title?: string | null;
+      type: string;
+      filesize?: string;
+      width?: number | null;
+      height?: number | null;
+    };
+  }[];
+  gallery_category: {
     name: string;
     slug: string;
   }[];
-  author_details?: {
+  gallery_tag: {
     name: string;
     slug: string;
   }[];
+  author?: {
+    name: string;
+    slug: string;
+  }[];
+  excerpt: string;
   date: string;
-  title: {
-    rendered: string;
-  };
+  title: string;
 }
 
-const { gallery, historia, date, title, category_details, author_details } =
+const { gallery, excerpt, date, title, gallery_category, gallery_tag, author } =
   Astro.props;
-// console.log(gallery);
+
+console.log('Gallery in GalleryGrid:', gallery);
 ---
 
 <article class="space-y-5 max-w-7xl mx-auto">
   <h1
     class="text-xl md:text-3xl lg:text-4xl font-black text-black dark:text-white uppercase tracking-tight"
   >
-    {title.rendered}
+    {title}
   </h1>
 
   <PostMeta
     date={date}
-    author={author_details ? author_details[0]?.name : ''}
-    slug={author_details ? author_details[0]?.slug : ''}
+    author={author ? author[0]?.name : ''}
+    slug={author ? author[0]?.slug : ''}
   />
-  {
-    category_details.map((cat) => (
-      <PostCategories name={cat.name} slug={cat.slug} />
-    ))
-  }
 
-  <p class="text-lg text-gray-100 mt-2">{historia}</p>
+  <PostCategories
+    name={gallery_category[0]?.name}
+    slug={gallery_category[0]?.slug}
+  />
+
+  <PostTags name={gallery_tag[0]?.name} slug={gallery_tag[0]?.slug} />
+
+  <p class="text-lg text-gray-100 mt-2">{excerpt}</p>
 
   <p class="text-md text-gray-400">
     *Por favor, haz click en las imágenes para verlas a tamaño completo...
@@ -53,18 +72,22 @@ const { gallery, historia, date, title, category_details, author_details } =
     {
       gallery.map(
         (image) =>
-          image?.large?.url && (
+          image?.directus_files_id?.id && (
             <a
               class="inline-block w-full mb-3 break-inside-avoid bg-dark text-white p-6 neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer"
-              href={image.full.url}
-              data-pswp-width={image.full.width}
-              data-pswp-height={image.full.height}
+              href={`${publicAssetsUrl}/${image.directus_files_id.id}`}
+              data-pswp-width={image.directus_files_id.width}
+              data-pswp-height={image.directus_files_id.height}
             >
               <Picture
-                src={image.large.url}
-                alt={image?.caption || 'Galería de imágenes'}
-                width={image?.large?.width || 600}
-                height={image?.large?.height || 400}
+                src={`${publicAssetsUrl}/${image.directus_files_id.id}`}
+                alt={
+                  image.directus_files_id.title ||
+                  image.directus_files_id.filename_download ||
+                  'Galería de imágenes'
+                }
+                width={image.directus_files_id.width || 600}
+                height={image.directus_files_id.height || 400}
                 formats={['avif', 'webp']}
               />
             </a>
