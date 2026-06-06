@@ -10,7 +10,7 @@ interface Props {
 const { date, author, slug } = Astro.props;
 ---
 
-<div class="text-sm">
+<div class="text-sm mb-4">
   <p>Publicado el: <span class="text-neon-cyan">{formatDate(date)}</span></p>
   {
     author && (

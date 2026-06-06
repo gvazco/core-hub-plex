@@ -184,6 +184,89 @@ a.nav-link{
 	transition: transform 650ms ease-out;
 }
 
+
+.main-content {
+
+  .article-chapters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .article-cols {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    p {
+      margin-bottom: 0.5rem;
+    }
+
+    img {
+      max-width: 450px;
+      width: 100%;
+      height: auto;
+      margin: 0 1rem;
+      padding: 1rem;
+      border: 0.5rem solid var(--color-dark-cyan);
+    }
+  }
+
+  h2 {
+    font-family: Rubik, sans-serif;
+    font-weight: 700;
+  }
+
+  ul {
+    list-style-type: upper-alpha;
+    margin-left: 2rem;
+
+    li::marker {
+    content: counter(list-item, upper-alpha) ".- ";
+    }
+  }  
+
+  ol {
+    list-style-type: decimales;
+    margin-left: 1.5rem;
+
+    li::marker {
+    content: counter(list-item, decimales) ".- ";
+    }
+  }  
+
+
+  @media (min-width: 768px) {
+    .article-cols {
+      flex-wrap: nowrap;
+
+      > * {
+        flex: 1;
+      }
+    }
+
+    h2 {
+      span {
+        font-size: 36pt !important;
+      }
+    }
+
+    h3 {
+      span {
+        font-size: 18pt !important;
+      }
+    }
+
+    ul {
+      margin-left: 3rem;
+    }
+  }
+}
+
 .bar{
 	background: linear-gradient(to right, var(--color-neon-cyan), var(--color-neon-pink));
 	width: 100%;
@@ -226,55 +309,43 @@ iframe {
   width: 100% !important;
 }
 
-/* Controles de audio personalizados */
-audio::-webkit-media-controls-panel {
-  background-color: var(--color-coffee-200) !important;
-  border-radius: 0;
+/* Contenedor principal */
+.audio-container {
+  margin: 1rem auto; /* Centrado horizontal con margen vertical */
+  background-color: #1e1e24; /* Gris oscuro elegante */
+  border: 1px solid #3a3a4a; /* Borde sutil */      /* Bordes muy redondeados */
+  padding: 16px 20px;         /* Ancho ideal para escritorio y móvil */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 
+              0 0 40px rgba(99, 102, 241, 0.1); /* Destello sutil azul/morado */
 }
 
-/* Botón de play/pause */
-audio::-webkit-media-controls-play-button {
-  background-color: var(--color-coffee-600);
-  border-radius: 0;
-  transform: scale(1.5);
-  margin: 0 0.25rem 0 0;
+/* Título superior opcional */
+.audio-title {
+  color: #a5b4fc;            /* Color lavanda/azul claro */
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
-/* Barra de progreso */
-audio::-webkit-media-controls-timeline {
-  background-color: var(--color-coffee-300);
-  border-radius: 0;
-  margin: 0 1rem;
+/* Estilos para el reproductor nativo */
+.audio-container audio {
+  width: 100%;
+  height: 40px;
+  outline: none;
+  
+  /* TRUCO CLAVE: Invierte los colores nativos claros para adaptarlos a la oscuridad */
+  filter: invert(0.9) hue-rotate(180deg); 
 }
 
-/* Controles de volumen */
-audio::-webkit-media-controls-volume-slider {
-  background-color: var(--color-coffee-300);
-  border-radius: 0;
-  padding: 0 0.5rem;
-}
-
-/* Botón de mute */
-audio::-webkit-media-controls-mute-button {
-  background-color: var(--color-coffee-500);
-  border-radius: 0;
-  transform: scale(1.2);
-}
-
-/* Tiempo actual/duración */
-audio::-webkit-media-controls-current-time-display,
-audio::-webkit-media-controls-time-remaining-display {
-  color: var(--color-coffee-900);
-  font-family: var(--default-font-family);
-  font-weight: bold;
-  border-radius: 0;
-}
-
-/* Estilos para Firefox */
-audio {
-  border: none;
-  height: 3.5rem;
-  padding: 1rem;
+/* Ajustes específicos para navegadores basados en Webkit (Chrome, Edge, Safari) */
+.audio-container audio::-webkit-media-controls-enclosure {
+  background-color: #e5e7eb; /* Cambia el fondo interno del reproductor invertido */
+  border-radius: 8px;
 }
 
 .input-label {

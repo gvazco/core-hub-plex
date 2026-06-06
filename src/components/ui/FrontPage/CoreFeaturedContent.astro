@@ -9,7 +9,6 @@ const newJson = await newResponse.json();
 const newData = DirectusPageIndexResponseSchema.parse(newJson);
 const { data: pageIndex } = newData;
 const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
-// console.log('Page Index Data:', pageIndex);
 ---
 
 <!-- Contenido Principal -->
@@ -116,6 +115,5 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
       </a>
     </article>
 
-    <AdvertisingSpace />
-  </aside>
+  <AdvertisingSpace />
 </section>

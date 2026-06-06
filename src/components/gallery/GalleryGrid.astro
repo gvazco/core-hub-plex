@@ -13,8 +13,9 @@ interface Props {
       filename_disk: string;
       filename_download: string;
       title?: string | null;
+      description?: string | null;
       type: string;
-      filesize?: string;
+      filesize?: number;
       width?: number | null;
       height?: number | null;
     };
@@ -39,7 +40,7 @@ interface Props {
 const { gallery, excerpt, date, title, gallery_category, gallery_tag, author } =
   Astro.props;
 
-console.log('Gallery in GalleryGrid:', gallery);
+// console.log('Gallery in GalleryGrid:', gallery);
 ---
 
 <article class="space-y-5 max-w-7xl mx-auto">
@@ -82,9 +83,7 @@ console.log('Gallery in GalleryGrid:', gallery);
               <Picture
                 src={`${publicAssetsUrl}/${image.directus_files_id.id}`}
                 alt={
-                  image.directus_files_id.title ||
-                  image.directus_files_id.filename_download ||
-                  'Galería de imágenes'
+                  image.directus_files_id.description || 'Galería de imágenes'
                 }
                 width={image.directus_files_id.width || 600}
                 height={image.directus_files_id.height || 400}

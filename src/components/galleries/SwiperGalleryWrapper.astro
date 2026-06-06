@@ -6,7 +6,6 @@ const url = `${import.meta.env.API_ITEMS}/galleries?fields=*,gallery_category.*,
 const res = await fetch(url);
 const json = await res.json();
 const data = DirectusGalleriesCollectionResponseSchema.parse(json);
-// console.log(data);
 ---
 
 <section class="swiper-gallery pb-15">

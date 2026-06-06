@@ -8,7 +8,7 @@ export const prerender = false;
 
 const { slug } = Astro.params;
 const newRes = await fetch(
-  `${import.meta.env.API_ITEMS}/galleries?filter[slug][_eq]=${slug}&fields=*,gallery_category.*,gallery_tag.*,author.*,gallery.directus_files_id.id,gallery.directus_files_id.filename_disk,gallery.directus_files_id.filename_download,gallery.directus_files_id.title,gallery.directus_files_id.type,gallery.directus_files_id.filesize,gallery.directus_files_id.width,gallery.directus_files_id.height`
+  `${import.meta.env.API_ITEMS}/galleries?filter[slug][_eq]=${slug}&fields=*,gallery_category.*,gallery_tag.*,author.*,gallery.directus_files_id.id,gallery.directus_files_id.filename_disk,gallery.directus_files_id.filename_download,gallery.directus_files_id.title,gallery.directus_files_id.type,gallery.directus_files_id.filesize,gallery.directus_files_id.width,gallery.directus_files_id.height,gallery.directus_files_id.description`
 );
 const newJson = await newRes.json();
 const postNew = DirectusGalleriesCollectionSchema.safeParse(newJson.data[0]);

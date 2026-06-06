@@ -24,7 +24,7 @@ const autorUrl = `${import.meta.env.API_ITEMS}/authors?filter[slug][_eq]=${slug}
 const autorRes = await fetch(autorUrl);
 const autorJson = await autorRes.json();
 const autor = DirectusAuthorSchema.parse(autorJson.data[0]);
-console.log('Autor:', autor);
+// console.log('Autor:', autor);
 
 const postsUrl = `${import.meta.env.API_ITEMS}/articles?filter[author][_eq]=${autor.id}&fields=*,article_category.*,article_tags.*,author.*`;
 const postsRes = await fetch(postsUrl);

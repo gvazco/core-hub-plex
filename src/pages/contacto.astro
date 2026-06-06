@@ -8,7 +8,7 @@ const response = await fetch(url);
 const json = await response.json();
 const pageData = DirectusContactPageResponseSchema.parse(json);
 const { data } = pageData;
-console.log(data[0]);
+// console.log(data[0]);
 ---
 
 <CoreLayout

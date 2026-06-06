@@ -14,6 +14,7 @@ const newsRes = await fetch(
 );
 const newJson = await newsRes.json();
 const newPost = DirectusArticlesCollectionSchema.safeParse(newJson.data[0]);
+console.log(newPost);
 
 if (!newPost.success) return Astro.redirect('/404');
 const {
@@ -23,6 +24,7 @@ const {
   seo_description,
   status,
   excerpt,
+  cover_audio,
   cover_image,
   date_created,
   markdown_disabled,
@@ -70,6 +72,14 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
     >
       {title}
     </h1>
+    {
+      subtitle && (
+        <h2 class="text-lg md:text-2xl text-gray-700 dark:text-gray-300">
+          {subtitle}
+        </h2>
+      )
+    }
+
     <PostMeta
       date={date_created}
       author={author ? author?.name : ''}
@@ -78,7 +88,24 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
     <PostCategories name={article_category.name} slug={article_category.slug} />
     <PostTags name={article_tags?.name} slug={article_tags?.slug} />
 
-    <div set:html={markdown_disabled} class="text-lg space-y-3 mt-5" />
+    {
+      cover_audio && (
+        <div class="audio-container w-full">
+          <span class="audio-title">Escuchar artículo</span>
+          <audio controls preload="metadata" class="w-full">
+            <source
+              src={`${publicAssetsUrl}/${cover_audio}`}
+              type="audio/mpeg"
+            />
+          </audio>
+        </div>
+      )
+    }
+
+    <div
+      set:html={markdown_disabled}
+      class="main-content text-xl space-y-3 mt-5"
+    />
 
     {
       gallery_slug && gallery_enabled ? (

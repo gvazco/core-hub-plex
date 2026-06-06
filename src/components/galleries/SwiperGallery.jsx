@@ -111,18 +111,25 @@ export default function SwiperGalleryReact({ slides }) {
           >
             {slide.cover_image && (
               <img
-                src={`${import.meta.env.PUBLIC_ASSETS}${slide.cover_image}`}
+                src={`${import.meta.env.PUBLIC_ASSETS}/${slide.cover_image}`}
                 alt={slide.title || slide.slug}
                 className="h-[18rem] sm:h-[22rem] lg:h-[28rem] w-full object-cover"
               />
             )}
             <div className="absolute align-center text-center inset-x-0 bottom-0 bg-black/60 p-6 text-white backdrop-blur-sm">
               <h2 className="mb-4 text-3xl font-semibold">
-                {slide.title || slide.slug}
+                {slide?.title || slide.slug}
               </h2>
+
+              <h3 className="mb-4 text-2xl font-semibold">
+                {slide?.subtitle}
+              </h3>
               
                 <h3 key={slide.gallery_category?.id} className="max-w-xs inline-block py-1 px-3 text-md font-bold text-white mb-2 ml-2 mr-2 transition-neo">
                   #{slide.gallery_category?.name}
+                </h3>
+                <h3 key={slide.gallery_tag?.id} className="max-w-xs inline-block py-1 px-3 text-md font-bold text-white mb-2 ml-2 mr-2 transition-neo">
+                  #{slide.gallery_tag?.name}
                 </h3>
               
             </div>
