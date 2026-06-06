@@ -107,13 +107,13 @@ export default function SwiperGalleryReact({ slides }) {
           <a
             key={slide.slug}
             href={`/galerias/${slide.slug}`}
-            className="swiper-slide relative w-full max-w-[420px] shrink-0 overflow-hidden transition-shadow bg-dark text-white p-6 neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer"
+            className="swiper-slide relative w-full max-w-[450px] shrink-0 overflow-hidden transition-shadow bg-dark text-white p-6 neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer"
           >
             {slide.cover_image && (
               <img
                 src={`${import.meta.env.PUBLIC_ASSETS}/${slide.cover_image}`}
                 alt={slide.title || slide.slug}
-                className="h-[18rem] sm:h-[22rem] lg:h-[28rem] w-full object-cover"
+                className="h-[22rem] sm:h-[24rem] lg:h-[30rem] w-full object-cover"
               />
             )}
             <div className="absolute align-center text-center inset-x-0 bottom-0 bg-black/60 p-6 text-white backdrop-blur-sm">
@@ -137,8 +137,8 @@ export default function SwiperGalleryReact({ slides }) {
         ))}
       </div>
       <div className="swiper-pagination mt-8"></div>
-      <button className="swiper-button-next bg-neon-cyan text-dark p-5 border-4 border-neon-cyan neo-shadow-pink neo-hover-pink transition-neo cursor-pointer"></button>
-      <button className="swiper-button-prev bg-neon-cyan text-dark p-5 border-4 border-neon-cyan neo-shadow-pink neo-hover-pink transition-neo cursor-pointer"></button>
+      <button className="swiper-button-next bg-neon-cyan text-dark p-4 border-4 border-neon-cyan neo-shadow-pink neo-hover-pink transition-neo cursor-pointer"></button>
+      <button className="swiper-button-prev bg-neon-cyan text-dark p-4 border-4 border-neon-cyan neo-shadow-pink neo-hover-pink transition-neo cursor-pointer"></button>
     </div>
   );
 }
