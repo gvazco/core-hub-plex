@@ -50,7 +50,7 @@ import CoreFooter from '@/components/ui/CoreFooter.astro';
 
     <script>
       import AOS from 'aos';
-      document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener('astro:page-load', () => {
         if (typeof AOS !== 'undefined') {
           AOS.init({
             easing: 'ease',

@@ -46,13 +46,21 @@
 </div>
 
 <script>
-  let currentIndex = 0;
-  const slides = document.querySelectorAll('.carousel-slide');
-  const totalSlides = slides.length;
+  let intervalId;
 
-  setInterval(() => {
-    slides[currentIndex].classList.remove('active');
-    currentIndex = (currentIndex + 1) % totalSlides;
-    slides[currentIndex].classList.add('active');
-  }, 4000);
+  document.addEventListener('astro:page-load', () => {
+    if (intervalId) clearInterval(intervalId);
+
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const totalSlides = slides.length;
+
+    if (totalSlides === 0) return;
+
+    intervalId = setInterval(() => {
+      slides[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % totalSlides;
+      slides[currentIndex].classList.add('active');
+    }, 4000);
+  });
 </script>

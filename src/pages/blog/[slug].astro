@@ -165,7 +165,7 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
     }
   </article>
   <script is:inline>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('astro:page-load', () => {
       const banner = document.querySelector('[data-gallery-banner]');
       const closeButton = document.querySelector('[data-gallery-close]');
       if (!banner || !closeButton) return;

@@ -58,32 +58,37 @@
     import { actions, isInputError } from "astro:actions";
     import { Notyf } from "notyf";
     import "notyf/notyf.min.css";
-    const form = document.querySelector("form");
-    form?.addEventListener("submit", async (e) => {
-        e.preventDefault();
 
-        const form = e.target as HTMLFormElement;
-        const formData = new FormData(form);
+    document.addEventListener('astro:page-load', () => {
+        const form = document.querySelector("form");
+        if (!form) return;
 
-        const { data, error } = await actions.contact.sendEmail(formData);
-        const inputErrors = isInputError(error) ? error.issues : [];
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-        const notyf = new Notyf({
-            position: {
-                x: "right",
-                y: "top",
-            },
-            duration: 5000,
-        });
-        if (inputErrors) {
-            inputErrors.forEach((error) => {
-                notyf.error(error.message);
+            const form = e.target as HTMLFormElement;
+            const formData = new FormData(form);
+
+            const { data, error } = await actions.contact.sendEmail(formData);
+            const inputErrors = isInputError(error) ? error.issues : [];
+
+            const notyf = new Notyf({
+                position: {
+                    x: "right",
+                    y: "top",
+                },
+                duration: 5000,
             });
-        }
+            if (inputErrors) {
+                inputErrors.forEach((error) => {
+                    notyf.error(error.message);
+                });
+            }
 
-        if (data?.message && !data?.error) {
-            notyf.success(data.message);
-            form.reset();
-        }
+            if (data?.message && !data?.error) {
+                notyf.success(data.message);
+                form.reset();
+            }
+        });
     });
 </script>
