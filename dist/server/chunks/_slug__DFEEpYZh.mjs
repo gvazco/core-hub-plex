@@ -1,7 +1,7 @@
-import { c as createComponent, $ as $$Picture } from './_astro_assets_DDVmWlVS.mjs';
+import { c as createComponent, $ as $$Picture } from './_astro_assets_Bq7iKUa6.mjs';
 import 'piccolore';
-import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent, u as unescapeHTML } from './server_BlFu8yvy.mjs';
-import { D as DirectusArticlesCollectionSchema, $ as $$CoreLayout } from './index_vRVi5Jx6.mjs';
+import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent, u as unescapeHTML } from './server_BVqo3V-3.mjs';
+import { D as DirectusArticlesCollectionSchema, $ as $$CoreLayout } from './index_mxEMs1aL.mjs';
 import 'clsx';
 import { f as formatDate } from './index_DBtM_ae6.mjs';
 
@@ -52,7 +52,6 @@ const $$slug = createComponent(async ($$result, $$props, $$slots) => {
   );
   const newJson = await newsRes.json();
   const newPost = DirectusArticlesCollectionSchema.safeParse(newJson.data[0]);
-  console.log(newPost);
   if (!newPost.success) return Astro2.redirect("/404");
   const {
     title,

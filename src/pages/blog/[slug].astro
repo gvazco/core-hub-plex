@@ -14,7 +14,7 @@ const newsRes = await fetch(
 );
 const newJson = await newsRes.json();
 const newPost = DirectusArticlesCollectionSchema.safeParse(newJson.data[0]);
-console.log(newPost);
+// console.log(newPost);
 
 if (!newPost.success) return Astro.redirect('/404');
 const {

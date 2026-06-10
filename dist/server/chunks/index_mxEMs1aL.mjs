@@ -1,6 +1,6 @@
-import { c as createComponent } from './_astro_assets_DDVmWlVS.mjs';
+import { c as createComponent } from './_astro_assets_Bq7iKUa6.mjs';
 import 'piccolore';
-import { k as createRenderInstruction, f as addAttribute, h as renderTemplate, m as maybeRenderHead, j as renderComponent, l as renderHead, n as renderSlot, o as renderTransition, q as fade, s as slide } from './server_BlFu8yvy.mjs';
+import { k as createRenderInstruction, f as addAttribute, h as renderTemplate, m as maybeRenderHead, j as renderComponent, l as renderHead, n as renderSlot, o as renderTransition, q as fade, s as slide } from './server_BVqo3V-3.mjs';
 import 'clsx';
 import { z } from 'zod';
 
@@ -230,7 +230,7 @@ const DirectusArticlesCollectionSchema = DirectusBaseSchema.extend({
   date_updated: z.string().datetime().nullable().optional(),
   user_updated: z.string().nullable().optional(),
   excerpt: z.string().optional(),
-  cover_audio: z.string(),
+  cover_audio: z.string().nullable().optional(),
   markdown: z.boolean().optional(),
   markdown_disabled: z.string().nullable().optional(),
   markdown_enabled: z.string().nullable().optional(),

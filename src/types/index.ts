@@ -191,7 +191,7 @@ export const DirectusArticlesCollectionSchema = DirectusBaseSchema.extend({
   date_updated: z.string().datetime().nullable().optional(),
   user_updated: z.string().nullable().optional(),
   excerpt: z.string().optional(),
-  cover_audio: z.string(),
+  cover_audio: z.string().nullable().optional(),
   markdown: z.boolean().optional(),
   markdown_disabled: z.string().nullable().optional(),
   markdown_enabled: z.string().nullable().optional(),
