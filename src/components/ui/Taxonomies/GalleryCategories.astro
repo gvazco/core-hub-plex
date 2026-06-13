@@ -5,19 +5,38 @@ const newCatUrl = `${import.meta.env.API_ITEMS}/galleries_categories`;
 const newCatResponse = await fetch(newCatUrl);
 const newCatJson = await newCatResponse.json();
 const newCatData = DirectusGalleriesCategoryResponseSchema.parse(newCatJson);
-const { data: category } = newCatData;
-// console.log('CATEGORY', category);
+const { data: catData } = newCatData;
 ---
 
-<div class="mt-5 md:mt-30 flex flex-wrap gap-2 justify-center">
-  {
-    category.map((cat) => (
-      <a
-        href={`/galerias/categoria/${cat.slug}`}
-        class="inline-block py-1 px-5 text-sm text-gray-50 m-1 bg-dark neo-border-cyan neo-shadow-cyan neo-hover-cyan transition-neo"
-      >
-        {cat.name}
-      </a>
-    ))
-  }
+<div class="mt-5 md:mt-30 my-3 slider overflow-y-hidden">
+  <div class="list">
+    {
+      catData
+        .filter((cat) => cat.status === 'published')
+        .map((cat) => (
+          <div class="item">
+            <a
+              href={`/galerias/categoria/${cat.slug}`}
+              class="inline-block py-1 px-5 text-sm text-white bg-dark neo-border-cyan p-5 neo-shadow-cyan neo-hover-cyan transition-neo"
+            >
+              {cat.name}
+            </a>
+          </div>
+        ))
+    }
+    {
+      catData
+        .filter((cat) => cat.status === 'published')
+        .map((cat) => (
+          <div class="item">
+            <a
+              href={`/galerias/categoria/${cat.slug}`}
+              class="inline-block py-1 px-5 text-sm text-white bg-dark neo-border-cyan p-5 neo-shadow-cyan neo-hover-cyan transition-neo"
+            >
+              {cat.name}
+            </a>
+          </div>
+        ))
+    }
+  </div>
 </div>

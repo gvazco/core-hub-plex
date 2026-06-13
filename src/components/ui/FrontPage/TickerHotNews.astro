@@ -5,28 +5,28 @@ const newResponse = await fetch(newURL);
 const newJson = await newResponse.json();
 const newData = DirectusHotNewsResponseSchema.parse(newJson);
 const { data: dataItems } = newData;
+// console.log(dataItems);
 ---
 
 <!----------------------- Ticker de Noticias Rápidas ----------------------->
 <div
-  class="mt-0 md:mt-20 bg-neon-yellow text-dark py-2 border-b-4 border-neon-yellow overflow-hidden font-mono font-bold text-lg flex items-center"
+  class="mt-0 md:mt-20 bg-neon-yellow text-dark py-2 border-b-4 border-neon-yellow overflow-hidden font-mono font-bold text-lg flex items-center slider"
+  style={`--width: 600px; --height: 50px; --quantity: ${dataItems.length}; `}
 >
-  <div class="animate-scroll">
+  <div class="list">
     {
       dataItems.map(
         (item) =>
           item.status === 'published' && (
-            <a
-              href={item.article_url}
-              target="_blank"
-              class="inline-flex items-center mx-2"
-            >
-              <p class="mx-4 flex items-center space-x-2">
-                <span class="material-symbols-outlined">{item.icon}</span>
-                {item.title}
-                <span>{item.subtitle}</span>
-              </p>
-            </a>
+            <div class="item" style={`--position: ${item.id}`}>
+              <a class="flex flex-row" href={item.article_url} target="_blank">
+                <span class="material-symbols-outlined mr-2">{item.icon}</span>
+                <p>
+                  {item.title}
+                  <span>{item.subtitle}</span>
+                </p>
+              </a>
+            </div>
           )
       )
     }

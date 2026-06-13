@@ -9,6 +9,7 @@ export default function SwiperGalleryReact({ slides }) {
   const shouldLoop = slideCount >= 3;
   const slidesPerView = slideCount >= 3 ? 'auto' : 1;
   const centeredSlides = slideCount > 1;
+  const stretch = slideCount <= 4 ? 40 : 120;
 
   useEffect(() => {
     if (!swiperRef.current) return;
@@ -24,17 +25,17 @@ export default function SwiperGalleryReact({ slides }) {
       effect: 'coverflow',
       grabCursor: true,
       centeredSlides,
-      centeredSlidesBounds: true,
-      loop: shouldLoop,
+      loop: true,
       speed: 600,
-      slidesPerView,
-      spaceBetween: 24,
-      watchOverflow: true,
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+      loopedSlides: slideCount,
+      spaceBetween: 20,
       roundLengths: true,
       observer: true,
       observeParents: true,
       autoplay: {
-        delay: 3000,
+        delay: 5000,
         disableOnInteraction: false,
       },
       navigation: {
@@ -47,49 +48,10 @@ export default function SwiperGalleryReact({ slides }) {
       },
       coverflowEffect: {
         rotate: 10,
-        stretch: 120,
+        stretch,
         depth: 200,
         modifier: 1,
         slideShadows: false,
-      },
-      breakpoints: {
-        320: {
-          slidesPerView: 1.2,
-          spaceBetween: 12,
-          centeredSlides: true,
-          coverflowEffect: {
-            stretch: 0,
-            rotate: 5,
-            depth: 100,
-          },
-        },
-        640: {
-          slidesPerView: slideCount >= 3 ? 1.5 : 1,
-          spaceBetween: 16,
-          coverflowEffect: {
-            stretch: 40,
-            rotate: 10,
-            depth: 150,
-          },
-        },
-        768: {
-          slidesPerView: slideCount >= 3 ? 'auto' : 1,
-          spaceBetween: 24,
-          coverflowEffect: {
-            stretch: 80,
-            rotate: 10,
-            depth: 200,
-          },
-        },
-        1024: {
-          slidesPerView: slideCount >= 3 ? 'auto' : 1,
-          spaceBetween: 24,
-          coverflowEffect: {
-            stretch: 120,
-            rotate: 10,
-            depth: 200,
-          },
-        },
       },
     });
 
@@ -101,7 +63,7 @@ export default function SwiperGalleryReact({ slides }) {
   }, [slides]);
 
   return (
-    <div ref={swiperRef} className="swiper">
+    <div ref={swiperRef} className="swiper bg-dark">
       <div className="swiper-wrapper">
         {slides.data?.map((slide) => (
           <a

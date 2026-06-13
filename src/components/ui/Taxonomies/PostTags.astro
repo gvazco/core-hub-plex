@@ -3,20 +3,41 @@ import { DirectusArticlesCategoryResponseSchema } from '@/types';
 const catUrl = `${import.meta.env.API_ITEMS}/articles_tags`;
 const catResponse = await fetch(catUrl);
 const catJson = await catResponse.json();
-const catData = DirectusArticlesCategoryResponseSchema.parse(catJson);
+const newCatData = DirectusArticlesCategoryResponseSchema.parse(catJson);
+const { data: catData } = newCatData;
 
 // console.log(catData);
 ---
 
-<div class="mt-5 md:mt-30 my-3 flex flex-wrap gap-2 justify-center">
-  {
-    catData.data.map((cat) => (
-      <a
-        href={`/blog/etiqueta/${cat.slug}`}
-        class="inline-block py-1 px-5 text-sm text-white m-1 bg-dark neo-border-cyan neo-shadow-cyan neo-hover-cyan transition-neo"
-      >
-        {cat.name}
-      </a>
-    ))
-  }
+<div class="mt-5 md:mt-30 my-3 slider overflow-y-hidden">
+  <div class="list">
+    {
+      catData
+        .filter((cat) => cat.status === 'published')
+        .map((cat) => (
+          <div class="item">
+            <a
+              href={`/blog/etiqueta/${cat.slug}`}
+              class="inline-block py-1 px-5 text-sm text-white bg-dark neo-border-cyan p-5 neo-shadow-cyan neo-hover-cyan transition-neo"
+            >
+              {cat.name}
+            </a>
+          </div>
+        ))
+    }
+    {
+      catData
+        .filter((cat) => cat.status === 'published')
+        .map((cat) => (
+          <div class="item">
+            <a
+              href={`/blog/etiqueta/${cat.slug}`}
+              class="inline-block py-1 px-5 text-sm text-white bg-dark neo-border-cyan p-5 neo-shadow-cyan neo-hover-cyan transition-neo"
+            >
+              {cat.name}
+            </a>
+          </div>
+        ))
+    }
+  </div>
 </div>

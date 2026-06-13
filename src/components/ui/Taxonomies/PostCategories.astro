@@ -8,18 +8,31 @@ const newCatData = DirectusArticlesCategoryResponseSchema.parse(newCatJson);
 const { data: catData } = newCatData;
 ---
 
-<div class="mt-5 md:mt-30 my-3 flex flex-wrap gap-2 justify-center">
-  {
-    catData.map(
-      (cat) =>
-        cat.status === 'published' && (
+<div class="mt-5 md:mt-30 my-3 slider overflow-y-hidden">
+  <div class="list">
+    {
+      catData.filter((cat) => cat.status === 'published').map((cat) => (
+        <div class="item">
           <a
             href={`/blog/categoria/${cat.slug}`}
-            class="inline-block py-1 px-5 text-sm text-white m-1 bg-dark neo-border-pink p-5 neo-shadow-pink neo-hover-pink transition-neo"
+            class="inline-block py-1 px-5 text-sm text-white bg-dark neo-border-pink p-5 neo-shadow-pink neo-hover-pink transition-neo"
           >
             {cat.name}
           </a>
-        )
-    )
-  }
+        </div>
+      ))
+    }
+    {
+      catData.filter((cat) => cat.status === 'published').map((cat) => (
+        <div class="item">
+          <a
+            href={`/blog/categoria/${cat.slug}`}
+            class="inline-block py-1 px-5 text-sm text-white bg-dark neo-border-pink p-5 neo-shadow-pink neo-hover-pink transition-neo"
+          >
+            {cat.name}
+          </a>
+        </div>
+      ))
+    }
+  </div>
 </div>

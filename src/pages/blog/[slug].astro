@@ -54,10 +54,11 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
     ) : (
       cover_image && (
         <Picture
+          class="max-w-5xl w-full h-auto object-cover"
           src={`${publicAssetsUrl}/${cover_image}`}
           alt={title}
           width={800}
-          height={600}
+          height={400}
           formats={['avif', 'webp']}
           class="w-full"
         />
