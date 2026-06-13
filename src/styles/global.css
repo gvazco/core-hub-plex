@@ -123,15 +123,15 @@ body {
 
     p {
       margin-bottom: 0.5rem;
+      text-align: justify;
     }
 
     img {
       max-width: 450px;
       width: 100%;
       height: auto;
-      margin: 0 1rem;
       padding: 1rem;
-      border: 0.5rem solid var(--color-dark-cyan);
+      border: 0.2rem solid var(--color-dark-cyan);
     }
   }
 
@@ -141,20 +141,27 @@ body {
   }
 
   ul {
+    
     list-style-type: upper-alpha;
     margin-left: 2rem;
+    font-family: var(--font-mono);
+    font-size: 16px;
 
     li::marker {
     content: counter(list-item, upper-alpha) ".- ";
+    
     }
   }  
 
   ol {
     list-style-type: decimales;
     margin-left: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 16px;
 
     li::marker {
     content: counter(list-item, decimales) ".- ";
+    
     }
   }  
 
@@ -162,6 +169,7 @@ body {
   @media (min-width: 768px) {
     .article-cols {
       flex-wrap: nowrap;
+      align-items: center;
 
       > * {
         flex: 1;
@@ -246,9 +254,6 @@ iframe {
 .swiper-pagination-bullet-active {
   background: white !important;
 }
-
-
-
 
 
 /* Utilidades de borde Neobrutalista */
@@ -363,7 +368,7 @@ iframe {
     display: flex;
     gap: 1.5rem;
     width: max-content;
-    animation: scroll 60s linear infinite;
+    animation: scroll 35s linear infinite;
 }
 
 .slider .list .item {
