@@ -123,10 +123,17 @@ body {
 
     p {
       margin-bottom: 0.5rem;
-      text-align: justify;
     }
 
     img {
+      max-width: 450px;
+      width: 100%;
+      height: auto;
+      padding: 1rem;
+      border: 0.2rem solid var(--color-dark-cyan);
+    }
+
+    video {
       max-width: 450px;
       width: 100%;
       height: auto;
