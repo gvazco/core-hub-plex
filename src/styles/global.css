@@ -170,7 +170,17 @@ body {
     content: counter(list-item, decimales) ".- ";
     
     }
-  }  
+  } 
+  
+  a {
+    color: var(--color-neon-cyan);
+    text-decoration: underline;
+  }
+
+  img, video {
+    padding: 1rem;
+    border: 0.2rem solid var(--color-dark-cyan);
+  }
 
 
   @media (min-width: 768px) {
