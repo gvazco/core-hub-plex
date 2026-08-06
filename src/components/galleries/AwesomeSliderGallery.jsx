@@ -1,10 +1,22 @@
 import AutoplaySlider from '@rcaferati/react-awesome-slider/autoplay';
 import '@rcaferati/react-awesome-slider/styles.css';
 import '@rcaferati/react-awesome-slider/custom-animations/open-animation.css';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export default function AwesomeSliderGallery({ slides }) {
   const items = slides?.data ?? [];
+  const [sliderHeight, setSliderHeight] = useState('60%');
+
+  useEffect(() => {
+    const updateHeight = () => {
+      setSliderHeight(window.innerWidth > 768 ? '45%' : '100%');
+    };
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+
+    return () => window.removeEventListener('resize', updateHeight);
+  }, []);
 
   const media = useMemo(
     () =>
@@ -52,7 +64,7 @@ export default function AwesomeSliderGallery({ slides }) {
       cancelOnInteraction={false}
       interval={2000}
       className="bg-dark"
-      style={{ '--slider-height-percentage': '45%' }}
+      style={{ '--slider-height-percentage': `${sliderHeight}` }}
       media={media}    />
   );
 }

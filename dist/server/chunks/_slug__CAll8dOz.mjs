@@ -1,7 +1,7 @@
-import { c as createComponent, $ as $$Picture } from './_astro_assets_CBeDp_T3.mjs';
+import { c as createComponent, $ as $$Picture } from './_astro_assets_rh7j0MCB.mjs';
 import 'piccolore';
-import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent } from './server_0vKI7cYl.mjs';
-import { r as renderScript, a as DirectusGalleriesCollectionSchema, $ as $$CoreLayout } from './index_BBqZMxxX.mjs';
+import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent } from './server_BHMSlh2v.mjs';
+import { r as renderScript, a as DirectusGalleriesCollectionSchema, $ as $$CoreLayout } from './index_Cof7n6TC.mjs';
 import 'clsx';
 import { f as formatDate } from './index_DBtM_ae6.mjs';
 
