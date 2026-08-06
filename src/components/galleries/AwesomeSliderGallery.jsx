@@ -9,7 +9,7 @@ export default function AwesomeSliderGallery({ slides }) {
 
   useEffect(() => {
     const updateHeight = () => {
-      setSliderHeight(window.innerWidth > 768 ? '45%' : '100%');
+      setSliderHeight(window.innerWidth > 768 ? '50%' : '120%');
     };
 
     updateHeight();
@@ -33,8 +33,8 @@ export default function AwesomeSliderGallery({ slides }) {
               className="absolute inset-0 z-10 flex items-end md:items-center justify-center text-white"
             >
               <span className="max-w-xl bg-black/70 p-6 md:p-12 text-center text-white backdrop-blur-sm">
-                <h2 className=" font-heading mb-4 text-4xl md:text-5xl font-semibold">{slide?.title || slide.slug}</h2>
-                <h3 className="mb-4 text-xl md:text-2xl font-semibold">{slide?.subtitle}</h3>
+                <h1 className=" mb-4 text-2xl md:text-5xl font-extrabold uppercase leading-none">{slide?.title || slide.slug}</h1>
+                <h3 className="mb-4 text-2xl font-bold text-neon-yellow uppercase leading-tight mb-4">{slide?.subtitle}</h3>
                 {slide?.gallery_category?.name && (
                   <span className="max-w-xs inline-block py-1 px-5 mx-3 text-sm text-white bg-dark neo-border-pink p-5">
                     #{slide.gallery_category.name}
@@ -62,7 +62,7 @@ export default function AwesomeSliderGallery({ slides }) {
       name="gallery"
       play={true}
       cancelOnInteraction={false}
-      interval={2000}
+      interval={2500}
       className="bg-dark"
       style={{ '--slider-height-percentage': `${sliderHeight}` }}
       media={media}    />

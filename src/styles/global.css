@@ -373,12 +373,11 @@ iframe {
     height: 100%;
   }
 
-
 .slider {
     width: 100%;
     overflow: hidden;
-    mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 2% 98%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 2% 98%, transparent);
 }
 
 .slider .list {
@@ -388,7 +387,18 @@ iframe {
     animation: scroll 35s linear infinite;
 }
 
+.slider .list-tags {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    animation: scrollTag 35s linear infinite;
+}
+
 .slider .list .item {
+    flex-shrink: 0;
+}
+
+.slider .list-tags .item {
     flex-shrink: 0;
 }
 
@@ -398,6 +408,15 @@ iframe {
     }
     100% {
         transform: translateX(-50%);
+    }
+}
+
+@keyframes scrollTag {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
     }
 }
 
@@ -446,14 +465,14 @@ iframe {
 }
 
 .asw {
-    mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 3% 97%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 3% 97%, transparent);
 }
 
 @media (max-width: 768px) {
   .asw {
-    mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 6% 94%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 6% 94%, transparent);
   }
 }
 
