@@ -9,7 +9,7 @@ export default function AwesomeSliderGallery({ slides }) {
 
   useEffect(() => {
     const updateHeight = () => {
-      setSliderHeight(window.innerWidth > 768 ? '55%' : '130%');
+      setSliderHeight(window.innerWidth > 768 ? '55%' : '140%');
     };
 
     updateHeight();

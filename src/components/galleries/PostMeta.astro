@@ -10,7 +10,6 @@ const { date, author, slug } = Astro.props;
 ---
 
 <div class="text-xl mb-4">
-  <p>Publicado el: <span class="text-neon-cyan">{formatDate(date)}</span></p>
   {
     author && (
       <p>

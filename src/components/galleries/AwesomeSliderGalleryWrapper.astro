@@ -2,14 +2,14 @@
 import AwesomeSliderGallery from './AwesomeSliderGallery';
 import { DirectusGalleriesCollectionResponseSchema } from '@/types';
 
-const url = `${import.meta.env.API_ITEMS}/galleries?fields=*,gallery_category.*,gallery_tag.*,author.*,gallery.directus_files_id.id,gallery.directus_files_id.filename_disk,gallery.directus_files_id.filename_download,gallery.directus_files_id.title,gallery.directus_files_id.type,gallery.directus_files_id.width,gallery.directus_files_id.height,gallery.directus_files_id.filesize`;
+const url = `${import.meta.env.API_ITEMS}/galleries?fields=*,gallery_category.*,gallery_tag.*,author.*,gallery.directus_files_id.id,gallery.directus_files_id.filename_disk,gallery.directus_files_id.filename_download,gallery.directus_files_id.title,gallery.directus_files_id.type,gallery.directus_files_id.width,gallery.directus_files_id.height,gallery.directus_files_id.filesize&limit=5&sort=-id`;
 const res = await fetch(url);
 const json = await res.json();
 const data = DirectusGalleriesCollectionResponseSchema.parse(json);
 ---
 
 <section class="awesome-slider-gallery">
-  <div data-aos="zoom-out-down" class="mx-auto max-w-7xl asw">
+  <div class="mx-auto max-w-7xl asw">
     <AwesomeSliderGallery client:load slides={data} />
   </div>
 </section>

@@ -36,11 +36,6 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
         {post.title}
       </h1>
     </div>
-    <PostMeta
-      date={post.date_created}
-      author={post?.author?.name}
-      slug={post?.slug}
-    />
 
     {
       post?.gallery_category && (

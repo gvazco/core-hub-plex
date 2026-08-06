@@ -1,15 +1,14 @@
-import { c as createComponent, $ as $$Picture } from './_astro_assets_BzkJ68To.mjs';
+import { c as createComponent, $ as $$Picture } from './_astro_assets_BxGNBMMm.mjs';
 import 'piccolore';
-import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent } from './server_BiVI4F_4.mjs';
-import { r as renderScript, a as DirectusGalleriesCollectionSchema, $ as $$CoreLayout } from './index_DnSG6drK.mjs';
+import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent } from './server_PbPv_DuJ.mjs';
+import { r as renderScript, a as DirectusGalleriesCollectionSchema, $ as $$CoreLayout } from './index_Cat89YTl.mjs';
 import 'clsx';
-import { f as formatDate } from './index_DBtM_ae6.mjs';
 
 const $$PostMeta = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$props, $$slots);
   Astro2.self = $$PostMeta;
   const { date, author, slug } = Astro2.props;
-  return renderTemplate`${maybeRenderHead()}<div class="text-xl mb-4"> <p>Publicado el: <span class="text-neon-cyan">${formatDate(date)}</span></p> ${author && renderTemplate`<p>
+  return renderTemplate`${maybeRenderHead()}<div class="text-xl mb-4"> ${author && renderTemplate`<p>
 Autor:${" "} <span class="text-neon-cyan"> <a${addAttribute(`/blog/autor/${slug}`, "href")}>${author}</a> </span> </p>`} </div>`;
 }, "/home/gustavovazco/Documentos/DEV/Core-Hub-Plex/core-hub-plex/src/components/galleries/PostMeta.astro", void 0);
 
