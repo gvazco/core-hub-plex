@@ -36,7 +36,7 @@ export default function AwesomeSliderGallery({ slides }) {
                 <h1 className=" mb-4 text-2xl md:text-5xl font-extrabold uppercase leading-none">{slide?.title || slide.slug}</h1>
                 <h3 className="mb-4 text-2xl font-bold text-neon-yellow uppercase leading-tight mb-4">{slide?.subtitle}</h3>
                 <div
-                  class="flex flex-col md:flex-row md:justify-between items-center font-mono mt-auto border-t-4 border-neon-green pt-4"
+                  class="flex flex-col md:flex-row justify-center items-center font-mono mt-auto border-t-4 border-neon-green pt-4"
                 >
                   <div class="mb-3 md:mb-0">
                     {
