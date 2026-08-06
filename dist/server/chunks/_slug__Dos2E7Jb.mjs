@@ -1,7 +1,7 @@
-import { c as createComponent, $ as $$Picture } from './_astro_assets_z_w9wbZM.mjs';
+import { c as createComponent, $ as $$Picture } from './_astro_assets_BzkJ68To.mjs';
 import 'piccolore';
-import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent, u as unescapeHTML } from './server_R8rLgLQ8.mjs';
-import { D as DirectusArticlesCollectionSchema, $ as $$CoreLayout, r as renderScript } from './index_BgEfwtHs.mjs';
+import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent, u as unescapeHTML } from './server_BiVI4F_4.mjs';
+import { D as DirectusArticlesCollectionSchema, $ as $$CoreLayout, r as renderScript } from './index_DnSG6drK.mjs';
 import 'clsx';
 import { f as formatDate } from './index_DBtM_ae6.mjs';
 
@@ -9,7 +9,7 @@ const $$PostMeta = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$props, $$slots);
   Astro2.self = $$PostMeta;
   const { date, author, slug } = Astro2.props;
-  return renderTemplate`${maybeRenderHead()}<div class="text-sm mb-4"> <p>Publicado el: <span class="text-neon-cyan">${formatDate(date)}</span></p> ${author && renderTemplate`<p>
+  return renderTemplate`${maybeRenderHead()}<div class="text-xl mb-4"> <p>Publicado el: <span class="text-neon-cyan">${formatDate(date)}</span></p> ${author && renderTemplate`<p>
 Autor:${" "} <span class="text-neon-cyan"> <a${addAttribute(`/blog/autor/${slug}`, "href")}>${author}</a> </span> </p>`} </div>`;
 }, "/home/gustavovazco/Documentos/DEV/Core-Hub-Plex/core-hub-plex/src/components/blog/PostMeta.astro", void 0);
 
@@ -17,14 +17,14 @@ const $$PostCategories = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$props, $$slots);
   Astro2.self = $$PostCategories;
   const { name, slug } = Astro2.props;
-  return renderTemplate`${maybeRenderHead()}<a${addAttribute(`/blog/categoria/${slug}`, "href")} class="max-w-xs inline-block py-1 px-5 text-sm text-white mr-2 bg-dark neo-border-pink p-5 neo-shadow-pink neo-hover-pink transition-neo"> ${name} </a>`;
+  return renderTemplate`${maybeRenderHead()}<a${addAttribute(`/blog/categoria/${slug}`, "href")} class="max-w-xs inline-block py-1 px-5 text-sm text-white bg-dark neo-border-pink p-5"> ${name} </a>`;
 }, "/home/gustavovazco/Documentos/DEV/Core-Hub-Plex/core-hub-plex/src/components/blog/PostCategories.astro", void 0);
 
 const $$PostTags = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$props, $$slots);
   Astro2.self = $$PostTags;
   const { name, slug } = Astro2.props;
-  return renderTemplate`${maybeRenderHead()}<a${addAttribute(`/blog/etiqueta/${slug}`, "href")} class="max-w-xs inline-block py-1 px-5 text-sm text-white ml-2 mr-2 bg-dark neo-border-cyan neo-shadow-cyan neo-hover-cyan transition-neo"> ${name} </a>`;
+  return renderTemplate`${maybeRenderHead()}<a${addAttribute(`/blog/etiqueta/${slug}`, "href")} class="max-w-xs inline-block py-1 px-5 mx-3 text-sm text-white bg-dark neo-border-cyan p-5"> ${name} </a>`;
 }, "/home/gustavovazco/Documentos/DEV/Core-Hub-Plex/core-hub-plex/src/components/blog/PostTags.astro", void 0);
 
 const $$GalleryBanner = createComponent(($$result, $$props, $$slots) => {

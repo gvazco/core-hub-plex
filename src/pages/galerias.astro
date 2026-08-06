@@ -2,6 +2,7 @@
 import CoreLayout from '@/layouts/CoreLayout.astro';
 import GalleryCategories from '@/components/ui/Taxonomies/GalleryCategories.astro';
 import GalleryTags from '@/components/ui/Taxonomies/GalleryTags.astro';
+import GalleryPosts from '@/components/galleries/GalleryPosts.astro';
 import { DirectusGalleriesPageResponseSchema } from '@/types';
 import AwesomeSliderGalleryWrapper from '@/components/galleries/AwesomeSliderGalleryWrapper.astro';
 const newUrl = `${import.meta.env.API_ITEMS}/pages?filter[slug][_eq]=galerias`;
@@ -19,4 +20,5 @@ const { data: galleriesPage } = newData;
   <GalleryCategories />
   <AwesomeSliderGalleryWrapper />
   <GalleryTags />
+  <GalleryPosts />
 </CoreLayout>

@@ -1,6 +1,6 @@
 import AutoplaySlider from '@rcaferati/react-awesome-slider/autoplay';
 import '@rcaferati/react-awesome-slider/styles.css';
-import '@rcaferati/react-awesome-slider/custom-animations/open-animation.css';
+import '@rcaferati/react-awesome-slider/custom-animations/scale-out-animation.css';
 import { useEffect, useMemo, useState } from 'react';
 
 export default function AwesomeSliderGallery({ slides }) {
@@ -55,14 +55,14 @@ export default function AwesomeSliderGallery({ slides }) {
 
   return (
     <AutoplaySlider
-      animation="openAnimation"
+      animation="scaleOutAnimation"
       organicArrows
       bullets={false}
       infinite
       name="gallery"
       play={true}
       cancelOnInteraction={false}
-      interval={2500}
+      interval={3000}
       className="bg-dark"
       style={{ '--slider-height-percentage': `${sliderHeight}` }}
       media={media}    />

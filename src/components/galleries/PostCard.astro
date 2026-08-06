@@ -12,7 +12,8 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
 ---
 
 <article
-  class="break-inside-avoid-column overflow-hidden transition-shadow bg-dark text-white p-6 neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer"
+  data-aos="zoom-out-down"
+  class="break-inside-avoid-column align-middle text-center overflow-hidden transition-shadow bg-dark text-white p-6 neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer"
 >
   <a href={`/galerias/${post.slug}`}>
     {
@@ -28,39 +29,31 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
       )
     }
 
-    <div class="p-5 space-y-3">
-      <h3
-        class="text-2xl font-bold uppercase mb-4 flex-grow group-hover:text-neon-cyan transition-colors"
+    <div class="py-5 space-y-3">
+      <h1
+        class="text-xl font-extrabold text-center uppercase leading-none flex-grow group-hover:text-neon-cyan transition-colors"
       >
-        <a href={`/galerias/${post.slug}`}>
-          {post.title}
-        </a>
-      </h3>
-
-      <PostMeta
-        date={post.date_created}
-        author={post?.author?.name}
-        slug={post?.slug}
-      />
-
-      <div class="flex flex-row align-center justify-start mt-4">
-        {
-          post?.gallery_category && (
-            <PostCategories
-              name={post.gallery_category.name}
-              slug={post.gallery_category.slug}
-            />
-          )
-        }
-        {
-          post?.gallery_tag && (
-            <PostTags
-              name={post.gallery_tag.name}
-              slug={post.gallery_tag.slug}
-            />
-          )
-        }
-      </div>
+        {post.title}
+      </h1>
     </div>
+    <PostMeta
+      date={post.date_created}
+      author={post?.author?.name}
+      slug={post?.slug}
+    />
+
+    {
+      post?.gallery_category && (
+        <PostCategories
+          name={post.gallery_category.name}
+          slug={post.gallery_category.slug}
+        />
+      )
+    }
+    {
+      post?.gallery_tag && (
+        <PostTags name={post.gallery_tag.name} slug={post.gallery_tag.slug} />
+      )
+    }
   </a>
 </article>

@@ -13,7 +13,8 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
 ---
 
 <article
-  class="break-inside-avoid-column overflow-hidden transition-shadow bg-dark text-white p-6 neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer"
+  data-aos="zoom-out-down"
+  class="break-inside-avoid-column align-middle text-center overflow-hidden transition-shadow bg-dark text-white p-6 neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer"
 >
   <a href={`/blog/${post.slug}`}>
     {
@@ -30,12 +31,18 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
     }
 
     <div class="py-5 space-y-3">
-      <h3
-        class="text-2xl font-bold uppercase flex-grow group-hover:text-neon-cyan transition-colors"
+      <h1
+        class="text-xl font-extrabold text-center uppercase leading-none flex-grow group-hover:text-neon-cyan transition-colors"
       >
         {post.title}
-      </h3>
-      {post.subtitle && <p class="text-gray-400">{post.subtitle}</p>}
+      </h1>
+      {
+        post.subtitle && (
+          <h3 class="text-base text-center font-bold text-neon-yellow uppercase">
+            {post.subtitle}
+          </h3>
+        )
+      }
     </div>
 
     <PostMeta

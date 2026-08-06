@@ -2,6 +2,7 @@
 import CoreLayout from '@/layouts/CoreLayout.astro';
 import BlogPosts from '@/components/blog/BlogPosts.astro';
 import PostCategories from '@/components/ui/Taxonomies/PostCategories.astro';
+import PostTags from '@/components/ui/Taxonomies/PostTags.astro';
 import { DirectusBlogPageResponseSchema } from '@/types';
 const newUrl = `${import.meta.env.API_ITEMS}/pages?filter[slug][_eq]=blog`;
 const response = await fetch(newUrl);
@@ -17,5 +18,6 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
   bgImage={`${publicAssetsUrl}/${blogPage[0]?.cover_image}`}
 >
   <PostCategories />
+  <PostTags />
   <BlogPosts />
 </CoreLayout>
