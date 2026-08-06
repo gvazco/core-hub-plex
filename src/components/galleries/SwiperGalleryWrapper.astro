@@ -9,7 +9,11 @@ const data = DirectusGalleriesCollectionResponseSchema.parse(json);
 ---
 
 <section class="swiper-gallery pb-15">
-  <div data-aos="zoom-out-down" class="mx-auto max-w-7xl">
+  <div
+    data-aos="zoom-out-down"
+    data-aos-duration="2000"
+    class="mx-auto max-w-7xl"
+  >
     <SwiperGalleryReact client:load slides={data} />
   </div>
 </section>

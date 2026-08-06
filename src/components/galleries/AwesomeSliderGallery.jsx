@@ -9,7 +9,7 @@ export default function AwesomeSliderGallery({ slides }) {
 
   useEffect(() => {
     const updateHeight = () => {
-      setSliderHeight(window.innerWidth > 768 ? '50%' : '130%');
+      setSliderHeight(window.innerWidth > 768 ? '60%' : '125%');
     };
 
     updateHeight();
@@ -35,16 +35,26 @@ export default function AwesomeSliderGallery({ slides }) {
               <span className="max-w-xl bg-black/70 p-6 md:p-12 text-center text-white backdrop-blur-sm">
                 <h1 className=" mb-4 text-2xl md:text-5xl font-extrabold uppercase leading-none">{slide?.title || slide.slug}</h1>
                 <h3 className="mb-4 text-2xl font-bold text-neon-yellow uppercase leading-tight mb-4">{slide?.subtitle}</h3>
-                {slide?.gallery_category?.name && (
-                  <span className="max-w-xs inline-block py-1 px-5 mx-3 text-sm text-white bg-dark neo-border-pink p-5">
-                    {slide.gallery_category.name}
-                  </span>
-                )}
-                {slide?.gallery_tag?.name && (
-                  <span className="max-w-xs inline-block py-1 px-5 text-sm text-white m-1 bg-dark neo-border-cyan p-5">
-                    {slide.gallery_tag.name}
-                  </span>
-                )}
+                <div
+                  class="flex flex-col md:flex-row md:justify-between items-center font-mono mt-auto border-t-4 border-neon-green pt-4"
+                >
+                  <div class="mb-3 md:mb-0">
+                    {
+                      slide?.gallery_category?.name && (
+                        <span class="bg-dark border-2 text-neon-green border-neon-green px-4 py-1 mx-2 font-bold">
+                          {slide.gallery_category.name}
+                        </span>
+                      )
+                    }
+                    {
+                      slide?.gallery_tag?.name && (
+                        <span class="bg-dark border-2 text-neon-green border-neon-green px-4 py-1 mx-2 font-bold">
+                          {slide.gallery_tag.name}
+                        </span>
+                      )
+                    }
+                  </div>
+                </div>
               </span>
             </a>
           ),

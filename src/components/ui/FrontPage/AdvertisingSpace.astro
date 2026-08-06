@@ -2,7 +2,12 @@
 
 ---
 
-<div data-aos="zoom-out-down" id="carousel" class="carousel-container">
+<div
+  data-aos="zoom-in-up"
+  data-aos-duration="2000"
+  id="carousel"
+  class="carousel-container"
+>
   <div class="carousel-slides">
     <div class="carousel-slide active">
       <div
@@ -46,10 +51,10 @@
 </div>
 
 <script>
-  let intervalId;
+  let intervalId: number | undefined;
 
   document.addEventListener('astro:page-load', () => {
-    if (intervalId) clearInterval(intervalId);
+    if (intervalId !== undefined) clearInterval(intervalId);
 
     let currentIndex = 0;
     const slides = document.querySelectorAll('.carousel-slide');
