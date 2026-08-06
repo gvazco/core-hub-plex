@@ -2,7 +2,7 @@
 import CoreLayout from '@/layouts/CoreLayout.astro';
 import GalleryCategories from '@/components/ui/Taxonomies/GalleryCategories.astro';
 import { DirectusGalleriesPageResponseSchema } from '@/types';
-import SwiperGalleryWrapper from '@/components/galleries/SwiperGalleryWrapper.astro';
+import AwesomeSliderGalleryWrapper from '@/components/galleries/AwesomeSliderGalleryWrapper.astro';
 const newUrl = `${import.meta.env.API_ITEMS}/pages?filter[slug][_eq]=galerias`;
 const newResponse = await fetch(newUrl);
 const newJson = await newResponse.json();
@@ -16,5 +16,5 @@ const { data: galleriesPage } = newData;
   bgImage={`${import.meta.env.PUBLIC_ASSETS}/${galleriesPage[0]?.cover_image}`}
 >
   <GalleryCategories />
-  <SwiperGalleryWrapper />
+  <AwesomeSliderGalleryWrapper />
 </CoreLayout>

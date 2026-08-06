@@ -445,6 +445,10 @@ iframe {
   display: none;
 }
 
+.asw {
+  mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
+}
 
 @layer base {
   h1 {
