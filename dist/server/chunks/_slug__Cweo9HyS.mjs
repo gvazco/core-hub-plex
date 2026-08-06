@@ -1,7 +1,7 @@
-import { c as createComponent, $ as $$Picture } from './_astro_assets_BmXW-CyI.mjs';
+import { c as createComponent, $ as $$Picture } from './_astro_assets_B7iqlq-J.mjs';
 import 'piccolore';
-import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent } from './server_DZ_E1BSU.mjs';
-import { r as renderScript, a as DirectusGalleriesCollectionSchema, $ as $$CoreLayout } from './index_BtotcBUn.mjs';
+import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent } from './server_kASgidGI.mjs';
+import { r as renderScript, a as DirectusGalleriesCollectionSchema, $ as $$CoreLayout } from './index_DiBmmrMv.mjs';
 import 'clsx';
 
 const $$PostMeta = createComponent(($$result, $$props, $$slots) => {

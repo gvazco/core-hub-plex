@@ -3,6 +3,7 @@ import { ClientRouter, fade, slide } from 'astro:transitions';
 import '@/styles/global.css';
 import CoreHeader from '@/components/ui/CoreHeader.astro';
 import CoreFooter from '@/components/ui/CoreFooter.astro';
+import LoadingOverlay from '@/components/ui/LoadingOverlay.astro';
 
 // interface Props {
 //   title: string;
@@ -48,8 +49,23 @@ import CoreFooter from '@/components/ui/CoreFooter.astro';
 
     <CoreFooter transition:animate={fade({ duration: '.5s' })} />
 
+    <LoadingOverlay />
+
     <script>
       import AOS from 'aos';
+
+      const routeLoading = document.getElementById('route-loading');
+      const showRouteLoading = () => routeLoading?.classList.add('active');
+      const hideRouteLoading = () => routeLoading?.classList.remove('active');
+
+      document.addEventListener('astro:before-preparation', () => {
+        showRouteLoading();
+      });
+
+      document.addEventListener('astro:page-load', () => {
+        hideRouteLoading();
+      });
+
       document.addEventListener('astro:page-load', () => {
         if (typeof AOS !== 'undefined') {
           AOS.init({
