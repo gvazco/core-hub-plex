@@ -3,6 +3,7 @@ import { Picture } from 'astro:assets';
 import type { Galeria } from '@/types';
 import PostMeta from './PostMeta.astro';
 import PostCategories from './PostCategories.astro';
+import PostTags from './PostTags.astro';
 interface Props {
   post: Galeria;
 }
@@ -42,14 +43,24 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
         slug={post?.slug}
       />
 
-      {
-        (
-          <PostCategories
-            name={post?.gallery_category?.name}
-            slug={post?.gallery_category?.slug}
-          />
-        )
-      }
+      <div class="flex flex-row align-center justify-start mt-4">
+        {
+          post?.gallery_category && (
+            <PostCategories
+              name={post.gallery_category.name}
+              slug={post.gallery_category.slug}
+            />
+          )
+        }
+        {
+          post?.gallery_tag && (
+            <PostTags
+              name={post.gallery_tag.name}
+              slug={post.gallery_tag.slug}
+            />
+          )
+        }
+      </div>
     </div>
   </a>
 </article>

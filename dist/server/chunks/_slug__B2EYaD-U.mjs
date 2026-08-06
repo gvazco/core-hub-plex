@@ -1,7 +1,7 @@
-import { c as createComponent, $ as $$Picture } from './_astro_assets_rh7j0MCB.mjs';
+import { c as createComponent, $ as $$Picture } from './_astro_assets_BY7EgV36.mjs';
 import 'piccolore';
-import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent } from './server_BHMSlh2v.mjs';
-import { r as renderScript, a as DirectusGalleriesCollectionSchema, $ as $$CoreLayout } from './index_Cof7n6TC.mjs';
+import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent } from './server_Cz2thbmy.mjs';
+import { r as renderScript, a as DirectusGalleriesCollectionSchema, $ as $$CoreLayout } from './index_C-5wHCi4.mjs';
 import 'clsx';
 import { f as formatDate } from './index_DBtM_ae6.mjs';
 
@@ -17,14 +17,14 @@ const $$PostCategories = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$props, $$slots);
   Astro2.self = $$PostCategories;
   const { name, slug } = Astro2.props;
-  return renderTemplate`${maybeRenderHead()}<a${addAttribute(`/galerias/categoria/${slug}`, "href")} class="max-w-xs inline-block py-1 px-5 text-sm text-white ml-2 mr-2 bg-dark neo-border-cyan neo-shadow-cyan neo-hover-cyan transition-neo"> ${name} </a>`;
+  return renderTemplate`${maybeRenderHead()}<a${addAttribute(`/galerias/categoria/${slug}`, "href")} class="max-w-xs inline-block py-1 px-5 text-sm text-white bg-dark neo-border-pink p-5"> ${name} </a>`;
 }, "/home/gustavovazco/Documentos/DEV/Core-Hub-Plex/core-hub-plex/src/components/galleries/PostCategories.astro", void 0);
 
 const $$PostTags = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$props, $$slots);
   Astro2.self = $$PostTags;
   const { name, slug } = Astro2.props;
-  return renderTemplate`${maybeRenderHead()}<a${addAttribute(`/galerias/etiqueta/${slug}`, "href")} class="max-w-xs inline-block py-1 px-5 text-sm text-white ml-2 mr-2 bg-dark neo-border-cyan neo-shadow-cyan neo-hover-cyan transition-neo"> ${name} </a>`;
+  return renderTemplate`${maybeRenderHead()}<a${addAttribute(`/galerias/etiqueta/${slug}`, "href")} class="max-w-xs inline-block py-1 px-5 mx-3 text-sm text-white bg-dark neo-border-cyan p-5"> ${name} </a>`;
 }, "/home/gustavovazco/Documentos/DEV/Core-Hub-Plex/core-hub-plex/src/components/galleries/PostTags.astro", void 0);
 
 const $$GalleryGrid = createComponent(($$result, $$props, $$slots) => {

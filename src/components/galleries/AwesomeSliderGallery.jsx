@@ -30,18 +30,18 @@ export default function AwesomeSliderGallery({ slides }) {
           children: (
             <a
               href={`/galerias/${slide.slug}`}
-              className="absolute inset-0 z-10 block text-white"
+              className="absolute inset-0 z-10 flex items-end md:items-center justify-center text-white"
             >
-              <span className="absolute inset-x-0 bottom-0 bg-black/80 p-6 text-center text-white backdrop-blur-sm">
-                <h2 className="mb-4 text-3xl font-semibold">{slide?.title || slide.slug}</h2>
-                <h3 className="mb-4 text-2xl font-semibold">{slide?.subtitle}</h3>
+              <span className="max-w-xl bg-black/70 p-6 md:p-12 text-center text-white backdrop-blur-sm">
+                <h2 className=" font-heading mb-4 text-4xl md:text-5xl font-semibold">{slide?.title || slide.slug}</h2>
+                <h3 className="mb-4 text-xl md:text-2xl font-semibold">{slide?.subtitle}</h3>
                 {slide?.gallery_category?.name && (
-                  <span className="max-w-xs inline-block py-1 px-3 text-md font-bold text-white mb-2 ml-2 mr-2 transition-neo">
+                  <span className="max-w-xs inline-block py-1 px-5 mx-3 text-sm text-white bg-dark neo-border-pink p-5">
                     #{slide.gallery_category.name}
                   </span>
                 )}
                 {slide?.gallery_tag?.name && (
-                  <span className="max-w-xs inline-block py-1 px-3 text-md font-bold text-white mb-2 ml-2 mr-2 transition-neo">
+                  <span className="max-w-xs inline-block py-1 px-5 text-sm text-white m-1 bg-dark neo-border-cyan p-5">
                     #{slide.gallery_tag.name}
                   </span>
                 )}
