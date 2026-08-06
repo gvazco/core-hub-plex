@@ -17,8 +17,8 @@ const { data: galleriesPage } = newData;
   subtitle={galleriesPage[0]?.subtitle}
   bgImage={`${import.meta.env.PUBLIC_ASSETS}/${galleriesPage[0]?.cover_image}`}
 >
-  <GalleryCategories />
   <AwesomeSliderGalleryWrapper />
+  <GalleryCategories />
   <GalleryTags />
   <GalleryPosts />
 </CoreLayout>

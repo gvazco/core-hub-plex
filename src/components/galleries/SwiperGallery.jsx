@@ -88,10 +88,10 @@ export default function SwiperGalleryReact({ slides }) {
               </h3>
               
                 <h3 key={slide.gallery_category?.id} className="max-w-xs inline-block py-1 px-3 text-md font-bold text-white mb-2 ml-2 mr-2 transition-neo">
-                  #{slide.gallery_category?.name}
+                  {slide.gallery_category?.name}
                 </h3>
                 <h3 key={slide.gallery_tag?.id} className="max-w-xs inline-block py-1 px-3 text-md font-bold text-white mb-2 ml-2 mr-2 transition-neo">
-                  #{slide.gallery_tag?.name}
+                  {slide.gallery_tag?.name}
                 </h3>
               
             </div>

@@ -9,7 +9,7 @@ export default function AwesomeSliderGallery({ slides }) {
 
   useEffect(() => {
     const updateHeight = () => {
-      setSliderHeight(window.innerWidth > 768 ? '50%' : '120%');
+      setSliderHeight(window.innerWidth > 768 ? '55%' : '130%');
     };
 
     updateHeight();
@@ -37,12 +37,12 @@ export default function AwesomeSliderGallery({ slides }) {
                 <h3 className="mb-4 text-2xl font-bold text-neon-yellow uppercase leading-tight mb-4">{slide?.subtitle}</h3>
                 {slide?.gallery_category?.name && (
                   <span className="max-w-xs inline-block py-1 px-5 mx-3 text-sm text-white bg-dark neo-border-pink p-5">
-                    #{slide.gallery_category.name}
+                    {slide.gallery_category.name}
                   </span>
                 )}
                 {slide?.gallery_tag?.name && (
                   <span className="max-w-xs inline-block py-1 px-5 text-sm text-white m-1 bg-dark neo-border-cyan p-5">
-                    #{slide.gallery_tag.name}
+                    {slide.gallery_tag.name}
                   </span>
                 )}
               </span>
