@@ -53,6 +53,7 @@ import LoadingOverlay from '@/components/ui/LoadingOverlay.astro';
 
     <script>
       import AOS from 'aos';
+      import 'aos/dist/aos.css';
 
       const routeLoading = document.getElementById('route-loading');
       const showRouteLoading = () => routeLoading?.classList.add('active');
@@ -71,7 +72,6 @@ import LoadingOverlay from '@/components/ui/LoadingOverlay.astro';
           AOS.init({
             easing: 'ease',
             duration: 1800,
-            once: true,
           });
         }
 
