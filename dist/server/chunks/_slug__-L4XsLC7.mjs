@@ -1,8 +1,93 @@
-import { c as createComponent, $ as $$Picture } from './_astro_assets_CiswWgTa.mjs';
+import { c as createComponent, $ as $$Picture } from './_astro_assets_oJC_Dz4F.mjs';
 import 'piccolore';
-import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent } from './server_BN-33P9q.mjs';
-import { r as renderScript, a as DirectusGalleriesCollectionSchema, $ as $$CoreLayout } from './index_f51_GqeK.mjs';
+import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent } from './server_B09-o1aD.mjs';
+import { r as renderScript, a as DirectusGalleriesCollectionSchema, $ as $$CoreLayout } from './index_BAMLebes.mjs';
+import { jsxs, jsx } from 'react/jsx-runtime';
+import { useRef, useEffect } from 'react';
+import Swiper from 'swiper/bundle';
 import 'clsx';
+
+function SwiperGalleryReact({ images }) {
+  const swiperRef = useRef(null);
+  const swiperInstanceRef = useRef(null);
+  const items = Array.isArray(images) ? images : [];
+  const slideCount = items.length;
+  const centeredSlides = slideCount > 1;
+  const stretch = slideCount <= 4 ? 40 : 120;
+  useEffect(() => {
+    if (!swiperRef.current) return;
+    if (swiperInstanceRef.current) {
+      swiperInstanceRef.current.destroy(true, true);
+      swiperInstanceRef.current = void 0;
+    }
+    swiperInstanceRef.current = new Swiper(swiperRef.current, {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides,
+      loop: slideCount >= 3,
+      speed: 600,
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+      loopedSlides: slideCount,
+      spaceBetween: 20,
+      roundLengths: true,
+      observer: true,
+      observeParents: true,
+      autoplay: {
+        delay: 5e3,
+        disableOnInteraction: false
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+      },
+      coverflowEffect: {
+        rotate: 10,
+        stretch,
+        depth: 200,
+        modifier: 1,
+        slideShadows: false
+      }
+    });
+    return () => {
+      if (swiperInstanceRef.current) {
+        swiperInstanceRef.current.destroy(true, true);
+        swiperInstanceRef.current = void 0;
+      }
+    };
+  }, [items, slideCount, centeredSlides, stretch]);
+  return /* @__PURE__ */ jsxs("div", { ref: swiperRef, className: "swiper bg-dark", children: [
+    /* @__PURE__ */ jsx("div", { className: "swiper-wrapper", children: items.map((item, index) => {
+      const file = item?.directus_files_id ?? item;
+      const src = `${"https://core-cms.core-hub-plex.cloud/assets"}/${file.id}`;
+      return /* @__PURE__ */ jsx(
+        "a",
+        {
+          href: src,
+          "data-pswp-width": file.width ?? void 0,
+          "data-pswp-height": file.height ?? void 0,
+          className: "swiper-slide relative w-full max-w-[450px] shrink-0 overflow-hidden transition-shadow bg-dark text-white p-6 neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer",
+          children: /* @__PURE__ */ jsx(
+            "img",
+            {
+              src,
+              alt: file.description || file.title || "Galería de imágenes",
+              className: "h-[22rem] w-full object-cover"
+            }
+          )
+        },
+        file.id ?? index
+      );
+    }) }),
+    /* @__PURE__ */ jsx("div", { className: "swiper-pagination mt-8" }),
+    /* @__PURE__ */ jsx("button", { className: "swiper-button-next bg-neon-cyan text-dark p-4 border-4 border-neon-cyan neo-shadow-pink neo-hover-pink transition-neo cursor-pointer" }),
+    /* @__PURE__ */ jsx("button", { className: "swiper-button-prev bg-neon-cyan text-dark p-4 border-4 border-neon-cyan neo-shadow-pink neo-hover-pink transition-neo cursor-pointer" })
+  ] });
+}
 
 const $$PostMeta = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$props, $$slots);
@@ -33,7 +118,7 @@ const $$GalleryGrid = createComponent(($$result, $$props, $$slots) => {
   const { gallery, excerpt, date, title, gallery_category, gallery_tag, author } = Astro2.props;
   return renderTemplate`${maybeRenderHead()}<article class="space-y-5 max-w-7xl mx-auto"> <h1 class="text-xl md:text-3xl lg:text-4xl font-black text-black dark:text-white uppercase tracking-tight"> ${title} </h1> ${renderComponent($$result, "PostMeta", $$PostMeta, { "date": date, "author": author ? author[0]?.name : "", "slug": author ? author[0]?.slug : "" })} ${renderComponent($$result, "PostCategories", $$PostCategories, { "name": gallery_category[0]?.name, "slug": gallery_category[0]?.slug })} ${renderComponent($$result, "PostTags", $$PostTags, { "name": gallery_tag[0]?.name, "slug": gallery_tag[0]?.slug })} <p class="text-lg text-gray-100 mt-2">${excerpt}</p> <p class="text-md text-gray-400">
 *Por favor, haz click en las imágenes para verlas a tamaño completo...
-</p> <div id="gallery" class="columns-1 sm:columns-2 lg:columns-3 gap-5 mt-5"> ${gallery.map(
+</p> <div id="gallery-mobile" class="md:hidden"> ${renderComponent($$result, "SwiperGalleryReact", SwiperGalleryReact, { "client:load": true, "images": gallery, "client:component-hydration": "load", "client:component-path": "@/components/gallery/SwiperGallery", "client:component-export": "default" })} </div> <div id="gallery" class="hidden sm:block md:columns-2 lg:columns-3 gap-5 mt-5"> ${gallery.map(
     (image) => image?.directus_files_id?.id && renderTemplate`<a class="inline-block w-full mb-3 break-inside-avoid bg-dark text-white p-6 neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer"${addAttribute(`${publicAssetsUrl}/${image.directus_files_id.id}`, "href")}${addAttribute(image.directus_files_id.width, "data-pswp-width")}${addAttribute(image.directus_files_id.height, "data-pswp-height")}> ${renderComponent($$result, "Picture", $$Picture, { "src": `${publicAssetsUrl}/${image.directus_files_id.id}`, "alt": image.directus_files_id.description || "Galería de imágenes", "width": image.directus_files_id.width || 600, "height": image.directus_files_id.height || 400, "formats": ["avif", "webp"] })} </a>`
   )} </div> </article> ${renderScript($$result, "/home/gustavovazco/Documentos/DEV/Core-Hub-Plex/core-hub-plex/src/components/gallery/GalleryGrid.astro?astro&type=script&index=0&lang.ts")}`;
 }, "/home/gustavovazco/Documentos/DEV/Core-Hub-Plex/core-hub-plex/src/components/gallery/GalleryGrid.astro", void 0);

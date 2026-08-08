@@ -2,30 +2,27 @@ import React, { useEffect, useRef } from 'react';
 import Swiper from 'swiper/bundle';
 import 'swiper/swiper-bundle.css';
 
-export default function SwiperGalleryReact({ slides }) {
+export default function SwiperGalleryReact({ images }) {
   const swiperRef = useRef(null);
   const swiperInstanceRef = useRef(null);
-  const slideCount = slides?.length ?? 0;
-  const shouldLoop = slideCount >= 3;
-  const slidesPerView = slideCount >= 3 ? 'auto' : 1;
+  const items = Array.isArray(images) ? images : [];
+  const slideCount = items.length;
   const centeredSlides = slideCount > 1;
   const stretch = slideCount <= 4 ? 40 : 120;
 
   useEffect(() => {
     if (!swiperRef.current) return;
 
-    // Destroy existing instance
     if (swiperInstanceRef.current) {
       swiperInstanceRef.current.destroy(true, true);
       swiperInstanceRef.current = undefined;
     }
 
-    // Create new instance
     swiperInstanceRef.current = new Swiper(swiperRef.current, {
       effect: 'coverflow',
       grabCursor: true,
       centeredSlides,
-      loop: true,
+      loop: slideCount >= 3,
       speed: 600,
       slidesPerView: 1,
       slidesPerGroup: 1,
@@ -58,45 +55,33 @@ export default function SwiperGalleryReact({ slides }) {
     return () => {
       if (swiperInstanceRef.current) {
         swiperInstanceRef.current.destroy(true, true);
+        swiperInstanceRef.current = undefined;
       }
     };
-  }, [slides]);
+  }, [items, slideCount, centeredSlides, stretch]);
 
   return (
     <div ref={swiperRef} className="swiper bg-dark">
       <div className="swiper-wrapper">
-        {slides.data?.map((slide) => (
-          <a
-            key={slide.slug}
-            href={`/galerias/${slide.slug}`}
-            className="swiper-slide relative w-full max-w-[450px] shrink-0 overflow-hidden transition-shadow bg-dark text-white p-6 neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer"
-          >
-            {slide.cover_image && (
+        {items.map((item, index) => {
+          const file = item?.directus_files_id ?? item;
+          const src = `${import.meta.env.PUBLIC_ASSETS}/${file.id}`;
+          return (
+            <a
+              key={file.id ?? index}
+              href={src}
+              data-pswp-width={file.width ?? undefined}
+              data-pswp-height={file.height ?? undefined}
+              className="swiper-slide relative w-full max-w-[450px] shrink-0 overflow-hidden transition-shadow bg-dark text-white p-6 neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer"
+            >
               <img
-                src={`${import.meta.env.PUBLIC_ASSETS}/${slide.cover_image}`}
-                alt={slide.title || slide.slug}
-                className="h-[22rem] sm:h-[24rem] lg:h-[30rem] w-full object-cover"
+                src={src}
+                alt={file.description || file.title || 'Galería de imágenes'}
+                className="h-[22rem] w-full object-cover"
               />
-            )}
-            <div className="absolute align-center text-center inset-x-0 bottom-0 bg-black/60 p-6 text-white backdrop-blur-sm">
-              <h2 className="mb-4 text-3xl font-semibold">
-                {slide?.title || slide.slug}
-              </h2>
-
-              <h3 className="mb-4 text-2xl font-semibold">
-                {slide?.subtitle}
-              </h3>
-              
-                <h3 key={slide.gallery_category?.id} className="max-w-xs inline-block py-1 px-3 text-md font-bold text-white mb-2 ml-2 mr-2 transition-neo">
-                  {slide.gallery_category?.name}
-                </h3>
-                <h3 key={slide.gallery_tag?.id} className="max-w-xs inline-block py-1 px-3 text-md font-bold text-white mb-2 ml-2 mr-2 transition-neo">
-                  {slide.gallery_tag?.name}
-                </h3>
-              
-            </div>
-          </a>
-        ))}
+            </a>
+          );
+        })}
       </div>
       <div className="swiper-pagination mt-8"></div>
       <button className="swiper-button-next bg-neon-cyan text-dark p-4 border-4 border-neon-cyan neo-shadow-pink neo-hover-pink transition-neo cursor-pointer"></button>

@@ -1,5 +1,6 @@
 ---
 import { Picture } from 'astro:assets';
+import SwiperGalleryReact from '@/components/gallery/SwiperGallery';
 import PostMeta from '@/components/galleries/PostMeta.astro';
 import PostCategories from '@/components/galleries/PostCategories.astro';
 import PostTags from '@/components/galleries/PostTags.astro';
@@ -69,7 +70,14 @@ const { gallery, excerpt, date, title, gallery_category, gallery_tag, author } =
     *Por favor, haz click en las imágenes para verlas a tamaño completo...
   </p>
 
-  <div id="gallery" class="columns-1 sm:columns-2 lg:columns-3 gap-5 mt-5">
+  <div id="gallery-mobile" class="md:hidden">
+    <SwiperGalleryReact client:load images={gallery} />
+  </div>
+
+  <div
+    id="gallery"
+    class="hidden sm:block md:columns-2 lg:columns-3 gap-5 mt-5"
+  >
     {
       gallery.map(
         (image) =>
@@ -98,47 +106,60 @@ const { gallery, excerpt, date, title, gallery_category, gallery_tag, author } =
 
 <script>
   import PhotoSwipeLightbox from 'photoswipe/lightbox';
+  import type PhotoSwipe from 'photoswipe';
   import 'photoswipe/style.css';
 
-  const lightbox = new PhotoSwipeLightbox({
-    gallery: '#gallery',
-    children: 'a',
-    pswpModule: () => import('photoswipe'),
-  });
-  lightbox.on('uiRegister', function () {
-    if (lightbox.pswp?.ui) {
-      lightbox.pswp.ui.registerElement({
-        name: 'custom-caption',
-        order: 9,
-        isButton: false,
-        appendTo: 'root',
-        html: 'Caption text',
-        onInit: (el, pswp) => {
-          lightbox.pswp?.on('change', () => {
-            const currSlideElement = lightbox.pswp?.currSlide?.data?.element;
-            let captionHTML = '';
-            if (currSlideElement) {
-              const hiddenCaption = currSlideElement.querySelector(
-                '.hidden-caption-content'
-              );
-              if (hiddenCaption) {
-                // get caption from element with class hidden-caption-content
-                captionHTML = hiddenCaption.innerHTML;
-              } else {
-                // get caption from alt attribute
-                captionHTML =
-                  currSlideElement.querySelector('img')?.getAttribute('alt') ??
-                  '';
+  function registerCaptions(lightbox: PhotoSwipeLightbox) {
+    lightbox.on('uiRegister', function () {
+      if (lightbox.pswp?.ui) {
+        lightbox.pswp.ui.registerElement({
+          name: 'custom-caption',
+          order: 9,
+          isButton: false,
+          appendTo: 'root',
+          html: 'Caption text',
+          onInit: (el: HTMLElement, pswp: PhotoSwipe) => {
+            pswp.on('change', () => {
+              const currSlideElement = pswp.currSlide?.data?.element as
+                HTMLElement | undefined;
+              let captionHTML = '';
+              if (currSlideElement) {
+                const hiddenCaption = currSlideElement.querySelector(
+                  '.hidden-caption-content'
+                );
+                if (hiddenCaption) {
+                  captionHTML = hiddenCaption.innerHTML;
+                } else {
+                  captionHTML =
+                    currSlideElement
+                      .querySelector('img')
+                      ?.getAttribute('alt') ?? '';
+                }
               }
-            }
-            el.innerHTML = captionHTML || '';
-          });
-        },
-      });
-    }
-  });
-  lightbox.init();
+              el.innerHTML = captionHTML || '';
+            });
+          },
+        });
+      }
+    });
+  }
+
+  function createLightbox(gallerySelector: string, childrenSelector = 'a') {
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: gallerySelector,
+      children: childrenSelector,
+      pswpModule: () => import('photoswipe'),
+    });
+    registerCaptions(lightbox);
+    lightbox.init();
+    return lightbox;
+  }
+
+  const lightbox = createLightbox('#gallery');
+  const lightboxMobile = createLightbox('#gallery-mobile');
+
   document.addEventListener('astro:after-swap', function () {
     lightbox.init();
+    lightboxMobile.init();
   });
 </script>

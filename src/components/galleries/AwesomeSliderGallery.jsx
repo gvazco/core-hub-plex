@@ -36,19 +36,19 @@ export default function AwesomeSliderGallery({ slides }) {
                 <h1 className=" mb-4 text-2xl md:text-5xl font-extrabold uppercase leading-none">{slide?.title || slide.slug}</h1>
                 <h3 className="mb-4 text-2xl font-bold text-neon-yellow uppercase leading-tight mb-4">{slide?.subtitle}</h3>
                 <div
-                  class="flex flex-col md:flex-row justify-center items-center font-mono mt-auto border-t-4 border-neon-green pt-4"
+                  className="flex flex-col md:flex-row justify-center items-center font-mono mt-auto border-t-4 border-neon-green pt-4"
                 >
-                  <div class="mb-3 md:mb-0">
+                  <div className="mb-3 md:mb-0">
                     {
                       slide?.gallery_category?.name && (
-                        <span class="bg-dark border-2 text-neon-green border-neon-green px-4 py-1 mx-2 font-bold">
+                        <span className="bg-dark border-2 text-neon-green border-neon-green px-4 py-1 mx-2 font-bold">
                           {slide.gallery_category.name}
                         </span>
                       )
                     }
                     {
                       slide?.gallery_tag?.name && (
-                        <span class="bg-dark border-2 text-neon-green border-neon-green px-4 py-1 mx-2 font-bold">
+                        <span className="bg-dark border-2 text-neon-green border-neon-green px-4 py-1 mx-2 font-bold">
                           {slide.gallery_tag.name}
                         </span>
                       )
