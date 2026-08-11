@@ -42,7 +42,12 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
 // console.log(newPost.data);
 ---
 
-<CoreLayout title={title} bgImage={`${publicAssetsUrl}/${cover_image}`}>
+<CoreLayout
+  title={title}
+  subtitle={subtitle ||
+    'Explora las galerías de nuestros autores y descubre su trabajo'}
+  bgImage={`${publicAssetsUrl}/${cover_image}`}
+>
   {
     video_cover && video_enabled ? (
       <div class="aspect-video">
