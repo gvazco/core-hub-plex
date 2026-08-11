@@ -13,6 +13,11 @@
       >Inicio</a
     >
     <a
+      href="/autores"
+      class="block px-2 py-4 text-lg font-bold bg-dark text-white neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer text-center uppercase"
+      >Autores</a
+    >
+    <a
       href="/blog"
       class="block px-2 py-4 text-lg font-bold bg-dark text-white neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer text-center uppercase"
       >Blog</a
@@ -27,15 +32,33 @@
       class="block px-2 py-4 text-lg font-bold bg-dark text-white neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer text-center uppercase"
       >Manifiesto</a
     >
-    <a
-      href="/colaboradores"
-      class="block px-2 py-4 text-lg font-bold bg-dark text-white neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer text-center uppercase"
-      >Colaboradores</a
-    >
+
     <a
       href="/contacto"
       class="block px-2 py-4 text-lg font-bold bg-dark text-white neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer text-center uppercase"
       >Contacto</a
     >
   </div>
+  <div id="reloj" class="px-6 text-center pb-4 text-lg font-medium text-white">
+  </div>
 </div>
+
+<script>
+  function mostrarReloj() {
+    const fecha = new Date();
+    const opciones = {
+      dateStyle: 'full' as const,
+      timeStyle: 'medium' as const,
+    };
+
+    const horaActual = new Intl.DateTimeFormat('es-MX', opciones).format(fecha);
+    const reloj = document.getElementById('reloj');
+
+    if (reloj) {
+      reloj.textContent = horaActual;
+    }
+  }
+
+  setInterval(mostrarReloj, 1000);
+  mostrarReloj();
+</script>
