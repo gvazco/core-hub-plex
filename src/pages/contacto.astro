@@ -7,18 +7,20 @@ const url = `${import.meta.env.API_ITEMS}/pages?filter[slug][_eq]=contacto`;
 const response = await fetch(url);
 const json = await response.json();
 const pageData = DirectusContactPageResponseSchema.parse(json);
-const { data } = pageData;
-// console.log(data[0]);
+const { data: contactPage } = pageData;
+const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
 ---
 
 <CoreLayout
   title="Contacto"
-  subtitle={data[0]?.subtitle || ''}
-  bgImage={data[0]?.cover_image || ''}
+  subtitle={contactPage[0]?.subtitle || 'Forma parte del nucleo'}
+  bgImage={`${publicAssetsUrl}/${contactPage[0]?.cover_image}`}
 >
-  <div class="text-xl space-y-3 mt-10 lg:mt-0" set:html={data[0]?.content} />
+  <div
+    class="text-xl space-y-3 mt-10 lg:mt-0"
+    set:html={contactPage[0]?.content}
+  />
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
     <ContactForm />
-    <LocationMap location={data[0]?.location?.location} />
   </div>
 </CoreLayout>

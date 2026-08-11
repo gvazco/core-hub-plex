@@ -5,13 +5,13 @@ import CoreHeader from '@/components/ui/CoreHeader.astro';
 import CoreFooter from '@/components/ui/CoreFooter.astro';
 import LoadingOverlay from '@/components/ui/LoadingOverlay.astro';
 
-// interface Props {
-//   title: string;
-//   subtitle: string;
-//   bgImage: string;
-// }
+interface Props {
+  title: string;
+  subtitle: string;
+  bgImage: string;
+}
 
-// const { title, subtitle, bgImage } = Astro.props;
+const { title, subtitle, bgImage } = Astro.props;
 ---
 
 <!doctype html>
@@ -19,8 +19,8 @@ import LoadingOverlay from '@/components/ui/LoadingOverlay.astro';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Core Hub Plex</title>
-    <meta property="og:image" content="/fijacion.webp" />
+    <title>{title} | {subtitle}</title>
+    <meta property="og:image" content={bgImage} />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
