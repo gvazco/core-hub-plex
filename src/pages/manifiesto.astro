@@ -1,3 +1,405 @@
 ---
+import CoreLayout from '@/layouts/CoreLayout.astro';
 
+const pillars = [
+  {
+    icon: 'visibility',
+    title: 'Verdad',
+    border: 'neo-border-pink',
+    shadow: 'neo-shadow-pink',
+    hover: 'neo-hover-pink',
+    text: 'text-neon-pink',
+    body: 'La verdad es nuestro punto de partida y nuestro punto de llegada. La buscamos con método, la exponemos con contexto y la defendemos con transparencia. No prometemos neutralidad absoluta, porque toda mirada tiene un lugar; sí prometemos honestidad: no maquillar los hechos, no confundir opinión y dato, no silenciar lo incómodo.',
+  },
+  {
+    icon: 'palette',
+    title: 'Arte',
+    border: 'neo-border-cyan',
+    shadow: 'neo-shadow-cyan',
+    hover: 'neo-hover-cyan',
+    text: 'text-neon-cyan',
+    body: 'Creemos que la forma también es contenido. La belleza no es un adorno: es una forma de atención. Una imagen bien compuesta comunica lo que el lenguaje no alcanza a decir. El arte nos permite acercarnos a la verdad desde otro ángulo, con menos ruido y más profundidad. Por eso este sitio cuida su estética con la misma rigurosidad que sus argumentos.',
+  },
+  {
+    icon: 'memory',
+    title: 'Tecnología',
+    border: 'neo-border-yellow',
+    shadow: 'neo-shadow-yellow',
+    hover: 'neo-hover-yellow',
+    text: 'text-neon-yellow',
+    body: 'La tecnología es nuestra herramienta, no nuestro ídolo. La usamos para amplificar voces, no para sustituirlas; para llegar más lejos sin perder el centro. Renderizamos, transmitimos y conectamos, pero quien mira, quien escribe y quien decide es siempre humano. La máquina sirve al mensaje; nunca al revés.',
+  },
+];
+
+const principles = [
+  'La verdad se investiga, no se inventa.',
+  'Toda historia tiene contexto; todo dato tiene fecha.',
+  'La imagen y la palabra se respetan y se complementan.',
+  'Firmamos lo que publicamos; respondemos por ello.',
+  'Preferimos profundidad a cantidad, calidad a velocidad.',
+  'La opinión se separa del hecho; ambos se señalan.',
+  'La tecnología amplifica; el juicio humano decide.',
+  'El silencio y la duda también son formas de rigor.',
+  'La comunidad no es audiencia; es conversación.',
+  'El futuro se construye hoy, con ética y sin ruido.',
+];
+
+const principleBorders = [
+  'neo-border-pink',
+  'neo-border-cyan',
+  'neo-border-green',
+  'neo-border-yellow',
+];
+
+const principleBadges = [
+  'bg-neon-pink text-white',
+  'bg-neon-cyan text-dark',
+  'bg-neon-green text-dark',
+  'bg-neon-yellow text-dark',
+];
 ---
+
+<CoreLayout
+  title={'Manifiesto'}
+  subtitle={'El objetivo de Core Hub Plex, declarado sin filtros'}
+  bgImage={''}
+>
+  <div class="mt-10 lg:mt-0 py-6 md:py-12">
+    <!----------------------------- HERO ------------------------------>
+    <section class="relative">
+      <div
+        class="absolute -top-6 -right-4 text-[22vw] font-black leading-none opacity-5 select-none pointer-events-none text-neon-pink"
+      >
+        CORE
+      </div>
+
+      <div class="bar" style="height: 6px"></div>
+
+      <div
+        class="relative bg-dark border-4 border-dark neo-border-cyan neo-shadow-pink p-6 md:p-12"
+      >
+        <p
+          class="font-mono text-xs md:text-sm font-bold tracking-[0.35em] uppercase text-neon-cyan"
+        >
+          // CORE HUB PLEX — PROTOCOLO DE INTENCIÓN
+        </p>
+
+        <h1 class="mt-6">Manifiesto</h1>
+
+        <p
+          class="font-mono text-base md:text-xl font-bold text-neon-yellow mt-6 max-w-2xl"
+        >
+          "La verdad, renderizada y sin filtros. Directamente a tu córtex."
+        </p>
+
+        <div
+          class="mt-8 flex flex-wrap items-center gap-3 font-mono text-sm font-bold"
+        >
+          <span
+            class="bg-neon-green text-dark border-2 border-dark px-3 py-1 neo-shadow-yellow"
+            >V.2026.1</span
+          >
+          <span class="bg-neon-pink text-white border-2 border-dark px-3 py-1"
+            >TRANSMITIDO DESDE LA RED GLOBAL</span
+          >
+          <span
+            class="bg-dark border-2 border-neon-cyan text-neon-cyan px-3 py-1"
+            >ESTADO: ACTIVO</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-------------------------- PREÁMBULO ---------------------------->
+    <section data-aos="fade-up" class="mt-14">
+      <blockquote class="border-l-8 border-neon-pink pl-6 md:pl-10 py-2">
+        <p
+          class="font-subheading font-bold text-xl md:text-3xl uppercase leading-snug"
+        >
+          Este es el manifiesto de Core Hub Plex: una declaración de intención,
+          no un manual. Aquí nombramos por qué existimos y hacia dónde miramos.
+          Creemos que la información puede ser bella y que la belleza puede ser
+          verdadera. Creemos que la tecnología no deshumaniza cuando se pone al
+          servicio de la mirada humana. Y creemos que una comunidad de autores,
+          fotógrafos y pensadores puede construir, píxel a píxel, un espacio
+          donde la realidad se renderice sin filtros. Este es nuestro punto de
+          partida y también nuestra promesa.
+        </p>
+      </blockquote>
+    </section>
+
+    <!-------------------------- 01 ORIGEN ---------------------------->
+    <section data-aos="fade-up" class="mt-14">
+      <h2
+        class="bg-neon-yellow text-dark border-4 border-dark px-4 py-2 font-black tracking-tight uppercase text-lg md:text-2xl neo-shadow-pink inline-block"
+      >
+        01 / Origen
+      </h2>
+
+      <div class="mt-6 space-y-5">
+        <p>
+          Core Hub Plex nace de una inquietud compartida: vivimos saturados de
+          estímulos, de titulares que gritan y de imágenes que se desvanecen a
+          los pocos segundos. La era digital nos prometió acceso total a la
+          información y nos entregó, en su lugar, un ruido sin centro. En medio
+          de ese caos quisimos construir un núcleo: un lugar de convergencia
+          donde las palabras vuelven a pesar, donde la fotografía vuelve a
+          detener el tiempo y donde la tecnología deja de ser un fin para
+          convertirse en un medio.
+        </p>
+        <p>
+          El nombre lo dice todo. Hub, porque somos un punto de conexión entre
+          ideas y creadores. Core, porque apostamos por lo esencial, por el
+          centro de las cosas. Plex, porque somos un entretejido, una red de
+          voces que se cruzan y se potencian. No nacimos para competir con el
+          ruido: nacimos para ofrecer una alternativa más lúcida, un espacio
+          donde la señal importe más que el ruido de fondo.
+        </p>
+      </div>
+    </section>
+
+    <!------------------------- 02 EL OBJETIVO ------------------------>
+    <section data-aos="fade-up" class="mt-14">
+      <h2
+        class="bg-neon-pink text-white border-4 border-dark px-4 py-2 font-black tracking-tight uppercase text-lg md:text-2xl neo-shadow-cyan inline-block"
+      >
+        02 / El objetivo
+      </h2>
+
+      <div class="mt-6 space-y-5">
+        <p>
+          El objetivo de Core Hub Plex puede resumirse en una sola frase:
+          devolverle a la información su dignidad. Durante demasiado tiempo
+          hemos tratado los hechos como mercancía, los textos como consumo
+          rápido y las imágenes como decoración. Nosotros creemos que cada
+          historia merece ser contada con rigor y con forma. Que cada fotografía
+          merece ser vista, no solo deslizada. Que cada idea merece un contexto,
+          no solo una etiqueta.
+        </p>
+        <p>
+          Este sitio existe para demostrar que el periodismo, la ciencia, la
+          cultura y la fotografía no son compartimentos estancos, sino capas de
+          una misma realidad. Un reportaje puede ser arte; una imagen puede ser
+          un argumento; una nota de ciencia puede ser literatura. Core Hub Plex
+          es el experimento que junta esas capas y las pone a dialogar frente al
+          lector.
+        </p>
+        <p>
+          Pero el objetivo no es solo estético ni únicamente editorial. Es, ante
+          todo, humano. Queremos devolverle al lector su agencia: que decida,
+          que cuestione, que se detenga. Queremos devolverle a los autores su
+          autoridad: que firmen, que respondan, que importen. Y queremos
+          devolverle a la verdad su lugar: en el centro de la conversación, sin
+          filtros, sin adjetivos de más, sin miedo.
+        </p>
+        <p>
+          No aspiramos a ser la voz de nadie. Aspiramos a ser un espacio donde
+          muchas voces puedan encontrarse y donde el silencio crítico sea
+          bienvenido. Si este sitio logra que una sola persona mire el mundo de
+          otra manera, habrá cumplido su objetivo. Si logra que muchas lo hagan,
+          habrá empezado a cambiar la conversación.
+        </p>
+      </div>
+    </section>
+
+    <!------------------------ 03 LOS TRES PILARES ---------------------->
+    <section data-aos="fade-up" class="mt-14">
+      <h2
+        class="bg-neon-cyan text-dark border-4 border-dark px-4 py-2 font-black tracking-tight uppercase text-lg md:text-2xl neo-shadow-pink inline-block"
+      >
+        03 / Los tres pilares
+      </h2>
+
+      <p class="mt-6">
+        Nuestro objetivo se sostiene sobre tres pilares que se refuerzan entre
+        sí. No son departamentos ni etiquetas: son los criterios con los que
+        evaluamos cada decisión, cada publicación y cada imagen que llega a la
+        pantalla.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        {
+          pillars.map((pillar) => (
+            <div
+              data-aos="zoom-in-up"
+              class={`bg-dark text-white p-6 border-4 border-dark ${pillar.border} ${pillar.shadow} ${pillar.hover} transition-neo flex flex-col gap-4`}
+            >
+              <span
+                class={`material-symbols-outlined text-5xl ${pillar.text}`}
+                aria-hidden="true"
+              >
+                {pillar.icon}
+              </span>
+              <h3 class="text-xl md:text-2xl font-black uppercase tracking-tight">
+                {pillar.title}
+              </h3>
+              <p class="text-sm md:text-base">{pillar.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!------------------------ 04 DIEZ PRINCIPIOS ----------------------->
+    <section data-aos="fade-up" class="mt-14">
+      <h2
+        class="bg-neon-green text-dark border-4 border-dark px-4 py-2 font-black tracking-tight uppercase text-lg md:text-2xl neo-shadow-yellow inline-block"
+      >
+        04 / Diez principios
+      </h2>
+
+      <p class="mt-6">
+        Para que el objetivo no se quede en palabras, lo fijamos en diez
+        principios innegociables. Son la ley de este núcleo, el marco contra el
+        que medimos cada byte que publicamos.
+      </p>
+
+      <ol class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 list-none">
+        {
+          principles.map((principle, i) => (
+            <li
+              data-aos="zoom-in"
+              data-aos-delay={i * 60}
+              class={`flex items-start gap-4 bg-dark text-white border-4 border-dark p-4 font-mono font-bold neo-shadow-cyan transition-neo ${principleBorders[i % 4]}`}
+            >
+              <span
+                class={`shrink-0 w-11 h-11 flex items-center justify-center border-2 border-dark font-black text-base ${principleBadges[i % 4]}`}
+              >
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <p class="text-sm md:text-base leading-snug pt-1">{principle}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <!------------------------- 05 COMPROMISOS ------------------------->
+    <section data-aos="fade-up" class="mt-14">
+      <h2
+        class="bg-neon-orange text-dark border-4 border-dark px-4 py-2 font-black tracking-tight uppercase text-lg md:text-2xl neo-shadow-cyan inline-block"
+      >
+        05 / Compromisos
+      </h2>
+
+      <div class="mt-6 space-y-5">
+        <p>
+          Un manifiesto sin actos es un eslogan. Por eso comprometemos nuestra
+          rutina: el rigor no es un accidente, es un proceso. Cada artículo pasa
+          por revisión; cada dato se contrasta; cada imagen se respeta en su
+          contexto original. Preferimos publicar menos y publicar mejor, aunque
+          el algoritmo castigue nuestra constancia. No escribimos para el clic,
+          escribimos para la memoria.
+        </p>
+        <p>
+          Nos comprometemos con nuestros autores como nos comprometemos con
+          nuestros lectores. Los autores no son proveedores de contenido: son la
+          materia de este núcleo. Les damos espacio, crédito y la libertad de
+          firmar una postura, incluso cuando no coincida con la nuestra. El
+          lector, por su parte, no es audiencia pasiva: es interlocutor. Sus
+          preguntas nos obligan a precisar; sus dudas nos obligan a volver a las
+          fuentes.
+        </p>
+        <p>
+          Nos comprometemos, también, con el medio. La tecnología que usamos
+          será siempre transparente: diremos de dónde salió cada pieza, quién la
+          produjo y con qué herramientas se editó. La rendición de cuentas no es
+          un gesto de marketing; es la forma más honesta de ganar confianza en
+          una época donde la confianza escasea.
+        </p>
+      </div>
+    </section>
+
+    <!-------------------------- 06 EL FUTURO -------------------------->
+    <section data-aos="fade-up" class="mt-14">
+      <h2
+        class="bg-dark text-neon-cyan border-4 border-neon-cyan px-4 py-2 font-black tracking-tight uppercase text-lg md:text-2xl neo-shadow-green inline-block"
+      >
+        06 / El futuro
+      </h2>
+
+      <div class="mt-6 space-y-5">
+        <p>
+          El futuro de Core Hub Plex no está escrito en ninguna hoja de ruta:
+          está en cada autor que decide sumarse, en cada fotógrafo que confía su
+          mirada, en cada lector que regresa. No buscamos crecer por crecer;
+          buscamos profundizar. Preferimos mil lectores atentos a un millón de
+          espectadores distraídos.
+        </p>
+        <p>
+          Soñamos con una red donde la belleza y la verdad no compitan, donde la
+          tecnología sirva a la atención en lugar de destruirla y donde el acto
+          de informar vuelva a ser un acto de cuidado. Ese futuro no se espera:
+          se construye hoy, byte a byte, con ética y sin ruido.
+        </p>
+        <p>
+          Este manifiesto no termina aquí. Se reescribe con cada publicación,
+          con cada imagen publicada y con cada conversación que logremos
+          encender. La señal está activa. La pregunta es si te sumas a
+          transmitirla.
+        </p>
+      </div>
+    </section>
+
+    <!----------------------------- FIRMA ------------------------------>
+    <section
+      data-aos="zoom-in-up"
+      class="mt-16 border-4 border-dark bg-neon-green text-dark p-8 md:p-12 neo-shadow-pink relative overflow-hidden"
+    >
+      <div
+        class="absolute -right-6 -bottom-10 text-[20vw] font-black leading-none opacity-10 select-none pointer-events-none text-dark"
+      >
+        PLEX
+      </div>
+
+      <div class="relative">
+        <p class="font-mono font-bold text-sm uppercase tracking-widest">
+          // Firmado en la red global
+        </p>
+        <p
+          class="text-4xl md:text-6xl font-black uppercase tracking-tighter mt-4"
+        >
+          Core Hub Plex
+        </p>
+        <p class="font-mono font-bold mt-4">
+          La verdad, renderizada y sin filtros. Directamente a tu córtex.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3 font-mono font-bold text-sm">
+          <span class="bg-dark text-white px-3 py-1 border-2 border-dark">
+            FIRMADO: 2026
+          </span>
+          <span class="bg-dark text-neon-green px-3 py-1 border-2 border-dark">
+            ESTADO: ACTIVO
+          </span>
+          <span class="bg-dark text-neon-yellow px-3 py-1 border-2 border-dark">
+            TRANSMISIÓN: CONTINUA
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!----------------------------- CTA -------------------------------->
+    <div
+      class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5 font-mono font-bold text-center"
+    >
+      <a
+        href="/blog"
+        class="bg-dark text-white border-4 border-dark neo-border-cyan neo-shadow-cyan neo-hover-cyan transition-neo p-5 uppercase"
+      >
+        Explorar el blog →
+      </a>
+      <a
+        href="/galerias"
+        class="bg-dark text-white border-4 border-dark neo-border-pink neo-shadow-pink neo-hover-pink transition-neo p-5 uppercase"
+      >
+        Ver las galerías →
+      </a>
+      <a
+        href="/contacto"
+        class="bg-dark text-white border-4 border-dark neo-border-yellow neo-shadow-yellow neo-hover-yellow transition-neo p-5 uppercase"
+      >
+        Sumarte al núcleo →
+      </a>
+    </div>
+  </div>
+</CoreLayout>
