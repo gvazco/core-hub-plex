@@ -3,13 +3,13 @@ import CoreLayout from '@/layouts/CoreLayout.astro';
 import TickerHotNews from '@/components/ui/FrontPage/TickerHotNews.astro';
 import CoreFeaturedContent from '@/components/ui/FrontPage/CoreFeaturedContent.astro';
 import CoreSecondaryNews from '@/components/ui/FrontPage/CoreSecondaryNews.astro';
-import bgImage from '@/assets/favicon.ico';
+const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
 ---
 
 <CoreLayout
   title={'Core Hub Plex'}
   subtitle={'Transmitiendo desde la red global'}
-  bgImage={bgImage}
+  bgImage={`${publicAssetsUrl}/45d123f4-ebf3-4831-ae73-373aa60f125d.png`}
 >
   <TickerHotNews />
   <CoreFeaturedContent />

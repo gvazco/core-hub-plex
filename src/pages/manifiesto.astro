@@ -1,5 +1,6 @@
 ---
 import CoreLayout from '@/layouts/CoreLayout.astro';
+const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
 
 const pillars = [
   {
@@ -62,7 +63,7 @@ const principleBadges = [
 <CoreLayout
   title={'Manifiesto'}
   subtitle={'El objetivo de Core Hub Plex, declarado sin filtros'}
-  bgImage={''}
+  bgImage={`${publicAssetsUrl}/45d123f4-ebf3-4831-ae73-373aa60f125d.png`}
 >
   <div class="mt-5 lg:mt-0 py-5 md:py-10">
     <!----------------------------- HERO ------------------------------>
