@@ -24,6 +24,7 @@ const tagJson = await tagRes.json();
 const tag = DirectusCategorySchema.parse(tagJson.data[0]);
 
 const postsUrl = `${import.meta.env.API_ITEMS}/galleries?filter[gallery_tag][_eq]=${tag.id}&fields=*,gallery_category.*,gallery_tag.*,author.*,gallery.directus_files_id.id,gallery.directus_files_id.filename_disk,gallery.directus_files_id.filename_download,gallery.directus_files_id.title,gallery.directus_files_id.type,gallery.directus_files_id.width,gallery.directus_files_id.height,gallery.directus_files_id.filesize`;
+const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
 const postsRes = await fetch(postsUrl);
 const postsJson = await postsRes.json();
 const posts = DirectusGalleriesCollectionResponseSchema.parse(postsJson);
@@ -34,7 +35,7 @@ const { data: postTag } = posts;
 <CoreLayout
   title={`Posts en la etiqueta: ${tag.name}`}
   subtitle={`Posts en la etiqueta: ${tag.name}`}
-  bgImage={postTag[0]?.cover_image || ''}
+  bgImage={`${publicAssetsUrl}/${postTag[0]?.cover_image || ''}`}
 >
   <GalleryTags />
   <div class="columns-1 md:columns-2 lg:columns-3 gap-5 my-8 space-y-5">

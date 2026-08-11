@@ -17,6 +17,7 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
 if (!postNew.success) return Astro.redirect('/404');
 const {
   title,
+  subtitle,
   cover_image,
   gallery,
   gallery_category,
@@ -27,7 +28,12 @@ const {
 } = postNew.data;
 ---
 
-<CoreLayout title={title} bgImage={cover_image}>
+<CoreLayout
+  title={title}
+  subtitle={subtitle ||
+    'Explora las galerías de nuestros autores y descubre su trabajo'}
+  bgImage={`${publicAssetsUrl}/${cover_image}`}
+>
   {
     cover_image && (
       <Picture

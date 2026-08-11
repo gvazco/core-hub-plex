@@ -1,7 +1,7 @@
-import { c as createComponent, $ as $$Picture } from './_astro_assets_CVGIOv1H.mjs';
+import { c as createComponent, $ as $$Picture } from './_astro_assets_BFOdySXm.mjs';
 import 'piccolore';
-import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent } from './server_Ch8mxaAY.mjs';
-import { r as renderScript, a as DirectusGalleriesCollectionSchema, $ as $$CoreLayout } from './index_CbWKtk5Q.mjs';
+import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent } from './server_PWKLb8AK.mjs';
+import { r as renderScript, a as DirectusGalleriesCollectionSchema, $ as $$CoreLayout } from './index_DuH57hR-.mjs';
 import { jsxs, jsx } from 'react/jsx-runtime';
 import { useRef, useEffect } from 'react';
 import Swiper from 'swiper/bundle';
@@ -137,6 +137,7 @@ const $$slug = createComponent(async ($$result, $$props, $$slots) => {
   if (!postNew.success) return Astro2.redirect("/404");
   const {
     title,
+    subtitle,
     cover_image,
     gallery,
     gallery_category,
@@ -145,7 +146,7 @@ const $$slug = createComponent(async ($$result, $$props, $$slots) => {
     date_created,
     author
   } = postNew.data;
-  return renderTemplate`${renderComponent($$result, "CoreLayout", $$CoreLayout, { "title": title, "bgImage": cover_image }, { "default": async ($$result2) => renderTemplate`${cover_image && renderTemplate`${renderComponent($$result2, "Picture", $$Picture, { "src": `${publicAssetsUrl}/${cover_image}`, "alt": title, "width": 800, "height": 400, "formats": ["avif", "webp"], "class": "w-full" })}`}${maybeRenderHead()}<article class="relative top-[-60px] md:top-[-100px] lg:top-[-130px] bg-dark-transparent space-y-5 p-5 max-w-5xl mx-auto"> ${renderComponent($$result2, "GalleryGrid", $$GalleryGrid, { "gallery": gallery || [], "title": title, "date": date_created, "excerpt": excerpt ?? "", "gallery_category": [
+  return renderTemplate`${renderComponent($$result, "CoreLayout", $$CoreLayout, { "title": title, "subtitle": subtitle || "Explora las galerías de nuestros autores y descubre su trabajo", "bgImage": `${publicAssetsUrl}/${cover_image}` }, { "default": async ($$result2) => renderTemplate`${cover_image && renderTemplate`${renderComponent($$result2, "Picture", $$Picture, { "src": `${publicAssetsUrl}/${cover_image}`, "alt": title, "width": 800, "height": 400, "formats": ["avif", "webp"], "class": "w-full" })}`}${maybeRenderHead()}<article class="relative top-[-60px] md:top-[-100px] lg:top-[-130px] bg-dark-transparent space-y-5 p-5 max-w-5xl mx-auto"> ${renderComponent($$result2, "GalleryGrid", $$GalleryGrid, { "gallery": gallery || [], "title": title, "date": date_created, "excerpt": excerpt ?? "", "gallery_category": [
     { name: gallery_category.name, slug: gallery_category.slug }
   ], "gallery_tag": gallery_tag ? [{ name: gallery_tag.name, slug: gallery_tag.slug }] : [], "author": [{ name: author.name, slug: author.slug }] })} </article> ` })}`;
 }, "/home/gustavovazco/Documentos/DEV/Core-Hub-Plex/core-hub-plex/src/pages/galerias/[slug].astro", void 0);

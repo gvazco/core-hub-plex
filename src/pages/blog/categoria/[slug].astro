@@ -24,6 +24,7 @@ const catJson = await catRes.json();
 const category = DirectusCategorySchema.parse(catJson.data[0]);
 
 const postsUrl = `${import.meta.env.API_ITEMS}/articles?filter[article_category][_eq]=${category.id}&fields=*,article_category.*,article_tags.*,author.*`;
+const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
 const postsRes = await fetch(postsUrl);
 const postsJson = await postsRes.json();
 const posts = DirectusArticlesCollectionResponseSchema.parse(postsJson);
@@ -34,7 +35,7 @@ const { data: postCategory } = posts;
 <CoreLayout
   title={`Posts en la categoría: ${category.name}`}
   subtitle={`Posts en la categoría: ${category.name}`}
-  bgImage={postCategory[0]?.cover_image || undefined}
+  bgImage={`${publicAssetsUrl}/${postCategory[0]?.cover_image || ''}`}
 >
   <PostCategories />
 

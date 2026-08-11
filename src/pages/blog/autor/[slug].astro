@@ -1,6 +1,5 @@
 ---
 import {
-  AutoresSlugSchema,
   DirectusAuthorSchema,
   DirectusAuthorsSlugSchema,
   DirectusArticlesCollectionResponseSchema,
@@ -24,9 +23,22 @@ const autorUrl = `${import.meta.env.API_ITEMS}/authors?filter[slug][_eq]=${slug}
 const autorRes = await fetch(autorUrl);
 const autorJson = await autorRes.json();
 const autor = DirectusAuthorSchema.parse(autorJson.data[0]);
-// console.log('Autor:', autor);
 
 const postsUrl = `${import.meta.env.API_ITEMS}/articles?filter[author][_eq]=${autor.id}&fields=*,article_category.*,article_tags.*,author.*`;
+const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
+
+// console.log('Autor:', autor);
+// Ensure avatar is a string URL for components that expect a string
+const autorForSummary = {
+  ...autor,
+  avatar:
+    typeof autor.avatar === 'string'
+      ? autor.avatar
+      : autor.avatar && autor.avatar.filename_download
+        ? `${publicAssetsUrl}/${autor.avatar.filename_download}`
+        : undefined,
+};
+
 const postsRes = await fetch(postsUrl);
 const postsJson = await postsRes.json();
 const posts = DirectusArticlesCollectionResponseSchema.parse(postsJson);
@@ -37,9 +49,9 @@ const { data: postsAuthor } = posts;
 <Layout
   title={`Posts por el autor: ${autor.name}`}
   subtitle={`Posts por el autor: ${autor.name}`}
-  bgImage={`${import.meta.env.PUBLIC_ASSETS}/${postsAuthor[0]?.cover_image || 'default-bg.jpg'}`}
+  bgImage={`${publicAssetsUrl}/${postsAuthor[0]?.cover_image || 'default-bg.jpg'}`}
 >
-  <AuthorSummary autor={autor} />
+  <AuthorSummary autor={autorForSummary} />
   <h2
     class="mx-10 md:mx-auto my-10 text-3xl md:text-5xl font-black uppercase text-white flex items-center gap-4"
   >
