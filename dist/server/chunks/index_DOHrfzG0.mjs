@@ -1,6 +1,6 @@
-import { c as createComponent } from './_astro_assets_oJC_Dz4F.mjs';
+import { c as createComponent } from './_astro_assets_Bq30wDJl.mjs';
 import 'piccolore';
-import { k as createRenderInstruction, f as addAttribute, h as renderTemplate, m as maybeRenderHead, j as renderComponent, l as renderHead, n as renderSlot, o as renderTransition, q as fade, s as slide } from './server_B09-o1aD.mjs';
+import { k as createRenderInstruction, f as addAttribute, h as renderTemplate, m as maybeRenderHead, j as renderComponent, l as renderHead, n as renderSlot, o as renderTransition, q as fade, s as slide } from './server_OXnNiwd8.mjs';
 import 'clsx';
 import { z } from 'zod';
 
@@ -29,21 +29,26 @@ const $$CoreMainNav = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$props, $$slots);
   Astro2.self = $$CoreMainNav;
   const navigation = [
+    { name: "Inicio", href: "/" },
     { name: "Blog", href: "/blog" },
     { name: "Galerías", href: "/galerias" },
-    { name: "Colaboradores", href: "/" }
+    { name: "Manifiesto", href: "/manifiesto" },
+    { name: "Contacto", href: "/contacto" }
   ];
   const currentPath = Astro2.url.pathname;
   const isActive = (href) => {
     if (href === "/") return currentPath === "/";
-    if (href === "/blog") return currentPath === "/blog";
+    if (href === "/blog") return currentPath.startsWith("/blog");
+    if (href === "/galerias") return currentPath.startsWith("/galerias");
+    if (href === "/manifiesto") return currentPath === "/manifiesto";
+    if (href === "/contacto") return currentPath === "/contacto";
     return currentPath === href || currentPath.startsWith(`${href}/`);
   };
   return renderTemplate`${maybeRenderHead()}<nav class="hidden md:flex gap-8 font-mono font-bold text-lg"> ${navigation.map((item) => renderTemplate`<a${addAttribute(item.href, "href")}${addAttribute(`${isActive(item.href) ? "text-neon-yellow" : "text-white hover:text-neon-yellow"} uppercase text-lg font-bold`, "class")}> ${item.name} </a>`)} </nav>`;
 }, "/home/gustavovazco/Documentos/DEV/Core-Hub-Plex/core-hub-plex/src/components/ui/CoreMainNav.astro", void 0);
 
 const $$CoreMobileMenu = createComponent(($$result, $$props, $$slots) => {
-  return renderTemplate`${maybeRenderHead()}<div id="mobile-menu" class="hidden md:hidden fixed inset-x-0 top-0 h-dvh z-40 bg-dark overflow-y-auto"> <div class="pt-28 px-6 pb-8 space-y-4 flex flex-col"> <a href="#about" class="block px-2 py-4 text-lg font-bold bg-dark text-white neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer text-center uppercase">Acerca de</a> <a href="/blog" class="block px-2 py-4 text-lg font-bold bg-dark text-white neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer text-center uppercase">Blog</a> <a href="/galerias" class="block px-2 py-4 text-lg font-bold bg-dark text-white neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer text-center uppercase">Galerías</a> <a href="/colaboradores" class="block px-2 py-4 text-lg font-bold bg-dark text-white neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer text-center uppercase">Colaboradores</a> </div> </div>`;
+  return renderTemplate`${maybeRenderHead()}<div id="mobile-menu" class="hidden md:hidden fixed inset-x-0 top-0 h-dvh z-40 bg-dark overflow-y-auto"> <div class="pt-28 px-6 pb-8 space-y-4 flex flex-col"> <a href="#about" class="block px-2 py-4 text-lg font-bold bg-dark text-white neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer text-center uppercase">Inicio</a> <a href="/blog" class="block px-2 py-4 text-lg font-bold bg-dark text-white neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer text-center uppercase">Blog</a> <a href="/galerias" class="block px-2 py-4 text-lg font-bold bg-dark text-white neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer text-center uppercase">Galerías</a> <a href="/manifiesto" class="block px-2 py-4 text-lg font-bold bg-dark text-white neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer text-center uppercase">Manifiesto</a> <a href="/colaboradores" class="block px-2 py-4 text-lg font-bold bg-dark text-white neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer text-center uppercase">Colaboradores</a> <a href="/contacto" class="block px-2 py-4 text-lg font-bold bg-dark text-white neo-border-pink neo-shadow-cyan neo-hover-cyan transition-neo cursor-pointer text-center uppercase">Contacto</a> </div> </div>`;
 }, "/home/gustavovazco/Documentos/DEV/Core-Hub-Plex/core-hub-plex/src/components/ui/CoreMobileMenu.astro", void 0);
 
 const $$CoreHeader = createComponent(($$result, $$props, $$slots) => {

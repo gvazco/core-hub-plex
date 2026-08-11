@@ -1,14 +1,19 @@
 ---
 const navigation = [
+  { name: 'Inicio', href: '/' },
   { name: 'Blog', href: '/blog' },
   { name: 'Galerías', href: '/galerias' },
-  { name: 'Colaboradores', href: '/' },
+  { name: 'Manifiesto', href: '/manifiesto' },
+  { name: 'Contacto', href: '/contacto' },
 ];
 
 const currentPath = Astro.url.pathname;
 const isActive = (href: string) => {
   if (href === '/') return currentPath === '/';
-  if (href === '/blog') return currentPath === '/blog';
+  if (href === '/blog') return currentPath.startsWith('/blog');
+  if (href === '/galerias') return currentPath.startsWith('/galerias');
+  if (href === '/manifiesto') return currentPath === '/manifiesto';
+  if (href === '/contacto') return currentPath === '/contacto';
   return currentPath === href || currentPath.startsWith(`${href}/`);
 };
 ---
