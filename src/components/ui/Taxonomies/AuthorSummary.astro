@@ -17,181 +17,162 @@ interface Props {
   };
 }
 const { autor } = Astro.props;
+
+const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
+
+const getAvatarUrl = (avatar?: string) =>
+  avatar
+    ? avatar.startsWith('http')
+      ? avatar
+      : `${publicAssetsUrl}/${avatar}`
+    : undefined;
+
+const avatarUrl = getAvatarUrl(autor.avatar);
+
+const socials = [
+  { key: 'facebook', label: 'Facebook', href: autor.social_links?.facebook },
+  { key: 'instagram', label: 'Instagram', href: autor.social_links?.instagram },
+  { key: 'linkedin', label: 'LinkedIn', href: autor.social_links?.linkedin },
+  { key: 'equis', label: 'X', href: autor.social_links?.equis },
+].filter((social) => social.href);
 ---
 
-<section class="bg-dark pt-1 pb-10 md:pt-16">
-  <div class="mx-auto max-w-7xl">
-    <!-- Header -->
-    <div class="mt-10 mb-10 text-center">
-      <h2
-        class="text-xl md:text-3xl lg:text-4xl font-black text-black dark:text-white uppercase tracking-tight"
-      >
-        {autor.name}
-      </h2>
-      <p class="text-lg text-gray-100 mt-2">
-        {autor.bio}
-      </p>
-    </div>
+<section class="bg-dark pb-10 pt-8 md:pb-16 md:pt-16">
+  <div class="mx-auto max-w-7xl px-5 md:px-0">
+    <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-3">
+      <div class="group lg:col-span-1">
+        <div
+          class="relative aspect-square overflow-hidden border-4 border-dark bg-gray-700 neo-shadow-pink transition-all duration-300 hover:rotate-1"
+        >
+          {
+            avatarUrl ? (
+              <img
+                class="w-full h-full object-cover grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:scale-105"
+                src={avatarUrl}
+                alt={`Foto de ${autor.name}`}
+                loading="lazy"
+              />
+            ) : (
+              <div
+                class="w-full h-full flex items-center justify-center bg-dark text-8xl font-black uppercase text-neon-pink"
+              >
+                {autor.name.charAt(0)}
+              </div>
+            )
+          }
+          <span
+            class="absolute left-0 top-0 border-b-2 border-r-2 border-dark bg-neon-yellow px-2 py-1 text-xs font-black uppercase tracking-widest text-dark"
+          >
+            Autor Core
+          </span>
+        </div>
 
-    <!-- Content -->
-    <div class="flex flex-col items-stretch gap-8 lg:flex-row">
-      <!-- Image -->
-      <div class="flex w-full lg:w-1/4">
-        <img
-          class="w-full p-8 border-4 border-neon-yellow border-dashed flex flex-col items-center justify-center text-center flex-grow object-cover"
-          src={`${import.meta.env.PUBLIC_ASSETS}/${autor.avatar || 'https://placehold.co/600x700/e5e7eb/000000'}`}
-          alt="Modern Platform Interface"
-        />
+        {
+          socials.length > 0 && (
+            <div class="mt-5 flex flex-wrap gap-3">
+              {socials.map((social) => (
+                <a
+                  aria-label={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 bg-dark p-2.5 text-white neo-border-cyan neo-shadow-cyan transition-neo hover:translate-x-0.5 hover:-translate-y-0.5"
+                >
+                  {
+                    social.key === 'facebook' ? (
+                      <svg
+                        class="h-5 w-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                      </svg>
+                    ) : social.key === 'instagram' ? (
+                      <svg
+                        class="h-5 w-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                      </svg>
+                    ) : social.key === 'linkedin' ? (
+                      <svg
+                        class="h-5 w-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                      </svg>
+                    ) : (
+                      <svg
+                        class="h-5 w-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M4 4l16 16M20 4L4 20"></path>
+                      </svg>
+                    )
+                  }
+                </a>
+              ))}
+            </div>
+          )
+        }
       </div>
 
-      <!-- Features Grid -->
-      <div class="w-full lg:w-3/4">
-        <div class="grid h-full grid-cols-1 gap-6 md:grid-cols-2">
-          <!-- Feature 1 -->
-          <div
-            class="group bmb-6 neo-border-green border-4 border-dark bg-gray-100 px-4 py-2 neo-shadow-pink hover:-translate-y-2 transition-transform p-6 transition-all duration-300 hover:border-black"
-          >
-            <div class="mb-4 flex items-center">
-              <div
-                class="mr-4 flex flex-shrink-0 items-center justify-center bg-black p-3"
-              >
-                <svg
-                  class="h-6 w-6 text-gray-100"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-              </div>
-              <h3
-                class="text-lg font-black uppercase mb-4 border-b-4 border-dark bg-dark text-gray-100 px-2 inline-block self-start"
-              >
-                Personalization
-              </h3>
-            </div>
-            <p class="text-gray-900">
+      <div
+        class="bg-dark p-8 text-white neo-border-green neo-shadow-green transition-neo md:p-10 lg:col-span-2"
+      >
+        <span
+          class="inline-block border-2 border-dark bg-neon-pink px-3 py-1 text-xs font-black uppercase tracking-widest text-dark"
+        >
+          Perfil
+        </span>
+        <h2 class="mt-4 text-4xl font-black uppercase leading-none tracking-tight md:text-6xl">
+          {autor.name}
+        </h2>
+        <div
+          class="mt-4 h-2 bg-gradient-to-r from-neon-pink via-neon-cyan to-neon-green"
+        ></div>
+        {
+          autor.bio && (
+            <p class="mt-6 font-mono text-sm leading-relaxed text-gray-100 md:text-base">
               {autor.bio}
             </p>
-          </div>
-
-          <!-- Feature 2 -->
-          <div
-            class="group bmb-6 neo-border-green border-4 border-dark bg-gray-100 px-4 py-2 neo-shadow-pink hover:-translate-y-2 transition-transform p-6 transition-all duration-300 hover:border-black"
-          >
-            <div class="mb-4 flex items-center">
-              <div
-                class="mr-4 flex flex-shrink-0 items-center justify-center bg-black p-3"
-              >
-                <svg
-                  class="h-6 w-6 text-gray-100"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-                  <path d="M12 18h.01"></path>
-                </svg>
-              </div>
-              <h3
-                class="text-lg font-black uppercase mb-4 border-b-4 border-dark bg-dark text-gray-100 px-2 inline-block self-start"
-              >
-                Mobile
-              </h3>
-            </div>
-            <p class="text-gray-900">
-              Our mobile-first design offers a seamless browsing experience
-              across all devices, including smartphones and tablets.
-            </p>
-          </div>
-
-          <!-- Feature 3 -->
-          <div
-            class="group bmb-6 neo-border-green border-4 border-dark bg-gray-100 px-4 py-2 neo-shadow-pink hover:-translate-y-2 transition-transform p-6 transition-all duration-300 hover:border-black"
-          >
-            <div class="mb-4 flex items-center">
-              <div
-                class="mr-4 flex flex-shrink-0 items-center justify-center bg-black p-3"
-              >
-                <svg
-                  class="h-6 w-6 text-gray-100"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path
-                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-                  ></path>
-                </svg>
-              </div>
-              <h3
-                class="text-lg font-black uppercase mb-4 border-b-4 border-dark bg-dark text-gray-100 px-2 inline-block self-start"
-              >
-                Support
-              </h3>
-            </div>
-            <p class="text-gray-900">
-              Our support team is available around the clock to answer questions
-              and resolve issues through email, phone, or live chat.
-            </p>
-          </div>
-
-          <!-- Feature 4 -->
-          <div
-            class="group bmb-6 neo-border-green border-4 border-dark bg-gray-100 px-4 py-2 neo-shadow-pink hover:-translate-y-2 transition-transform p-6 transition-all duration-300 hover:border-black"
-          >
-            <div class="mb-4 flex items-center">
-              <div
-                class="mr-4 flex flex-shrink-0 items-center justify-center bg-black p-3"
-              >
-                <svg
-                  class="h-6 w-6 text-gray-100"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"
-                  ></rect>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                </svg>
-              </div>
-              <h3
-                class="text-lg font-black uppercase mb-4 border-b-4 border-dark bg-dark text-gray-100 px-2 inline-block self-start"
-              >
-                Security
-              </h3>
-            </div>
-            <p class="text-gray-900">
-              We use cutting-edge security measures to protect customer
-              information and ensure the safety of all transactions.
-            </p>
-          </div>
-        </div>
+          )
+        }
       </div>
     </div>
   </div>

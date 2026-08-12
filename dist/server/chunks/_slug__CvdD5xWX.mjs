@@ -1,7 +1,7 @@
-import { c as createComponent, $ as $$Picture } from './_astro_assets_C89Gf8-3.mjs';
+import { c as createComponent, $ as $$Picture } from './_astro_assets_lAHs0FO9.mjs';
 import 'piccolore';
-import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent } from './server_-_gTPsf1.mjs';
-import { r as renderScript, a as DirectusGalleriesCollectionSchema, $ as $$CoreLayout } from './index_CLeK7eB7.mjs';
+import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent } from './server_D-FGeNOT.mjs';
+import { r as renderScript, a as DirectusGalleriesCollectionSchema, $ as $$CoreLayout } from './index_Tgen_pqK.mjs';
 import { jsxs, jsx } from 'react/jsx-runtime';
 import { useRef, useEffect } from 'react';
 import Swiper from 'swiper/bundle';

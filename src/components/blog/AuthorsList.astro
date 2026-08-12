@@ -1,0 +1,108 @@
+---
+import { DirectusAuthorsSchema } from '@/types';
+const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
+
+const catUrl = `${import.meta.env.API_ITEMS}/authors`;
+const catResponse = await fetch(catUrl);
+const catJson = await catResponse.json();
+const catData = DirectusAuthorsSchema.parse(catJson.data);
+
+const accents = ['cyan', 'pink', 'green', 'yellow'] as const;
+
+const getAccent = (index: number) => accents[index % accents.length];
+
+const getAvatarUrl = (cat: (typeof catData)[number]) =>
+  typeof cat.avatar === 'string'
+    ? `${publicAssetsUrl}/${cat.avatar}`
+    : cat.avatar && cat.avatar.filename_download
+      ? `${publicAssetsUrl}/${cat.avatar.filename_download}`
+      : undefined;
+---
+
+<div>
+  <h2
+    class="mx-10 md:mx-auto my-10 text-3xl md:text-5xl font-black uppercase text-white flex items-center gap-4"
+  >
+    <span class="w-8 h-8 bg-neon-pink inline-block neo-shadow-cyan"></span>
+    Nuestros autores
+    <span
+      class="flex-grow h-2 bg-gradient-to-r from-neon-pink via-neon-cyan to-neon-green"
+    ></span>
+  </h2>
+
+  <div
+    class="mt-5 my-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-5 md:px-0"
+  >
+    {
+      catData.map((cat, index) => {
+        const accent = getAccent(index);
+        const avatarUrl = getAvatarUrl(cat);
+        const socials = [
+          cat.social_links?.facebook && {
+            label: 'Facebook',
+            href: cat.social_links.facebook,
+            icon: 'FB',
+          },
+          cat.social_links?.instagram && {
+            label: 'Instagram',
+            href: cat.social_links.instagram,
+            icon: 'IG',
+          },
+        ].filter(Boolean) as { label: string; href: string; icon: unknown }[];
+
+        return (
+          <article
+            class={`group bg-dark text-white p-8 neo-border-${accent} neo-shadow-${accent} neo-hover-${accent} transition-neo`}
+          >
+            <a href={`/blog/autor/${cat.slug}`}>
+              <div
+                class={`aspect-square overflow-hidden border-4 border-dark bg-gray-700 neo-shadow-${accent}`}
+              >
+                {avatarUrl ? (
+                  <img
+                    class="w-full h-full object-cover"
+                    src={avatarUrl}
+                    alt={`Foto de ${cat.name}`}
+                    loading="lazy"
+                  />
+                ) : (
+                  <div
+                    class={`w-full h-full flex items-center justify-center text-6xl font-black uppercase bg-dark text-neon-${accent}`}
+                  >
+                    {cat.name.charAt(0)}
+                  </div>
+                )}
+              </div>
+
+              <h3 class="mt-5 text-2xl font-black uppercase leading-none">
+                {cat.name}
+              </h3>
+            </a>
+
+            {cat.bio && (
+              <p class="mt-3 font-mono text-sm text-gray-100 leading-relaxed line-clamp-3">
+                {cat.bio}
+              </p>
+            )}
+
+            {socials.length > 0 && (
+              <div class="mt-5 flex flex-wrap gap-3">
+                {socials.map((social) => (
+                  <a
+                    aria-label={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class={`inline-flex items-center gap-2 p-2.5 text-white bg-dark text-white text-2xl transition-all font-mono font-bold neo-border-${accent} neo-shadow-${accent} transition-neo hover:translate-x-0.5 hover:-translate-y-0.5`}
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+            )}
+          </article>
+        );
+      })
+    }
+  </div>
+</div>

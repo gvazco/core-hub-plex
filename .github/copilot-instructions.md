@@ -1,12 +1,15 @@
 # Core Hub Plex - Copilot Instructions
 
+## Summary
+This file documents current conventions for the Core Hub Plex Astro site. It replaces the older WordPress-centered guidance: the project now consumes Directus REST endpoints and uses environment variables and asset handling aligned to Directus. Keep this file in sync with AGENTS.md and the repo README.
+
 ## Tech Stack
 
 - **Framework:** Astro v6 (SSR via `@astrojs/node`, mode: "standalone")
-- **UI Library:** React (via `@astrojs/react`) — only for Swiper gallery carousel
+- **UI Library:** React (via `@astrojs/react`) — used only for gallery carousels
 - **CSS:** Tailwind CSS v4 (`@tailwindcss/vite`)
 - **Language:** TypeScript (strict mode via `astro/tsconfigs/strict`)
-- **Backend:** WordPress headless CMS via REST API (`{API_URL}/wp/v2/`)
+- **Backend / CMS:** Directus headless CMS (Directus REST endpoints under `API_ITEMS`)
 - **Package Manager:** npm
 - **Module System:** ESM (`"type": "module"`)
 - **Runtime:** Node.js >=22.12.0
@@ -41,15 +44,13 @@ src/
 
 ## Naming Conventions
 
-- **Astro components:** PascalCase (`CoreHeader.astro`, `GalleryGrid.astro`)
-- **React/JSX components:** PascalCase (`SwiperGallery.jsx`)
-- **Plain JS/TS files:** camelCase (`formatDate`, `nullToEmptyString`)
-- **Zod schemas:** PascalCase with "Schema" suffix (`PostSchema`, `GallerySchema`)
-- **Inferred types:** PascalCase matching schema name (`Post`, `Galeria`, `MenuItem`)
-- **Props interface:** `interface Props { ... }` in component frontmatter
-- **Folders:** camelCase (`blog/`, `galleries/`, `ui/FrontPage/`)
-- **Environment variables:** UPPER_SNAKE_CASE (`API_URL`, `HOME_URL`)
-- **Routes/slugs:** kebab-case (`/blog/categoria/tecnologia`)
+- Astro components and React components: PascalCase (`CoreHeader.astro`, `SwiperGallery.jsx`)
+- Plain JS/TS files and folders: camelCase (`formatDate`, `blog/`)
+- Zod schemas: PascalCase with `Schema` suffix (`PostSchema`)
+- Inferred types: PascalCase matching schema name (`Post`, `Galeria`)
+- Props interface: `interface Props { ... }` in frontmatter
+- Environment variables: UPPER_SNAKE_CASE (`API_ITEMS`, `PUBLIC_ASSETS`, `HOME_URL`)
+- Routes/slugs: kebab-case (`/blog/categoria/tecnologia`)
 
 ## Imports
 
@@ -59,85 +60,87 @@ src/
   import { PostSchema } from '@/types'
   import { formatDate } from '@/helpers'
   ```
-- Relative imports for same-directory siblings:
-  ```astro
-  import PostMeta from './PostMeta.astro'
-  ```
-- Type-only imports:
+- Prefer type-only imports for types:
   ```ts
   import type { Post } from '@/types'
   ```
 
-## Data Flow
+## Data Flow (Directus)
 
-1. Fetch from WordPress REST API (`{API_URL}/wp/v2/{endpoint}`)
-2. Validate response with Zod `.safeParse()`
-3. Redirect to `/404` if parsing fails:
+1. Fetch from Directus items endpoint: `${API_ITEMS}/<collection>?filter[slug][_eq]=<slug>&fields=*`.
+2. Validate responses with Zod `.safeParse()` using schemas in `src/types/index.ts`.
+3. If parsing fails, redirect to `/404`:
    ```astro
-   const post = PostSchema.safeParse(json[0]);
-   if (!post.success) return Astro.redirect('/404');
+   const result = PostSchema.safeParse(json?.data?.[0]);
+   if (!result.success) return Astro.redirect('/404');
    ```
-4. Pass validated data to child components via `Astro.props`
+4. Build asset URLs using `PUBLIC_ASSETS` (e.g., `${PUBLIC_ASSETS}/${fileId}`) for client-side components.
+5. Pass validated data to child components via `Astro.props`.
+
+Notes:
+- Use Directus filter and fields syntax when querying (e.g., `filter[slug][_eq]`, `fields=*,gallery.*`).
+- Prefer server-side validation and safe defaults; optional chaining in templates for missing fields.
+
+## Environment variables (required)
+
+- `API_ITEMS` — Directus `/items` base URL (server-side only)
+- `PUBLIC_ASSETS` — Directus `/assets` base URL (must be `PUBLIC_`-prefixed for client usage)
+- `HOME_URL` — used by contact action (legacy WordPress CF7 endpoint)
+- `FRONT_URL` — used for meta/OG canonical URLs
 
 ## Rendering Modes
 
-- **SSR (dynamic):** `export const prerender = false` for `blog/[slug]` and `galerias/[slug]`
-- **SSG (static):** `getStaticPaths()` for category/tag/author listing pages
-- **Default (static):** homepage, blog listing, gallery listing, contact, 404
+- SSR for per-slug pages: `export const prerender = false` (e.g., `blog/[slug]`, `galerias/[slug]`).
+- `getStaticPaths()` for category/tag listing pages at build time.
+- Default static builds for homepage, listings and contact (build requires reachable CMS and env vars).
 
 ## Component Patterns
 
-- Astro component with frontmatter:
+- Astro components with frontmatter and typed Props:
   ```astro
   ---
-  interface Props { post: Post; }
-  const { post } = Astro.props;
+  interface Props { post: Post }
+  const { post } = Astro.props
   ---
   ```
-- Safe access with optional chaining:
-  ```astro
-  {post?.featured_images?.medium_large?.url && (
-    <Picture src={...} />
-  )}
-  ```
+- Use optional chaining when reading nested Directus relations.
 
 ## CSS Conventions
 
-- Tailwind CSS v4 with `@import "tailwindcss"` and `@utility` directives
-- Custom neobrutalist utilities: `.neo-border-*`, `.neo-shadow-*`, `.neo-hover-*`
-- Neon color palette: pink, cyan, green, yellow, orange, purple, blue, red
-- Dark theme background: `#0a0a0a`
-- Fonts: Syne (headings), JetBrains Mono (secondary), Rubik (body)
-- Uppercase-heavy styling for headers and navigation
-- Custom CSS section comments: `/* Ticker / Marquee animation */`
+- Tailwind v4 utilities and project-specific utility classes (`.neo-border-*`, `.neo-shadow-*`).
+- Neon palette; dark theme base `#0a0a0a`.
 
 ## Error Handling
 
-- Zod `.safeParse()` with redirect on failure
-- Optional chaining for missing data
-- Zod + Notyf for form validation feedback
-- No try/catch around fetch calls (assume API availability)
-- Custom 404 page at `src/pages/404.astro`
+- Validate remote data with Zod and redirect on failure.
+- Use Notyf for user-facing form validation feedback.
+- Avoid swallowing fetch errors silently; prefer visible failure modes during build.
 
 ## Forms
 
-- Contact form uses Astro Actions (`src/actions/contact.ts`)
-- Validation via Zod schema with `z.preprocess(nullToEmptyString, ...)`
-- Errors caught with `isInputError(error)` → Notyf toast
-- Submission to WordPress Contact Form 7 REST API
+- Contact form remains implemented as an Astro Action (`src/actions/contact.ts`).
+- Server-side Zod validation via `z.preprocess(nullToEmptyString, ...)`.
+- Errors are surfaced via Notyf in the client.
+- NOTE: Contact submission still posts to a WordPress Contact Form 7 endpoint (`HOME_URL`) — keep the env var set until the endpoint is migrated.
 
-## Image Handling
+## Image & Asset Handling
 
-- Astro `<Picture>` component for responsive images (AVIF/WebP)
-- Remote images allowed from defined domains in config
-- WordPress featured images with size variants (medium, medium_large, large, full)
-- PhotoSwipe for gallery lightbox
+- Use Astro `<Picture>` for responsive images; prefer AVIF/WebP variants when available.
+- Build-time processing uses `sharp` for optimizations where configured.
+- Client-side asset URLs must use `PUBLIC_ASSETS`.
 
 ## Additional Conventions
 
-- Entire site in **Spanish** (`<html lang="es">`, `es-ES` locale for dates)
-- No testing framework configured
-- Prettier config: `semi: true`, `singleQuote: true`, `tabWidth: 2`, `trailingComma: "es5"`
-- No ESLint configured
-- No authentication — fully public site
-- No i18n framework — single locale
+- Site language: Spanish — `<html lang="es">`, `es-ES` locale for dates and currency.
+- No test framework configured; verification = `npm run build`.
+- Prettier preferences: semi: true, singleQuote: true, tabWidth: 2.
+- No ESLint configured.
+
+## Notes for Copilot / Contributors
+
+- Prefer `search_code_subagent` for broad code discovery; use `glob`/`grep`/`view` for narrow searches.
+- When changing API usage, update `src/types/index.ts` Zod schemas and adjust fetch calls accordingly.
+- Keep AGENTS.md and this file aligned — AGENTS.md contains runtime notes and gotchas.
+
+---
+Updated to reflect Directus backend and project conventions. Keep this file current when data sources, env vars, or rendering modes change.
