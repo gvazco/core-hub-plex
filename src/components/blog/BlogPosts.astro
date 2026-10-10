@@ -1,7 +1,7 @@
 ---
 import { DirectusArticlesCollectionResponseSchema } from '@/types';
 import PostCard from './PostCard.astro';
-const newUrl = `${import.meta.env.API_ITEMS}/articles?fields=*,article_category.*,article_tags.*,author.*`;
+const newUrl = `${import.meta.env.API_ITEMS}/articles?fields=*,article_category.*,article_tags.*,author.*&sort=-date_created`;
 const newRes = await fetch(newUrl);
 const newJson = await newRes.json();
 const newData = DirectusArticlesCollectionResponseSchema.parse(newJson);
