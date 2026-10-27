@@ -6,6 +6,7 @@ import PostMeta from '@/components/blog/PostMeta.astro';
 import PostCategories from '@/components/blog/PostCategories.astro';
 import PostTags from '@/components/blog/PostTags.astro';
 import GalleryBanner from '@/components/blog/GalleryBanner.astro';
+import GiscusComments from '@/components/blog/GiscusComments.astro';
 
 export const prerender = false;
 const { slug } = Astro.params;
@@ -76,7 +77,7 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
     )
   }
   <article
-    class="relative top-[-30px] md:top-[-60px] lg:top-[-90px] bg-dark-transparent space-y-5 pt-8 p-5 max-w-5xl mx-auto"
+    class="relative top-[-30px] md:top-[-60px] lg:top-[-90px] bg-dark-transparent space-y-5 pt-8 py-5 px-3 max-w-5xl mx-auto"
   >
     <h1
       class="text-2xl md:text-3xl lg:text-4xl font-black text-white bg-dark p-2 uppercase tracking-tight"
@@ -127,6 +128,9 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
       )
     }
   </article>
+
+  <GiscusComments />
+
   <script is:inline>
     document.addEventListener('astro:page-load', () => {
       const banner = document.querySelector('[data-gallery-banner]');
@@ -195,4 +199,5 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
       lightbox.init();
     });
   </script>
+  <!-- Sección de Comentarios con Giscus -->
 </CoreLayout>

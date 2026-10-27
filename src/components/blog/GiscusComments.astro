@@ -1,0 +1,36 @@
+---
+// src/components/GiscusComments.astro
+// Eliminamos la interfaz Props y pageId ya que Astro/Giscus manejarán el pathname automáticamente
+const REPO = 'gvazco/core-hub-plex';
+const REPO_ID = 'R_kgDOSb7m0g';
+const CATEGORY = 'Announcements';
+const CATEGORY_ID = 'DIC_kwDOSb7m0s4DJx06';
+---
+
+<div class="giscus-container">
+  <script
+    src="https://giscus.app"
+    data-repo={REPO}
+    data-repo-id={REPO_ID}
+    data-category={CATEGORY}
+    data-category-id={CATEGORY_ID}
+    data-mapping="pathname"
+    data-strict="1"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="es"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async></script>
+</div>
+
+<style>
+  .giscus-container {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e2e8f0;
+    width: 100%;
+  }
+</style>
