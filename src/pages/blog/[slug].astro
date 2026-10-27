@@ -52,8 +52,11 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
     video_cover && video_enabled ? (
       <div class="aspect-video">
         <iframe
-          src={video_cover}
+          src={`https://www.youtube.com/embed/${video_cover.id}`}
           title={title}
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen
           class="w-full h-full"
         />
