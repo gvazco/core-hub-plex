@@ -84,12 +84,16 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
           class="bg-dark text-neon-cyan font-mono px-3 py-1 text-sm font-bold border-2 border-dark mb-4 inline-block"
           >{pageIndex.impact_category?.name}</span
         >
+        <span
+          class="bg-dark text-neon-cyan font-mono px-3 py-1 text-sm font-bold border-2 border-dark mb-4 inline-block"
+          >{pageIndex.impact_tag?.name}</span
+        >
         <h2
           class="text-3xl text-neon-green font-bold uppercase leading-tight mb-4 text-dark mix-blend-exclusion"
         >
           {pageIndex.impact_title}
         </h2>
-        <p class="font-mono text-dark opacity-90 font-bold mb-4 line-clamp-3">
+        <p class="font-mono text-dark opacity-90 font-bold mb-4 line-clamp-7">
           {pageIndex.impact_excerpt}
         </p>
       </a>
