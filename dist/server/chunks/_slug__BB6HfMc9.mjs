@@ -1,7 +1,7 @@
-import { c as createComponent, $ as $$Picture } from './_astro_assets_DRiO1A5i.mjs';
+import { c as createComponent, $ as $$Picture } from './_astro_assets_6X38eql3.mjs';
 import 'piccolore';
-import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent, u as unescapeHTML } from './server_BqE1O_pZ.mjs';
-import { D as DirectusArticlesCollectionSchema, $ as $$CoreLayout, r as renderScript } from './index_BKh8-Z1r.mjs';
+import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent, u as unescapeHTML } from './server_DDZVo4i5.mjs';
+import { D as DirectusArticlesCollectionSchema, $ as $$CoreLayout, r as renderScript } from './index_DCuXCqMM.mjs';
 import 'clsx';
 import { f as formatDate } from './index_DBtM_ae6.mjs';
 
@@ -9,8 +9,8 @@ const $$PostMeta = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$props, $$slots);
   Astro2.self = $$PostMeta;
   const { date, author, slug } = Astro2.props;
-  return renderTemplate`${maybeRenderHead()}<div class="mb-4"> <p class="text-sm">
-Publicado el: <span class="text-neon-cyan">${formatDate(date)}</span> </p> ${author && renderTemplate`<p class="text-sm">
+  return renderTemplate`${maybeRenderHead()}<div class="mb-4"> <p class="text-lg">
+Publicado el: <span class="text-neon-cyan">${formatDate(date)}</span> </p> ${author && renderTemplate`<p class="text-lg">
 Autor:${" "} <span class="text-neon-cyan"> <a${addAttribute(`/blog/autor/${slug}`, "href")}>${author}</a> </span> </p>`} </div>`;
 }, "/home/gustavovazco/Documentos/DEV/Core-Hub-Plex/core-hub-plex/src/components/blog/PostMeta.astro", void 0);
 

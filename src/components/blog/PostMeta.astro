@@ -11,12 +11,12 @@ const { date, author, slug } = Astro.props;
 ---
 
 <div class="mb-4">
-  <p class="text-sm">
+  <p class="text-lg">
     Publicado el: <span class="text-neon-cyan">{formatDate(date)}</span>
   </p>
   {
     author && (
-      <p class="text-sm">
+      <p class="text-lg">
         Autor:{' '}
         <span class="text-neon-cyan">
           <a href={`/blog/autor/${slug}`}>{author}</a>

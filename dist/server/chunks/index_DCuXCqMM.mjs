@@ -1,6 +1,6 @@
-import { c as createComponent } from './_astro_assets_DRiO1A5i.mjs';
+import { c as createComponent } from './_astro_assets_6X38eql3.mjs';
 import 'piccolore';
-import { k as createRenderInstruction, f as addAttribute, h as renderTemplate, m as maybeRenderHead, j as renderComponent, l as renderHead, n as renderSlot, o as renderTransition, q as fade, s as slide } from './server_BqE1O_pZ.mjs';
+import { k as createRenderInstruction, f as addAttribute, h as renderTemplate, m as maybeRenderHead, j as renderComponent, l as renderHead, n as renderSlot, o as renderTransition, q as fade, s as slide } from './server_DDZVo4i5.mjs';
 import 'clsx';
 import { z } from 'zod';
 
@@ -54,7 +54,7 @@ const $$CoreMobileMenu = createComponent(($$result, $$props, $$slots) => {
 const $$CoreHeader = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$props, $$slots);
   Astro2.self = $$CoreHeader;
-  return renderTemplate`${maybeRenderHead()}<header class="border-b-4 border-neon-cyan p-6 bg-dark sticky top-0 z-50"> <nav class="max-w-7xl mt-5 md:mt-0 mx-auto flex justify-between items-center gap-2"> <a href="/" class="text-xl lg:text-4xl font-extrabold tracking-wide text-neon-cyan uppercase flex items-center gap-2"> <span class="bg-neon-cyan text-dark px-2 py-1 relative"> <span class="absolute inset-0 neo-border-cyan mt-1 ml-1 mix-blend-screen opacity-50"></span>
+  return renderTemplate`${maybeRenderHead()}<header class="border-b-4 border-neon-cyan px-6 py-4 md:p-6 bg-dark sticky top-0 z-50"> <nav class="max-w-7xl mt-5 md:mt-0 mx-auto flex justify-between items-center gap-2"> <a href="/" class="text-2xl lg:text-4xl font-extrabold tracking-wide text-neon-cyan uppercase flex items-center gap-2"> <span class="bg-neon-cyan text-dark px-2 py-1 relative"> <span class="absolute inset-0 neo-border-cyan mt-1 ml-1 mix-blend-screen opacity-50"></span>
 COREHUB
 </span>
 PLEX
