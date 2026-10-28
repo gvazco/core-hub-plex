@@ -1,10 +1,12 @@
 ---
 // src/components/GiscusComments.astro
 // Eliminamos la interfaz Props y pageId ya que Astro/Giscus manejarán el pathname automáticamente
-const REPO = 'gvazco/core-hub-plex';
-const REPO_ID = 'R_kgDOSb7m0g';
-const CATEGORY = 'Announcements';
-const CATEGORY_ID = 'DIC_kwDOSb7m0s4DJx06';
+const enviroment = import.meta.env;
+
+const REPO = enviroment.REPO;
+const REPO_ID = enviroment.REPO_ID;
+const CATEGORY = enviroment.GISCUS_CATEGORY;
+const CATEGORY_ID = enviroment.GISCUS_CATEGORY_ID;
 ---
 
 <div class="giscus-container">

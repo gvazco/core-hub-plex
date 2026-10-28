@@ -1,7 +1,7 @@
-import { c as createComponent, $ as $$Picture } from './_astro_assets_Cs2eaRHb.mjs';
+import { c as createComponent, $ as $$Picture } from './_astro_assets_DTP6lzqz.mjs';
 import 'piccolore';
-import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent, u as unescapeHTML } from './server_sG8cAH4r.mjs';
-import { D as DirectusArticlesCollectionSchema, $ as $$CoreLayout, r as renderScript } from './index_GIoyLHkL.mjs';
+import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent, u as unescapeHTML } from './server_CrWlgLHC.mjs';
+import { D as DirectusArticlesCollectionSchema, $ as $$CoreLayout, r as renderScript } from './index_BfcNG-b6.mjs';
 import 'clsx';
 import { f as formatDate } from './index_DBtM_ae6.mjs';
 
@@ -39,6 +39,7 @@ Tenemos muchas fotos para mostrar, haz click en el botón para verlas.
 </p> </div> </div> <a${addAttribute(gallerySlug, "href")} target="_blank" class="bg-black ml-3 dark:bg-white text-sm md:text-lg text-[#ffde59] dark:text-black font-black px-2 py-2 md:px-6 md:py-3 border-2 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.3)] transition-all uppercase tracking-wide inline-block"> <div class="camera-icon"></div> </a> </div> </div>`;
 }, "/home/gustavovazco/Documentos/DEV/Core-Hub-Plex/core-hub-plex/src/components/blog/GalleryBanner.astro", void 0);
 
+const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "PUBLIC_ASSETS": "https://core-cms.core-hub-plex.cloud/assets", "SITE": undefined, "SSR": true};
 var __freeze$1 = Object.freeze;
 var __defProp$1 = Object.defineProperty;
 var __template$1 = (cooked, raw) => __freeze$1(__defProp$1(cooked, "raw", { value: __freeze$1(cooked.slice()) }));
@@ -46,11 +47,12 @@ var _a$1;
 const $$GiscusComments = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$props, $$slots);
   Astro2.self = $$GiscusComments;
-  const REPO = "gvazco/core-hub-plex";
-  const REPO_ID = "R_kgDOSb7m0g";
-  const CATEGORY = "Announcements";
-  const CATEGORY_ID = "DIC_kwDOSb7m0s4DJx06";
-  return renderTemplate(_a$1 || (_a$1 = __template$1(["", '<div class="giscus-container" data-astro-cid-t3avhtp4> <script src="https://giscus.app/client.js"', "", "", "", ' data-mapping="pathname" data-strict="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="es" data-loading="lazy" crossorigin="anonymous" async><\/script> </div>'])), maybeRenderHead(), addAttribute(REPO, "data-repo"), addAttribute(REPO_ID, "data-repo-id"), addAttribute(CATEGORY, "data-category"), addAttribute(CATEGORY_ID, "data-category-id"));
+  const enviroment = Object.assign(__vite_import_meta_env__, { REPO: "gvazco/core-hub-plex", REPO_ID: "R_kgDOSb7m0g", GISCUS_CATEGORY: "Announcements", GISCUS_CATEGORY_ID: "DIC_kwDOSb7m0s4DJx06", _: "/home/gustavovazco/.nvm/versions/node/v22.22.2/bin/npm" });
+  const REPO = enviroment.REPO;
+  const REPO_ID = enviroment.REPO_ID;
+  const CATEGORY = enviroment.GISCUS_CATEGORY;
+  const CATEGORY_ID = enviroment.GISCUS_CATEGORY_ID;
+  return renderTemplate(_a$1 || (_a$1 = __template$1(["", '<div class="giscus-container" data-astro-cid-t3avhtp4> <script src="https://giscus.app/client.js"', "", "", "", ' data-mapping="pathname" data-strict="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="es" data-loading="lazy" crossorigin="anonymous" async></script> </div>'])), maybeRenderHead(), addAttribute(REPO, "data-repo"), addAttribute(REPO_ID, "data-repo-id"), addAttribute(CATEGORY, "data-category"), addAttribute(CATEGORY_ID, "data-category-id"));
 }, "/home/gustavovazco/Documentos/DEV/Core-Hub-Plex/core-hub-plex/src/components/blog/GiscusComments.astro", void 0);
 
 var __freeze = Object.freeze;
