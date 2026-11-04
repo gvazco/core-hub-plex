@@ -80,7 +80,7 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
     class="relative top-[-30px] md:top-[-60px] lg:top-[-90px] bg-dark-transparent space-y-5 pt-8 py-5 px-3 max-w-5xl mx-auto"
   >
     <h1
-      class="text-2xl md:text-3xl lg:text-4xl font-black text-white bg-dark p-3 uppercase tracking-tight"
+      class="text-2xl md:text-3xl lg:text-4xl font-black text-white bg-dark-transparent p-3 uppercase tracking-tight"
     >
       {title}
     </h1>
@@ -149,54 +149,6 @@ const publicAssetsUrl = import.meta.env.PUBLIC_ASSETS;
           hideBanner();
         }
       });
-    });
-  </script>
-
-  <script>
-    import PhotoSwipeLightbox from 'photoswipe/lightbox';
-    import 'photoswipe/style.css';
-
-    const lightbox = new PhotoSwipeLightbox({
-      gallery: '#gallery',
-      children: 'a',
-      pswpModule: () => import('photoswipe'),
-    });
-    lightbox.on('uiRegister', function () {
-      if (lightbox.pswp?.ui) {
-        lightbox.pswp.ui.registerElement({
-          name: 'custom-caption',
-          order: 9,
-          isButton: false,
-          appendTo: 'root',
-          html: 'Caption text',
-          onInit: (el, pswp) => {
-            lightbox.pswp?.on('change', () => {
-              const currSlideElement = lightbox.pswp?.currSlide?.data?.element;
-              let captionHTML = '';
-              if (currSlideElement) {
-                const hiddenCaption = currSlideElement.querySelector(
-                  '.hidden-caption-content'
-                );
-                if (hiddenCaption) {
-                  // get caption from element with class hidden-caption-content
-                  captionHTML = hiddenCaption.innerHTML;
-                } else {
-                  // get caption from alt attribute
-                  captionHTML =
-                    currSlideElement
-                      .querySelector('img')
-                      ?.getAttribute('alt') ?? '';
-                }
-              }
-              el.innerHTML = captionHTML || '';
-            });
-          },
-        });
-      }
-    });
-    lightbox.init();
-    document.addEventListener('astro:after-swap', function () {
-      lightbox.init();
     });
   </script>
   <!-- Sección de Comentarios con Giscus -->
