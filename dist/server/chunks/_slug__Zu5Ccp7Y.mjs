@@ -1,7 +1,7 @@
-import { c as createComponent, $ as $$Picture } from './_astro_assets_CTlDboQR.mjs';
+import { c as createComponent, $ as $$Picture } from './_astro_assets_DZTSLBta.mjs';
 import 'piccolore';
-import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent, u as unescapeHTML } from './server_DhhDU7dU.mjs';
-import { D as DirectusArticlesCollectionSchema, $ as $$CoreLayout } from './index_DWpGAk2l.mjs';
+import { m as maybeRenderHead, f as addAttribute, h as renderTemplate, j as renderComponent, u as unescapeHTML } from './server_DAEp5yjB.mjs';
+import { D as DirectusArticlesCollectionSchema, $ as $$CoreLayout } from './index_BwBdENLQ.mjs';
 import 'clsx';
 import { f as formatDate } from './index_DBtM_ae6.mjs';
 
@@ -47,7 +47,7 @@ var _a$1;
 const $$GiscusComments = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$props, $$slots);
   Astro2.self = $$GiscusComments;
-  const enviroment = Object.assign(__vite_import_meta_env__, { REPO: "gvazco/core-hub-plex", REPO_ID: "R_kgDOSb7m0g", GISCUS_CATEGORY: "Announcements", GISCUS_CATEGORY_ID: "DIC_kwDOSb7m0s4DJx06", _: "/home/gustavovazco/.nvm/versions/node/v24.21.0/bin/npm" });
+  const enviroment = Object.assign(__vite_import_meta_env__, { REPO: "gvazco/core-hub-plex", REPO_ID: "R_kgDOSb7m0g", GISCUS_CATEGORY: "Announcements", GISCUS_CATEGORY_ID: "DIC_kwDOSb7m0s4DJx06", _: "/home/gustavovazco/.nvm/versions/node/v22.22.2/bin/npm" });
   const REPO = enviroment.REPO;
   const REPO_ID = enviroment.REPO_ID;
   const CATEGORY = enviroment.GISCUS_CATEGORY;
